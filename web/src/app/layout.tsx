@@ -1,19 +1,22 @@
-import type { Metadata } from "next";
-import "./styles/global.css";
+import '@styles/global.css';
 
-export const metadata: Metadata = {
-  title: "Jessica Wilkinson Counselling",
-  description: "Counselling services for children, adolescents and adults",
+export const metadata = {
+  title: 'Jess Counselling',
+  description: 'Professional counselling services',
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body className={`antialiased`}>{children}</body>
+      <body>
+        {/* Header would go here */}
+        {children}
+        {/* Footer would go here */}
+      </body>
     </html>
   );
 }

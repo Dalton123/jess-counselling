@@ -1,7 +1,7 @@
 <svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M0,200 C300,100 600,300 900,200 C1200,100 1500,300 1800,200 L1800,900 L0,900 Z" fill="url(#paint0_linear)" opacity="0.3"/>
-  <path d="M0,300 C300,200 600,400 900,300 C1200,200 1500,400 1800,300 L1800,900 L0,900 Z" fill="url(#paint1_linear)" opacity="0.2"/>
-  <path d="M0,400 C300,300 600,500 900,400 C1200,300 1500,500 1800,400 L1800,900 L0,900 Z" fill="url(#paint2_linear)" opacity="0.1"/>
+  <path class="wave wave1" d="M0,200 C300,100 600,300 900,200 C1200,100 1500,300 1800,200 L1800,900 L0,900 Z" fill="url(#paint0_linear)" opacity="0.3"/>
+  <path class="wave wave2" d="M0,300 C300,200 600,400 900,300 C1200,200 1500,400 1800,300 L1800,900 L0,900 Z" fill="url(#paint1_linear)" opacity="0.2"/>
+  <path class="wave wave3" d="M0,400 C300,300 600,500 900,400 C1200,300 1500,500 1800,400 L1800,900 L0,900 Z" fill="url(#paint2_linear)" opacity="0.1"/>
   <defs>
     <linearGradient id="paint0_linear" x1="0" y1="0" x2="1440" y2="900" gradientUnits="userSpaceOnUse">
       <stop stop-color="#FF88B3"/>
@@ -16,4 +16,35 @@
       <stop offset="1" stop-color="#87FFEE"/>
     </linearGradient>
   </defs>
+  <style>
+    .wave {
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+    }
+    .wave1 {
+      animation-name: wave1;
+    }
+    .wave2 {
+      animation-name: wave2;
+      animation-delay: 0.5s;
+    }
+    .wave3 {
+      animation-name: wave3;
+      animation-delay: 1s;
+    }
+    
+    @keyframes wave1 {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+    @keyframes wave2 {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    @keyframes wave3 {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-25px); }
+    }
+  </style>
 </svg>
