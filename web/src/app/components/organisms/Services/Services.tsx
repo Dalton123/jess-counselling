@@ -1,49 +1,67 @@
-import { urlForImage } from "../../../sanity/lib/client";
 import { SectionHeader } from "../../molecules/SectionHeader/SectionHeader";
 import { ServiceCard } from "../../molecules/ServiceCard/ServiceCard";
+import { urlForImage } from "../../../sanity/lib/client";
 
-type ServiceData = {
+type SanityService = {
+  _id: string;
   title: string;
-  image: string;
+  image: {
+    asset: {
+      _ref: string;
+      _type: string;
+    };
+  };
   imageAlt: string;
   link: string;
 };
 
-type ServicesProps = {
-  sectionLabel?: string;
-  sectionTitle?: string;
-  sectionStyledTitle?: string;
-  viewAllLink?: string;
-  viewAllText?: string;
-  services: ServiceData[];
+type ServicesData = {
+  sectionLabel: string;
+  sectionTitle: string;
+  sectionStyledTitle: string;
+  viewAllLink: string;
+  viewAllText: string;
+  selectedServices: Array<SanityService>;
+  showSectionHeader: boolean;
 };
 
-export const Services = ({
-  sectionLabel = "SERVICES",
-  sectionTitle = "We Provide a Range of",
-  sectionStyledTitle = "Psychological Services",
-  viewAllLink = "/services",
-  viewAllText = "VIEW ALL SERVICES",
-  services = [],
-}: ServicesProps) => {
-  return (
-    <section className="py-16 md:py-24">
-      <div className="container mx-auto px-4">
-        <SectionHeader
-          label={sectionLabel}
-          title={sectionTitle}
-          styledTitle={sectionStyledTitle}
-          viewAllLink={viewAllLink}
-          viewAllText={viewAllText}
-        />
+export const Services = ({ data }: { data: ServicesData }) => {
+  const {
+    showSectionHeader = false,
+    sectionLabel,
+    sectionTitle,
+    viewAllLink,
+    viewAllText,
+  } = data;
+  // Transform the Sanity services data
+  const services = data.selectedServices.map((service) => ({
+    title: service.title,
+    image: urlForImage(service.image).url(),
+    imageAlt: service.imageAlt,
+    link: service.link,
+  }));
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+  return (
+    <section className="py-6 md:py-8">
+      <div className="container mx-auto px-4">
+        {/* {showSectionHeader && (
+          <SectionHeader
+            data={{
+              label: sectionLabel,
+              title: sectionTitle,
+              viewAllLink: viewAllLink,
+              viewAllText: viewAllText,
+            }}
+          />
+        )} */}
+
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
           {services.map((service, index) => (
             <ServiceCard
               key={index}
               title={service.title}
               image={service.image}
-              imageAlt={service.imageAlt}
+              imageAlt={service.imageAlt || service.title}
               link={service.link}
             />
           ))}

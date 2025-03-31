@@ -1,15 +1,17 @@
-export const page = {
+import {defineField, defineType, defineArrayMember} from 'sanity'
+
+export const page = defineType({
   name: 'page',
   title: 'Page',
   type: 'document',
   fields: [
-    {
+    defineField({
       name: 'title',
       title: 'Title',
       type: 'string',
       validation: (Rule: any) => Rule.required(),
-    },
-    {
+    }),
+    defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
@@ -18,24 +20,26 @@ export const page = {
         maxLength: 96,
       },
       validation: (Rule: any) => Rule.required(),
-    },
-    {
+    }),
+    defineField({
       name: 'content',
       title: 'Page Content',
       type: 'array',
       of: [
-        {type: 'hero'},
-        {type: 'services'},
-        // {type: 'testimonials'},
-        // {type: 'contactForm'},
-        // {type: 'textWithImage'},
+        defineArrayMember({type: 'hero'}),
+        defineArrayMember({type: 'services'}),
+        defineArrayMember({type: 'feature'}),
+        defineArrayMember({type: 'sectionHeader'}),
+        // defineArrayMember({type: 'testimonials'}),
+        // defineArrayMember({type: 'contactForm'}),
+        // defineArrayMember({type: 'textWithImage'}),
       ],
-    },
-    {
+    }),
+    defineField({
       name: 'description',
       title: 'Meta Description',
       type: 'text',
       rows: 3,
-    },
+    }),
   ],
-}
+})

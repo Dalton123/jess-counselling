@@ -15,8 +15,8 @@ export const ServiceCard = ({
   link,
 }: ServiceCardProps) => {
   return (
-    <div className="relative rounded-2xl overflow-hidden group">
-      <div className="aspect-square relative">
+    <div className="group relative overflow-hidden rounded-4xl after:pointer-events-none after:absolute after:inset-0 after:z-0 after:bg-gradient-to-t after:from-teal-500 after:to-teal-300 after:opacity-0 after:transition-all after:duration-500 after:ease-in-out after:hover:scale-105 hover:after:opacity-30">
+      <div className="relative aspect-square">
         <Image
           src={image}
           alt={imageAlt}
@@ -26,13 +26,13 @@ export const ServiceCard = ({
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 p-8">
-        <h3 className="text-white text-2xl md:text-3xl font-semibold mb-4">
+      <div className="absolute right-0 bottom-0 left-0 z-1 p-8">
+        <h3 className="mb-4 text-2xl font-semibold text-white md:text-3xl">
           {title}
         </h3>
         <Link
           href={link}
-          className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 transition-colors duration-300"
+          className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/20 transition-colors duration-300 hover:bg-white/30"
         >
           <span className="sr-only">Learn more about {title}</span>
           <svg

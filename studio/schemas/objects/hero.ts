@@ -1,29 +1,31 @@
-export const hero = {
+import {defineField} from 'sanity'
+
+export const hero = defineField({
   name: 'hero',
   title: 'Hero Section',
   type: 'object',
   fields: [
-    {
+    defineField({
       name: 'tagline',
       title: 'Tagline',
       type: 'string',
       description: 'The small text displayed above the heading',
-    },
-    {
+    }),
+    defineField({
       name: 'heading',
       title: 'Heading',
       type: 'string',
       description: 'The main heading text',
       validation: (Rule: any) => Rule.required(),
-    },
-    {
+    }),
+    defineField({
       name: 'subheading',
       title: 'Subheading',
       type: 'text',
       rows: 3,
       description: 'Supporting text below the heading',
-    },
-    {
+    }),
+    defineField({
       name: 'backgroundImage',
       title: 'Background Image',
       type: 'image',
@@ -31,14 +33,14 @@ export const hero = {
       options: {
         hotspot: true,
       },
-    },
-    {
+    }),
+    defineField({
       name: 'useWaveAnimation',
       title: 'Use Wave Animation',
       type: 'boolean',
       description: 'Toggle between background image or animated waves',
       initialValue: true,
-    },
+    }),
   ],
   preview: {
     select: {
@@ -53,4 +55,4 @@ export const hero = {
       }
     },
   },
-}
+})

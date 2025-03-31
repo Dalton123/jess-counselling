@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./typography.css";
 
 :root {
   --background: #ffffff;
@@ -6,7 +7,7 @@
 }
 
 @property --border-angle {
-  syntax: '<angle>';
+  syntax: "<angle>";
   inherits: false;
   initial-value: 0deg;
 }
@@ -14,8 +15,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --animate-rotate-border: border-rotate 3s linear infinite;
-  
+  --animate-rotate-border: border-rotate 5s linear infinite;
+
   @keyframes border-rotate {
     to {
       --border-angle: 360deg;

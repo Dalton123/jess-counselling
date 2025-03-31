@@ -1,6 +1,6 @@
-import { notFound } from 'next/navigation';
-import { ComponentSelector } from '@organisms/ComponentSelector/ComponentSelector';
-import { client } from '../../../sanity/lib/client';
+import { notFound } from "next/navigation";
+import { ComponentSelector } from "@organisms/ComponentSelector/ComponentSelector";
+import { client } from "../../../sanity/lib/client";
 
 type PageComponent = {
   _type: string;
@@ -37,14 +37,14 @@ export async function getPageData(slug: string): Promise<PageData | null> {
         }
       }
     }`;
-    
+
     // console.log('Fetching page data for slug:', slug);
     const data = await client.fetch(query, { slug });
     // console.log('Fetched page data:', data);
-    
+
     return data;
   } catch (error) {
-    console.error('Error fetching page data:', error);
+    console.error("Error fetching page data:", error);
     return null;
   }
 }
@@ -55,31 +55,31 @@ export async function getAllPages() {
       title,
       "slug": slug.current
     }`;
-    
+
     const pages = await client.fetch(query);
     // console.log('Fetched all pages:', pages);
-    
+
     return pages;
   } catch (error) {
-    console.error('Error fetching all pages:', error);
+    console.error("Error fetching all pages:", error);
     return [];
   }
 }
 
 export default async function PageBuilder({ slug }: PageBuilderProps) {
   // console.log('PageBuilder received slug:', slug);
-  
+
   const page = await getPageData(slug);
-  
+
   if (!page) {
-    console.log('No page found for slug:', slug);
+    console.log("No page found for slug:", slug);
     notFound();
   }
-  
+
   // console.log('Rendering page with content:', page.content);
-  
+
   return (
-    <main className="flex flex-col gap-8 px-4">
+    <main>
       {page.content?.map((component, index) => (
         <ComponentSelector key={index} component={component} />
       ))}

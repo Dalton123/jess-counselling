@@ -1,43 +1,63 @@
 import { Button } from "@atoms/Button/Button";
+import { PortableText } from "@portabletext/react";
+import { PortableTextBlock } from "@portabletext/react";
+import classNames from "classnames";
 
 type SectionHeaderProps = {
-  label: string;
-  title: string;
-  styledTitle?: string;
-  viewAllLink?: string;
-  viewAllText?: string;
+  data: {
+    label: string;
+    title: PortableTextBlock[];
+    styledTitle?: string;
+    viewAllLink?: string;
+    viewAllText?: string;
+  };
+  wrapper: "none" | "dark" | "light";
 };
 
 export const SectionHeader = ({
-  label,
-  title,
-  styledTitle,
-  viewAllLink,
-  viewAllText = "VIEW ALL",
+  data,
+  wrapper = "none",
 }: SectionHeaderProps) => {
+  const { label, title, viewAllLink, viewAllText } = data;
   return (
-    <div className="flex justify-between items-start mb-12">
-      <div>
-        <p className="text-blue-600 mb-3 tracking-wider text-sm">
-          / {label.toUpperCase()} /
-        </p>
-        <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
-          {title}
-          {styledTitle && (
-            <span className="block font-serif italic font-medium mt-1">
-              {styledTitle}
-            </span>
-          )}
-        </h2>
-      </div>
- 
-      {viewAllLink && (
-        <Button
-          href={viewAllLink}
-        >
-          {viewAllText}
-        </Button>
+    <div
+      className={classNames(
+        "container mx-auto mb-8 flex flex-col gap-4 md:mb-12 md:flex-row md:items-center",
+        {
+          "justify-between": viewAllLink,
+          "justify-center text-center": !viewAllLink,
+        }
       )}
+    >
+      <div>
+        {/* Gradient text */}
+        {label && (
+          <p className="mt-3 bg-gradient-to-r from-teal-300 via-teal-500 to-green-400 bg-clip-text text-sm font-black tracking-widest text-transparent">
+            / {label.toUpperCase()} /
+          </p>
+        )}
+        {title && (
+          <div
+            className={classNames("text-balance", {
+              "text-white/80": wrapper === "dark",
+              "text-slate-700": wrapper === "light" || wrapper === "none",
+            })}
+          >
+            <PortableText
+              value={title}
+              components={{
+                marks: {
+                  styled: ({ children }) => (
+                    <span className="font-serif italic">{children}</span>
+                  ),
+                },
+              }}
+            />
+          </div>
+        )}
+      </div>
+
+      {viewAllLink && <Button href={viewAllLink}>{viewAllText}</Button>}
     </div>
   );
 };

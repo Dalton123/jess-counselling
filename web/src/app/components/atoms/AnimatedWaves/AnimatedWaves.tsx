@@ -52,16 +52,10 @@ export const AnimatedWaves = () => {
           delay: 1,
         }}
       />
-      
+
       {/* Bottom gradient mask - this doesn't animate */}
-      <rect
-        x="0"
-        y="700"
-        width="1800"
-        height="200"
-        fill="url(#bottomMask)"
-      />
-      
+      <rect x="0" y="700" width="1800" height="200" fill="url(#bottomMask)" />
+
       <defs>
         <linearGradient
           id="paint0_linear"
@@ -71,8 +65,8 @@ export const AnimatedWaves = () => {
           y2="900"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#FF88B3" />
-          <stop offset="1" stopColor="#8794FF" />
+          <stop stopColor="#4AC29A" />
+          <stop offset="1" stopColor="#4ECDC4" />
         </linearGradient>
         <linearGradient
           id="paint1_linear"
@@ -82,8 +76,8 @@ export const AnimatedWaves = () => {
           y2="900"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#A288FF" />
-          <stop offset="1" stopColor="#87CDFF" />
+          <stop stopColor="#2C9B94" />
+          <stop offset="1" stopColor="#3CAEA3" />
         </linearGradient>
         <linearGradient
           id="paint2_linear"
@@ -93,10 +87,10 @@ export const AnimatedWaves = () => {
           y2="900"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#FF88D1" />
-          <stop offset="1" stopColor="#87FFEE" />
+          <stop stopColor="#20716A" />
+          <stop offset="1" stopColor="#2A9187" />
         </linearGradient>
-        
+
         {/* Gradient for the bottom mask - from transparent to pink */}
         <linearGradient
           id="bottomMask"
@@ -106,10 +100,10 @@ export const AnimatedWaves = () => {
           y2="900"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0" stopColor="#FFF5F9" stopOpacity="0" />
-          <stop offset="1" stopColor="#FFF5F9" stopOpacity="1" />
+          <stop offset="0" stopColor="#00d5be" stopOpacity="0" />
+          <stop offset="1" stopColor="#00d5be" stopOpacity="1" />
         </linearGradient>
       </defs>
     </svg>
   );
-}; 
+};
