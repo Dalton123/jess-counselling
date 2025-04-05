@@ -16,6 +16,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --animate-rotate-border: border-rotate 5s linear infinite;
+  --breakpoint-3xl: 120rem;
 
   @keyframes border-rotate {
     to {
@@ -35,4 +36,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  background-image: url("/images/noise-pattern.png");
+  background-position: center;
+  background-repeat: repeat;
 }

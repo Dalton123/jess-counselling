@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { Button } from "../../atoms/Button/Button";
-import { urlForImage } from "../../../sanity/lib/client";
+import { Button } from "@atoms/Button/Button";
+import { urlForImage } from "@sanity/lib/client";
 import { PortableText } from "@portabletext/react";
 import { PortableTextBlock } from "@portabletext/react";
 import { SectionHeader } from "@molecules/SectionHeader/SectionHeader";
@@ -69,6 +69,7 @@ export const Feature = ({ data }: FeatureProps) => {
             viewAllText: sectionHeader.viewAllText,
           }}
           wrapper={wrapper}
+          className="mb-12"
         />
       )}
 
@@ -91,45 +92,39 @@ export const Feature = ({ data }: FeatureProps) => {
           {/* Content Section */}
           <div
             className={classNames(
-              "flex flex-col items-start justify-center gap-4 p-12 md:w-1/2 md:gap-8",
+              "flex flex-col items-start justify-center p-12 md:w-1/2",
               {
                 "bg-slate-700": wrapper === "light" || wrapper === "none",
                 "bg-white": wrapper === "dark",
               }
             )}
           >
-            {title && (
-              <h2 className="bg-gradient-to-r from-emerald-400 via-teal-400 to-teal-200 bg-clip-text font-serif text-6xl leading-tight text-transparent italic">
-                {title}
-              </h2>
-            )}
-            {description && (
-              <div
-                className={classNames("text-balance", {
-                  "text-white/80": wrapper === "light" || wrapper === "none",
-                  "text-slate-700": wrapper === "dark",
-                })}
-              >
-                <PortableText value={description} />
-              </div>
-            )}
-            {buttonText && (
-              <Button
-                href={buttonLink}
-                backgroundColor={
-                  wrapper === "light" || wrapper === "none"
-                    ? "bg-slate-700"
-                    : "bg-white"
-                }
-                textColor={
-                  wrapper === "light" || wrapper === "none"
-                    ? "text-white"
-                    : "text-slate-700"
-                }
-              >
-                {buttonText}
-              </Button>
-            )}
+            <div
+              className={classNames("prose", {
+                "text-white/80": wrapper === "light" || wrapper === "none",
+                "text-slate-700": wrapper === "dark",
+              })}
+            >
+              {title && <h2 className="fancy-text">{title}</h2>}
+              {description && <PortableText value={description} />}
+              {buttonText && (
+                <Button
+                  href={buttonLink}
+                  backgroundColor={
+                    wrapper === "light" || wrapper === "none"
+                      ? "bg-slate-700"
+                      : "bg-white"
+                  }
+                  textColor={
+                    wrapper === "light" || wrapper === "none"
+                      ? "text-white"
+                      : "text-slate-700"
+                  }
+                >
+                  {buttonText}
+                </Button>
+              )}
+            </div>
           </div>
 
           {/* Image Section */}

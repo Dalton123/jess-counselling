@@ -30,6 +30,8 @@ export const page = defineType({
         defineArrayMember({type: 'services'}),
         defineArrayMember({type: 'feature'}),
         defineArrayMember({type: 'sectionHeader'}),
+        defineArrayMember({type: 'contact'}),
+        defineArrayMember({type: 'logoShowcase'}),
         // defineArrayMember({type: 'testimonials'}),
         // defineArrayMember({type: 'contactForm'}),
         // defineArrayMember({type: 'textWithImage'}),

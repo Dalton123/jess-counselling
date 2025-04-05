@@ -2,7 +2,8 @@ import { Hero } from "@organisms/hero/hero";
 import { Services } from "@organisms/Services/Services";
 import { Feature } from "../../molecules/Feature/Feature";
 import { SectionHeader } from "../../molecules/SectionHeader/SectionHeader";
-
+import { ContactSection } from "@organisms/ContactSection/ContactSection";
+import { LogoShowcase } from "@organisms/LogoShowcase/LogoShowcase";
 // This component renders the right component based on the _type
 export function ComponentSelector({ component }: { component: any }) {
   // Extract the component type
@@ -21,7 +22,13 @@ export function ComponentSelector({ component }: { component: any }) {
       return <Feature data={component} />;
 
     case "sectionHeader":
-      return <SectionHeader data={component} />;
+      return <SectionHeader data={component} wrapper="none" />;
+
+    case "contact":
+      return <ContactSection data={component} />;
+
+    case "logoShowcase":
+      return <LogoShowcase data={component} />;
 
     // Add cases for other component types
 

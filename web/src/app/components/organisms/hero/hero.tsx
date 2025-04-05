@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
+import { urlForImage } from "@sanity/lib/client";
 import { AnimatedWaves } from "@atoms/AnimatedWaves/AnimatedWaves";
 
 type HeroProps = {
@@ -18,7 +19,7 @@ export const Hero = ({ data }: HeroProps) => {
         <div className="absolute inset-0 z-20 opacity-60">
           {data.backgroundImage ? (
             <Image
-              src={data.backgroundImage}
+              src={urlForImage(data.backgroundImage).url()}
               alt="Background pattern"
               fill
               className="object-cover"

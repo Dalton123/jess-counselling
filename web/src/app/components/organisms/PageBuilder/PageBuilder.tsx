@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { ComponentSelector } from "@organisms/ComponentSelector/ComponentSelector";
-import { client } from "../../../sanity/lib/client";
+import { client } from "@sanity/lib/client";
+import { pageQuery, allPagesQuery } from "@sanity/lib/queries";
 
 type PageComponent = {
   _type: string;
@@ -22,24 +23,8 @@ type PageBuilderProps = {
 
 export async function getPageData(slug: string): Promise<PageData | null> {
   try {
-    const query = `*[_type == "page" && slug.current == $slug][0] {
-      title,
-      description,
-      content[] {
-        _type,
-        ...,
-        selectedServices[]-> {
-          _id,
-          title,
-          image,
-          imageAlt,
-          link
-        }
-      }
-    }`;
-
     // console.log('Fetching page data for slug:', slug);
-    const data = await client.fetch(query, { slug });
+    const data = await client.fetch(pageQuery, { slug });
     // console.log('Fetched page data:', data);
 
     return data;
@@ -51,12 +36,7 @@ export async function getPageData(slug: string): Promise<PageData | null> {
 
 export async function getAllPages() {
   try {
-    const query = `*[_type == "page" && defined(slug.current)] {
-      title,
-      "slug": slug.current
-    }`;
-
-    const pages = await client.fetch(query);
+    const pages = await client.fetch(allPagesQuery);
     // console.log('Fetched all pages:', pages);
 
     return pages;

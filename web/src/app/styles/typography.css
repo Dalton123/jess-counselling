@@ -1,6 +1,14 @@
 @layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
   h1 {
     font-size: var(--text-6xl);
+    line-height: 1.1;
 
     @media (min-width: 768px) {
       font-size: var(--text-8xl);
@@ -9,6 +17,7 @@
 
   h2 {
     font-size: var(--text-4xl);
+    line-height: 1;
 
     @media (min-width: 768px) {
       font-size: var(--text-6xl);
@@ -17,6 +26,7 @@
 
   h3 {
     font-size: var(--text-3xl);
+    line-height: 1;
 
     @media (min-width: 768px) {
       font-size: var(--text-4xl);
@@ -30,4 +40,34 @@
       font-size: var(--text-lg);
     }
   }
+
+  li {
+    @apply relative before:mr-2 before:text-teal-400 before:content-['•'];
+  }
+}
+
+@utility prose {
+  max-width: 65ch;
+  @apply space-y-4 text-base;
+}
+
+/* .prose h2,
+.prose h3 {
+  @apply mb-6;
+} */
+
+.prose p {
+  @apply text-pretty;
+}
+
+@utility fancy-text {
+  @apply bg-gradient-to-r from-emerald-400 via-teal-400 to-teal-200 bg-clip-text font-serif leading-normal text-transparent italic;
+}
+
+.prose a:not(.btn) {
+  @apply relative text-teal-400 after:absolute after:-bottom-px after:left-0 after:h-px after:w-full after:bg-teal-400 after:transition-all after:duration-300 after:ease-in-out after:content-[''] hover:after:h-1;
+}
+
+.prose a:not(.btn):hover {
+  @apply after:h-1;
 }

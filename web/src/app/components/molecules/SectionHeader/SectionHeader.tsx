@@ -12,17 +12,20 @@ type SectionHeaderProps = {
     viewAllText?: string;
   };
   wrapper: "none" | "dark" | "light";
+  className?: string;
 };
 
 export const SectionHeader = ({
   data,
   wrapper = "none",
+  className = "",
 }: SectionHeaderProps) => {
   const { label, title, viewAllLink, viewAllText } = data;
   return (
     <div
       className={classNames(
-        "container mx-auto mb-8 flex flex-col gap-4 md:mb-12 md:flex-row md:items-center",
+        "container mx-auto mt-8 mb-2 flex flex-col gap-4 px-8 md:flex-row md:items-center",
+        className,
         {
           "justify-between": viewAllLink,
           "justify-center text-center": !viewAllLink,
@@ -38,7 +41,7 @@ export const SectionHeader = ({
         )}
         {title && (
           <div
-            className={classNames("text-balance", {
+            className={classNames("prose", {
               "text-white/80": wrapper === "dark",
               "text-slate-700": wrapper === "light" || wrapper === "none",
             })}

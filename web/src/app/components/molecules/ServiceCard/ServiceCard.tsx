@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { urlForImage } from "@sanity/lib/client";
 import Link from "next/link";
 
 type ServiceCardProps = {
@@ -16,15 +17,17 @@ export const ServiceCard = ({
 }: ServiceCardProps) => {
   return (
     <div className="group relative overflow-hidden rounded-4xl after:pointer-events-none after:absolute after:inset-0 after:z-0 after:bg-gradient-to-t after:from-teal-500 after:to-teal-300 after:opacity-0 after:transition-all after:duration-500 after:ease-in-out after:hover:scale-105 hover:after:opacity-30">
-      <div className="relative aspect-square">
-        <Image
-          src={image}
-          alt={imageAlt}
-          fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-      </div>
+      {image && (
+        <div className="relative aspect-square">
+          <Image
+            src={urlForImage(image).url()}
+            alt={imageAlt}
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+        </div>
+      )}
 
       <div className="absolute right-0 bottom-0 left-0 z-1 p-8">
         <h3 className="mb-4 text-2xl font-semibold text-white md:text-3xl">
