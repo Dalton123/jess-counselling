@@ -12,16 +12,18 @@
   initial-value: 0deg;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --animate-rotate-border: border-rotate 5s linear infinite;
-  --breakpoint-3xl: 120rem;
+@keyframes border-rotate {
+  from {
+    --border-angle: 0deg;
+  }
+  to {
+    --border-angle: 360deg;
+  }
+}
 
-  @keyframes border-rotate {
-    to {
-      --border-angle: 360deg;
-    }
+@layer utilities {
+  .animate-rotate-border {
+    animation: border-rotate 5s linear infinite;
   }
 }
 
@@ -52,6 +54,11 @@
   background-image: url("/images/glow-ball3.png");
   background-position: center;
   background-repeat: no-repeat;
+}
+
+/* Add utility for rotating border animation */
+@utility animate-rotate-border {
+  animation: border-rotate 5s linear infinite;
 }
 
 body {
