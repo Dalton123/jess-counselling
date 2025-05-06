@@ -1,17 +1,22 @@
-import ScrollProgressEnum from "@models/enums/ScrollProgressEnum";
 import { useMotionValueEvent, useScroll } from "framer-motion";
 import { RefObject, useEffect, useState } from "react";
+
+enum ScrollProgressEnum {
+  Start = "Start",
+  Middle = "Middle",
+  End = "End",
+}
 
 const useHorizontalScrollShadows = (
   containerRef: RefObject<HTMLElement>,
   threshold: number,
-  disabled: boolean,
+  disabled: boolean
 ) => {
   const { scrollXProgress } = useScroll({ container: containerRef });
   const [isStart, setIsStart] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(
-    ScrollProgressEnum.Start,
+    ScrollProgressEnum.Start
   );
 
   useMotionValueEvent(scrollXProgress, "change", (value: number) => {

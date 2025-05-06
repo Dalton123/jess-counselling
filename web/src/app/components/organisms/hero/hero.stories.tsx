@@ -1,5 +1,4 @@
 import { StoryFn } from "@storybook/react";
-import { fn } from "@storybook/test";
 import { Hero } from "./hero";
 
 const meta = {
@@ -12,12 +11,33 @@ export default meta;
 export const Default: StoryFn<typeof Hero> = (args) => <Hero {...args} />;
 
 Default.args = {
-  tagline: "FOCUSING ON THE UNIQUE NEEDS OF EACH PERSON",
-  heading: "Personalized Support for Your Unique Journey",
-  subheading:
-    "Begin your path to healing with compassionate guidance tailored to your individual needs",
-  ctaText: "GET STARTED NOW",
-  onCtaClick: fn(),
+  data: {
+    tagline: "FOCUSING ON THE UNIQUE NEEDS OF EACH PERSON",
+    heading: [
+      {
+        _type: "block",
+        children: [
+          {
+            _type: "span",
+            text: "Personalized Support for Your Unique Journey",
+          },
+        ],
+        markDefs: [],
+      },
+    ],
+    subheading: [
+      {
+        _type: "block",
+        children: [
+          {
+            _type: "span",
+            text: "Begin your path to healing with compassionate guidance tailored to your individual needs",
+          },
+        ],
+        markDefs: [],
+      },
+    ],
+  },
 };
 
 export const WithoutTagline: StoryFn<typeof Hero> = (args) => (
@@ -25,12 +45,28 @@ export const WithoutTagline: StoryFn<typeof Hero> = (args) => (
 );
 
 WithoutTagline.args = {
-  tagline: "",
-  heading: "Begin Your Healing Journey Today",
-  subheading:
-    "Professional counselling services in a warm, supportive environment",
-  ctaText: "BOOK A CONSULTATION",
-  onCtaClick: fn(),
+  data: {
+    tagline: "",
+    heading: [
+      {
+        _type: "block",
+        children: [{ _type: "span", text: "Begin Your Healing Journey Today" }],
+        markDefs: [],
+      },
+    ],
+    subheading: [
+      {
+        _type: "block",
+        children: [
+          {
+            _type: "span",
+            text: "Professional counselling services in a warm, supportive environment",
+          },
+        ],
+        markDefs: [],
+      },
+    ],
+  },
 };
 
 export const WithBackgroundImage: StoryFn<typeof Hero> = (args) => (
@@ -38,7 +74,11 @@ export const WithBackgroundImage: StoryFn<typeof Hero> = (args) => (
 );
 
 WithBackgroundImage.args = {
-  ...Default.args,
-  backgroundImage: "/images/custom-background.jpg",
-  onCtaClick: fn(),
+  data: {
+    ...Default.args.data,
+    backgroundImage: {
+      _type: "image",
+      asset: { _ref: "custom-bg", _type: "image" },
+    },
+  },
 };
