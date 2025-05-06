@@ -17,7 +17,7 @@ type SanityService = {
   description?: PortableTextBlock[];
 };
 
-type ServicesData = {
+export type ServicesData = {
   showSectionHeader: boolean;
   header: {
     label: string;

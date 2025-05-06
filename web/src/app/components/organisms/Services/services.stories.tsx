@@ -1,5 +1,6 @@
 import { StoryFn } from "@storybook/react";
 import { Services } from "./Services";
+import type { ServicesData } from "./Services"; // ServicesData is now exported
 
 const meta = {
   title: "Components/Organisms/Services",
@@ -16,52 +17,71 @@ export const Default: StoryFn<typeof Services> = (args) => (
 );
 
 Default.args = {
-  services: [
-    {
-      title: "Individual Therapy",
-      imageSrc:
-        "https://images.unsplash.com/photo-1544027993-37dbfe43562a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      imageAlt: "Therapist working with an individual client",
-      link: "/services/individual-therapy",
+  data: {
+    showSectionHeader: false,
+    header: {
+      label: "Our Services",
+      title: [
+        {
+          _type: "block",
+          children: [{ _type: "span", text: "Our Services" }],
+          markDefs: [],
+        },
+      ],
     },
-    {
-      title: "Couple Therapy",
-      imageSrc:
-        "https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      imageAlt: "Therapist holding hands with a couple",
-      link: "/services/couple-therapy",
-    },
-    {
-      title: "Child Therapy",
-      imageSrc:
-        "https://images.unsplash.com/photo-1516627145497-ae6968895b74?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      imageAlt: "Child during therapy session",
-      link: "/services/child-therapy",
-    },
-  ],
+    selectedServices: [
+      {
+        _id: "1",
+        title: "Individual Therapy",
+        image: { asset: { _ref: "image-1", _type: "image" } },
+        imageAlt: "Therapist working with an individual client",
+        link: { href: "/services/individual-therapy", text: "Read more" },
+      },
+      {
+        _id: "2",
+        title: "Couple Therapy",
+        image: { asset: { _ref: "image-2", _type: "image" } },
+        imageAlt: "Therapist holding hands with a couple",
+        link: { href: "/services/couple-therapy", text: "Read more" },
+      },
+      {
+        _id: "3",
+        title: "Child Therapy",
+        image: { asset: { _ref: "image-3", _type: "image" } },
+        imageAlt: "Child during therapy session",
+        link: { href: "/services/child-therapy", text: "Read more" },
+      },
+    ],
+    wrapper: "none",
+  },
 };
+
+// Type-cast story data to ServicesData to remove TS errors
+const defaultData = Default.args!.data as ServicesData;
 
 export const WithMoreServices: StoryFn<typeof Services> = (args) => (
   <Services {...args} />
 );
 
 WithMoreServices.args = {
-  ...Default.args,
-  services: [
-    ...Default.args.services,
-    {
-      title: "Family Therapy",
-      imageSrc:
-        "https://images.unsplash.com/photo-1542628682-88321d2a4828?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      imageAlt: "Family therapy session",
-      link: "/services/family-therapy",
-    },
-    {
-      title: "Group Therapy",
-      imageSrc:
-        "https://images.unsplash.com/photo-1519452635265-7b1fbfd1e4e0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      imageAlt: "Group therapy session",
-      link: "/services/group-therapy",
-    },
-  ],
+  data: {
+    ...defaultData,
+    selectedServices: [
+      ...defaultData.selectedServices,
+      {
+        _id: "4",
+        title: "Family Therapy",
+        image: { asset: { _ref: "image-4", _type: "image" } },
+        imageAlt: "Family therapy session",
+        link: { href: "/services/family-therapy", text: "Read more" },
+      },
+      {
+        _id: "5",
+        title: "Group Therapy",
+        image: { asset: { _ref: "image-5", _type: "image" } },
+        imageAlt: "Group therapy session",
+        link: { href: "/services/group-therapy", text: "Read more" },
+      },
+    ],
+  },
 };

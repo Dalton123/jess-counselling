@@ -15,20 +15,58 @@ type Story = StoryObj<typeof Feature>;
 
 export const Default: Story = {
   args: {
-    title: "Hypnosis",
-    description:
-      "These programs involve self-guided materials such as workbooks, online courses, or apps designed to help individuals address specific issues like anxiety, depression, or stress management. Some guided programs may also include periodic check-ins with a therapist or coach for support.",
-    imageSrc:
-      "https://images.unsplash.com/photo-1493836512294-502baa1986e2?q=80&w=2670&auto=format&fit=crop",
-    imageAlt: "People in therapy session",
-    readMoreLink: "/services/hypnosis",
+    data: {
+      title: "Hypnosis",
+      description: [
+        {
+          _type: "block",
+          children: [
+            {
+              _type: "span",
+              text: "These programs involve self-guided materials such as workbooks, online courses, or apps designed to help individuals address specific issues like anxiety, depression, or stress management. Some guided programs may also include periodic check-ins with a therapist or coach for support.",
+            },
+          ],
+          markDefs: [],
+        },
+      ],
+      image: { asset: { _ref: "image-abc123", _type: "image" } },
+      imageAlt: "People in therapy session",
+      link: { href: "/services/hypnosis", text: "Read more" },
+      reversed: false,
+      showSectionHeader: false,
+      wrapper: "light",
+      fullWidth: false,
+      topSpacing: "medium",
+      bottomSpacing: "medium",
+    },
   },
 };
 
 export const Reversed: Story = {
   args: {
-    ...Default.args,
-    title: "Counselling",
-    reversed: true,
+    data: {
+      title: "Counselling",
+      description: [
+        {
+          _type: "block",
+          children: [
+            {
+              _type: "span",
+              text: "Counselling involves talking to a therapist or counselor about your feelings, thoughts, and behaviors. It can help you understand yourself better and learn new ways to cope with difficult emotions or situations.",
+            },
+          ],
+          markDefs: [],
+        },
+      ],
+      image: { asset: { _ref: "image-abc123", _type: "image" } },
+      imageAlt: "People in therapy session",
+      link: { href: "/services/counselling", text: "Read more" },
+      reversed: true,
+      showSectionHeader: false,
+      wrapper: "light",
+      fullWidth: false,
+      topSpacing: "medium",
+      bottomSpacing: "medium",
+    },
   },
 };
