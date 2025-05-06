@@ -5,7 +5,7 @@ import { pageQuery, allPagesQuery } from "@sanity/lib/queries";
 
 type PageComponent = {
   _type: string;
-  [key: string]: any;
+  [key: string]: unknown;
 };
 
 type PageData = {

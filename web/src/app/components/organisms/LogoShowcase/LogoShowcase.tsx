@@ -30,7 +30,7 @@ export const LogoShowcase = ({ data }: LogoShowcaseProps) => {
 
   return (
     <section
-      className={classNames("px8 mx-auto mb-6 px-4 py-8 md:mb-8", {
+      className={classNames("px8 container mx-auto mb-6 px-5 py-8 md:mb-8", {
         "w-[calc(100%-40px)] rounded-4xl bg-slate-700": darkBackground,
         "w-[calc(100%-40px)] rounded-4xl bg-gradient-to-bl from-emerald-100 to-teal-100":
           !darkBackground,

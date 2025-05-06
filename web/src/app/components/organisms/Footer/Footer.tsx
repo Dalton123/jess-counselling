@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import { motion } from "framer-motion";
 
 type FooterData = {
@@ -19,9 +18,9 @@ export const Footer = ({ data }: { data: FooterData }) => {
   };
 
   return (
-    <footer className="relative overflow-hidden bg-slate-950 py-12">
+    <footer className="before:flower-pattern relative z-1 overflow-hidden bg-slate-950 py-12 before:absolute before:inset-0 before:z-[-1] before:opacity-10 before:content-['']">
       {/* Main Footer Content */}
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-16">
         <div className="flex flex-col items-start gap-4">
           {/* Logo/Text */}
           <div className="font-serif text-2xl text-white/80 italic">

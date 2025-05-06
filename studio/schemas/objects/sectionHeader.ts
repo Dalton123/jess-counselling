@@ -7,6 +7,31 @@ export const sectionHeader = defineType({
   type: 'object',
   fields: [
     defineField({
+      name: 'topSpacing',
+      title: 'Top Spacing',
+      type: 'string',
+      options: {
+        list: ['none', 'small', 'medium', 'large'],
+      },
+    }),
+    defineField({
+      name: 'bottomSpacing',
+      title: 'Bottom Spacing',
+      type: 'string',
+      options: {
+        list: ['none', 'small', 'medium', 'large'],
+      },
+    }),
+    defineField({
+      name: 'textAlignment',
+      title: 'Text Alignment',
+      type: 'string',
+      options: {
+        list: ['left', 'center', 'right'],
+        layout: 'radio',
+      },
+    }),
+    defineField({
       name: 'label',
       title: 'Label',
       type: 'string',
@@ -21,6 +46,7 @@ export const sectionHeader = defineType({
           type: 'block',
           styles: [
             {title: 'Normal', value: 'normal'},
+            {title: 'H1', value: 'h1'},
             {title: 'H2', value: 'h2'},
             {title: 'H3', value: 'h3'},
           ],
@@ -40,26 +66,49 @@ export const sectionHeader = defineType({
       ],
     }),
     defineField({
-      name: 'viewAllLink',
-      title: 'View All Link',
-      type: 'string',
-      description: 'Optional link for the "View All" button',
+      name: 'link',
+      title: 'Link',
+      type: 'object',
+      fields: [
+        {
+          name: 'href',
+          title: 'URL',
+          type: 'string',
+        },
+        {
+          name: 'text',
+          title: 'Link Text',
+          type: 'string',
+        },
+      ],
     }),
     defineField({
-      name: 'viewAllText',
-      title: 'View All Text',
+      name: 'buttonHorizontalPosition',
+      title: 'Button Horizontal Position',
       type: 'string',
-      description: 'Text for the "View All" button',
-      initialValue: 'VIEW ALL',
+      options: {
+        list: ['left', 'center', 'right'],
+        layout: 'radio',
+      },
+    }),
+    defineField({
+      name: 'buttonVerticalPosition',
+      title: 'Button Vertical Position',
+      type: 'string',
+      options: {
+        list: ['top', 'center', 'bottom'],
+        layout: 'radio',
+      },
     }),
   ],
   preview: {
     select: {
-      title: 'label',
+      title: 'title',
     },
     prepare({title}) {
       return {
-        title: title || 'Section Header',
+        title:
+          title.find((block: any) => block._type === 'block')?.children[0].text || 'Section Header',
         subtitle: 'Section Header Component',
       }
     },

@@ -7,6 +7,48 @@ export const contact = defineType({
   type: 'object',
   fields: [
     defineField({
+      name: 'wrapper',
+      title: 'Section Background',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'None', value: 'none'},
+          {title: 'Light', value: 'light'},
+          {title: 'Dark', value: 'dark'},
+        ],
+      },
+      initialValue: 'none',
+      description: 'Background style for the section',
+    }),
+    defineField({
+      name: 'topSpacing',
+      title: 'Top Spacing',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'None', value: 'none'},
+          {title: 'Small', value: 'small'},
+          {title: 'Medium', value: 'medium'},
+          {title: 'Large', value: 'large'},
+        ],
+      },
+      initialValue: 'medium',
+    }),
+    defineField({
+      name: 'bottomSpacing',
+      title: 'Bottom Spacing',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'None', value: 'none'},
+          {title: 'Small', value: 'small'},
+          {title: 'Medium', value: 'medium'},
+          {title: 'Large', value: 'large'},
+        ],
+      },
+      initialValue: 'medium',
+    }),
+    defineField({
       name: 'text',
       title: 'Text',
       type: 'array',

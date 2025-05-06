@@ -1,7 +1,8 @@
 import { SectionHeader } from "../../molecules/SectionHeader/SectionHeader";
 import { ServiceCard } from "../../molecules/ServiceCard/ServiceCard";
+import { SectionWrapper } from "../../atoms/SectionWrapper/SectionWrapper";
 import { urlForImage } from "../../../sanity/lib/client";
-
+import { PortableTextBlock } from "@portabletext/react";
 type SanityService = {
   _id: string;
   title: string;
@@ -12,61 +13,56 @@ type SanityService = {
     };
   };
   imageAlt: string;
-  link: string;
+  link?: { href: string; text: string };
+  description?: PortableTextBlock[];
 };
 
 type ServicesData = {
-  sectionLabel: string;
-  sectionTitle: string;
-  sectionStyledTitle: string;
-  viewAllLink: string;
-  viewAllText: string;
-  selectedServices: Array<SanityService>;
   showSectionHeader: boolean;
+  header: {
+    label: string;
+    title: PortableTextBlock[];
+    viewAllLink?: { href: string; text: string };
+  };
+  selectedServices: Array<SanityService>;
+  wrapper?: "none" | "dark" | "light";
 };
 
 export const Services = ({ data }: { data: ServicesData }) => {
   const {
     showSectionHeader = false,
-    sectionLabel,
-    sectionTitle,
-    viewAllLink,
-    viewAllText,
+    header,
+    selectedServices,
+    wrapper = "none",
   } = data;
+
   // Transform the Sanity services data
-  const services = data.selectedServices.map((service) => ({
+  const services = selectedServices.map((service) => ({
     title: service.title,
+    description: service.description,
     image: urlForImage(service.image).url(),
     imageAlt: service.imageAlt,
     link: service.link,
   }));
 
   return (
-    <section className="py-6 md:py-8">
-      <div className="container mx-auto px-4">
-        {/* {showSectionHeader && (
-          <SectionHeader
-            data={{
-              label: sectionLabel,
-              title: sectionTitle,
-              viewAllLink: viewAllLink,
-              viewAllText: viewAllText,
-            }}
-          />
-        )} */}
+    <SectionWrapper wrapper={wrapper}>
+      {showSectionHeader && header && (
+        <SectionHeader data={header} wrapper={wrapper} />
+      )}
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
-          {services.map((service, index) => (
-            <ServiceCard
-              key={index}
-              title={service.title}
-              image={service.image}
-              imageAlt={service.imageAlt || service.title}
-              link={service.link}
-            />
-          ))}
-        </div>
+      <div className="flex flex-col gap-4 md:flex-row md:gap-8">
+        {services.map((service, index) => (
+          <ServiceCard
+            key={index}
+            title={service.title}
+            description={service.description || []}
+            image={service.image}
+            imageAlt={service.imageAlt || service.title}
+            link={service.link ? service.link : { href: "", text: "" }}
+          />
+        ))}
       </div>
-    </section>
+    </SectionWrapper>
   );
 };

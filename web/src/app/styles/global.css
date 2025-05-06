@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @import "./typography.css";
-
+@import "./swiper.css";
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -32,11 +32,35 @@
   }
 }
 
+@utility flower-pattern {
+  background-image: url("/images/flower-pattern.png");
+  background-position: center;
+  background-repeat: repeat;
+}
+@utility noise-pattern {
+  background-image: url("/images/noise-pattern.png");
+  background-position: center;
+  background-repeat: repeat;
+}
+@utility noise-pattern-2 {
+  background-image: url("/images/noise-pattern-02.png");
+  background-position: center;
+  background-repeat: repeat;
+}
+
+@utility glow-ball {
+  background-image: url("/images/glow-ball3.png");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-  background-image: url("/images/noise-pattern.png");
-  background-position: center;
-  background-repeat: repeat;
+  @apply noise-pattern overscroll-none;
+}
+
+:focus {
+  @apply outline-teal-500;
 }

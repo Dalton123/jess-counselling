@@ -5,6 +5,7 @@ import Image from "next/image";
 import { urlForImage } from "@sanity/lib/client";
 import { Button } from "@atoms/Button/Button";
 import { PortableText, PortableTextBlock } from "@portabletext/react";
+import { SectionWrapper } from "@atoms/SectionWrapper/SectionWrapper";
 
 // Form field type for validation
 type FormFields = {
@@ -21,13 +22,17 @@ type ContactSectionProps = {
     phoneNumber: string;
     backgroundImage: {
       asset: {
-        url: string;
+        _ref: string;
+        _type: string;
       };
     };
     formDisclaimer: string;
     successTitle: string;
     successMessage: string;
     buttonText: string;
+    wrapper?: "none" | "dark" | "light";
+    topSpacing?: "none" | "small" | "medium" | "large";
+    bottomSpacing?: "none" | "small" | "medium" | "large";
   };
 };
 
@@ -105,7 +110,12 @@ export const ContactSection = ({ data }: ContactSectionProps) => {
   };
 
   return (
-    <section className="mx-auto mb-6 min-h-[600px] w-full px-4 md:mb-8">
+    <SectionWrapper
+      wrapper={data.wrapper || "none"}
+      topSpacing={data.topSpacing || "medium"}
+      bottomSpacing={data.bottomSpacing || "medium"}
+      className="min-h-[600px]"
+    >
       <div className="relative overflow-hidden rounded-3xl lg:flex">
         {/* Background Image */}
         {data.backgroundImage && (
@@ -149,8 +159,8 @@ export const ContactSection = ({ data }: ContactSectionProps) => {
           </div>
 
           {/* Right Column - Form */}
-          <div className="flex w-full items-center justify-center p-6 lg:px-8 lg:py-20">
-            <div className="w-full rounded-2xl bg-slate-700/60 p-6 text-white shadow-lg backdrop-blur-sm transition-all duration-500 focus-within:bg-slate-700/80 hover:bg-slate-700/80 md:p-8 lg:max-w-lg">
+          <div className="flex w-full items-center justify-center p-4 pb-12 lg:px-8 lg:py-20">
+            <div className="noise-pattern-2 w-full rounded-2xl bg-slate-700/60 p-6 text-white shadow-lg backdrop-blur-sm transition-all duration-500 focus-within:bg-slate-700/80 hover:bg-slate-700/70 md:p-8 lg:max-w-lg">
               {data.formDisclaimer && (
                 <p className="mb-6 text-sm text-slate-300">
                   {data.formDisclaimer}
@@ -180,7 +190,7 @@ export const ContactSection = ({ data }: ContactSectionProps) => {
                       type="text"
                       value={formData.name}
                       onChange={handleChange}
-                      className={`w-full rounded-md bg-slate-600/40 p-3 text-white placeholder-slate-400 outline-none focus:ring-2 focus:ring-teal-300/50 ${
+                      className={`w-full rounded-md border border-slate-900/20 bg-slate-600/40 p-3 text-white placeholder-slate-400 outline-none focus:ring-2 focus:ring-teal-300/50 ${
                         errors.name ? "border border-red-500" : ""
                       }`}
                     />
@@ -200,7 +210,7 @@ export const ContactSection = ({ data }: ContactSectionProps) => {
                       type="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className={`w-full rounded-md bg-slate-600/40 p-3 text-white placeholder-slate-400 outline-none focus:ring-2 focus:ring-teal-300/50 ${
+                      className={`w-full rounded-md border border-slate-900/20 bg-slate-600/40 p-3 text-white placeholder-slate-400 outline-none focus:ring-2 focus:ring-teal-300/50 ${
                         errors.email ? "border border-red-500" : ""
                       }`}
                     />
@@ -222,7 +232,7 @@ export const ContactSection = ({ data }: ContactSectionProps) => {
                       type="tel"
                       value={formData.phone}
                       onChange={handleChange}
-                      className="w-full rounded-md bg-slate-600/40 p-3 text-white placeholder-slate-400 outline-none focus:ring-2 focus:ring-teal-300/50"
+                      className="w-full rounded-md border border-slate-900/20 bg-slate-600/40 p-3 text-white placeholder-slate-400 outline-none focus:ring-2 focus:ring-teal-300/50"
                     />
                   </div>
 
@@ -237,7 +247,7 @@ export const ContactSection = ({ data }: ContactSectionProps) => {
                       rows={4}
                       value={formData.message}
                       onChange={handleChange}
-                      className={`field-sizing-content w-full rounded-md bg-slate-600/40 p-3 text-white placeholder-slate-400 outline-none focus:ring-2 focus:ring-teal-300/50 ${
+                      className={`field-sizing-content w-full rounded-md border border-slate-900/20 bg-slate-600/40 p-3 text-white placeholder-slate-400 outline-none focus:ring-2 focus:ring-teal-300/50 ${
                         errors.message ? "border border-red-500" : ""
                       }`}
                     />
@@ -268,7 +278,9 @@ export const ContactSection = ({ data }: ContactSectionProps) => {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full"
+                    className="mx-auto w-full max-w-2xs"
+                    backgroundColor="bg-slate-700/90"
+                    textColor="text-teal-50"
                   >
                     {isSubmitting
                       ? "Sending..."
@@ -280,6 +292,6 @@ export const ContactSection = ({ data }: ContactSectionProps) => {
           </div>
         </div>
       </div>
-    </section>
+    </SectionWrapper>
   );
 };

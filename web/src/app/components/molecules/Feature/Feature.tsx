@@ -4,13 +4,13 @@ import { urlForImage } from "@sanity/lib/client";
 import { PortableText } from "@portabletext/react";
 import { PortableTextBlock } from "@portabletext/react";
 import { SectionHeader } from "@molecules/SectionHeader/SectionHeader";
+import { SectionWrapper } from "@atoms/SectionWrapper/SectionWrapper";
 import classNames from "classnames";
 
 type SectionHeaderData = {
   label: string;
   title: PortableTextBlock[];
-  viewAllLink?: string;
-  viewAllText?: string;
+  viewAllLink?: { href: string; text: string };
   wrapper: "none" | "dark" | "light";
 };
 
@@ -25,13 +25,14 @@ type FeatureProps = {
       };
     };
     imageAlt: string;
-    buttonText?: string;
-    buttonLink: string;
+    link?: { href: string; text: string };
     reversed?: boolean;
     showSectionHeader: boolean;
     sectionHeader?: SectionHeaderData;
     wrapper: "none" | "dark" | "light";
     fullWidth?: boolean;
+    topSpacing?: "none" | "small" | "medium" | "large";
+    bottomSpacing?: "none" | "small" | "medium" | "large";
   };
 };
 
@@ -41,61 +42,51 @@ export const Feature = ({ data }: FeatureProps) => {
     description,
     image,
     imageAlt,
-    buttonText = "READ MORE",
-    buttonLink,
+    link,
     reversed = false,
     showSectionHeader = false,
     sectionHeader,
     wrapper = "light",
     fullWidth = false,
+    topSpacing = "medium",
+    bottomSpacing = "medium",
   } = data;
 
   return (
-    <div
-      className={classNames("mx-auto mb-6 px-4 md:mb-8", {
-        container: wrapper === "none" && !fullWidth,
-        "py-20": wrapper !== "none",
-        "w-[calc(100%-40px)] rounded-4xl bg-slate-700": wrapper === "dark",
-        "w-[calc(100%-40px)] rounded-4xl bg-gradient-to-bl from-emerald-100 to-teal-100":
-          wrapper === "light",
-      })}
+    <SectionWrapper
+      wrapper={wrapper}
+      fullWidth={fullWidth}
+      topSpacing={topSpacing}
+      bottomSpacing={bottomSpacing}
     >
       {showSectionHeader && sectionHeader && (
         <SectionHeader
-          data={{
-            label: sectionHeader.label,
-            title: sectionHeader.title,
-            viewAllLink: sectionHeader.viewAllLink,
-            viewAllText: sectionHeader.viewAllText,
-          }}
-          wrapper={wrapper}
-          className="mb-12"
+          data={sectionHeader}
+          wrapper="none"
+          textColor={wrapper === "dark" ? "light" : "dark"}
         />
       )}
 
       <div
         className={classNames("", {
-          "container mx-auto px-4": wrapper !== "none",
+          "container mx-auto px-5 md:px-10": wrapper !== "none",
         })}
       >
         <div
-          className={classNames(
-            "flex min-h-[475px] flex-col overflow-hidden rounded-4xl",
-            {
-              "md:flex-row-reverse": reversed,
-              "md:flex-row": !reversed,
-              "min-h-[500px] md:min-h-[700px] lg:min-h-[900px]": fullWidth,
-              "min-h-[475px]": !fullWidth,
-            }
-          )}
+          className={classNames("flex flex-col overflow-hidden rounded-4xl", {
+            "md:flex-row-reverse": reversed,
+            "md:flex-row": !reversed,
+            "min-h-[500px] md:min-h-[700px] lg:min-h-[900px]": fullWidth,
+            "min-h-[475px] md:min-h-[600px] lg:min-h-[750px]": !fullWidth,
+          })}
         >
           {/* Content Section */}
           <div
             className={classNames(
-              "flex flex-col items-start justify-center p-12 md:w-1/2",
+              "noise-pattern-2 flex flex-col items-start justify-center py-8 pr-4 pl-6 md:w-1/2 md:p-12",
               {
                 "bg-slate-700": wrapper === "light" || wrapper === "none",
-                "bg-white": wrapper === "dark",
+                "bg-teal-50": wrapper === "dark",
               }
             )}
           >
@@ -107,9 +98,9 @@ export const Feature = ({ data }: FeatureProps) => {
             >
               {title && <h2 className="fancy-text">{title}</h2>}
               {description && <PortableText value={description} />}
-              {buttonText && (
+              {link && (
                 <Button
-                  href={buttonLink}
+                  href={link.href}
                   backgroundColor={
                     wrapper === "light" || wrapper === "none"
                       ? "bg-slate-700"
@@ -121,7 +112,7 @@ export const Feature = ({ data }: FeatureProps) => {
                       : "text-slate-700"
                   }
                 >
-                  {buttonText}
+                  {link.text}
                 </Button>
               )}
             </div>
@@ -130,7 +121,7 @@ export const Feature = ({ data }: FeatureProps) => {
           {/* Image Section */}
           {image && (
             <div
-              className={classNames("relative min-h-[300px]", {
+              className={classNames("relative min-h-[300px] overflow-hidden", {
                 "md:w-1/2": !fullWidth,
                 "md:w-4/6 lg:w-5/6": fullWidth,
               })}
@@ -141,11 +132,11 @@ export const Feature = ({ data }: FeatureProps) => {
                 fill
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-br from-transparent to-teal-400/80"></div>
+              <div className="absolute inset-0 w-[200%] bg-gradient-to-br from-transparent to-teal-400/80"></div>
             </div>
           )}
         </div>
       </div>
-    </div>
+    </SectionWrapper>
   );
 };

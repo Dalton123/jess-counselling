@@ -1,4 +1,5 @@
-import {defineField} from 'sanity'
+import {defineArrayMember, defineField} from 'sanity'
+import {StyledText} from '../../components/StyledText'
 
 export const hero = defineField({
   name: 'hero',
@@ -14,15 +15,95 @@ export const hero = defineField({
     defineField({
       name: 'heading',
       title: 'Heading',
-      type: 'string',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'block',
+          styles: [
+            {title: 'Normal', value: 'normal'},
+            {title: 'H1', value: 'h1'},
+            {title: 'H2', value: 'h2'},
+            {title: 'H3', value: 'h3'},
+            {title: 'H4', value: 'h4'},
+          ],
+          lists: [
+            {title: 'Bullet', value: 'bullet'},
+            {title: 'Numbered', value: 'number'},
+          ],
+          marks: {
+            decorators: [
+              {title: 'Strong', value: 'strong'},
+              {title: 'Emphasis', value: 'em'},
+              {
+                title: 'Styled',
+                value: 'styled',
+                component: StyledText,
+              },
+            ],
+            annotations: [
+              {
+                name: 'link',
+                type: 'object',
+                title: 'Link',
+                fields: [
+                  {
+                    name: 'href',
+                    type: 'string',
+                    title: 'URL',
+                  },
+                ],
+              },
+            ],
+          },
+        }),
+      ],
       description: 'The main heading text',
       validation: (Rule: any) => Rule.required(),
     }),
     defineField({
       name: 'subheading',
       title: 'Subheading',
-      type: 'text',
-      rows: 3,
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'block',
+          styles: [
+            {title: 'Normal', value: 'normal'},
+            {title: 'H2', value: 'h2'},
+            {title: 'H3', value: 'h3'},
+            {title: 'H4', value: 'h4'},
+          ],
+          lists: [
+            {title: 'Bullet', value: 'bullet'},
+            {title: 'Numbered', value: 'number'},
+          ],
+          marks: {
+            decorators: [
+              {title: 'Strong', value: 'strong'},
+              {title: 'Emphasis', value: 'em'},
+              {
+                title: 'Styled',
+                value: 'styled',
+                component: StyledText,
+              },
+            ],
+            annotations: [
+              {
+                name: 'link',
+                type: 'object',
+                title: 'Link',
+                fields: [
+                  {
+                    name: 'href',
+                    type: 'string',
+                    title: 'URL',
+                  },
+                ],
+              },
+            ],
+          },
+        }),
+      ],
       description: 'Supporting text below the heading',
     }),
     defineField({
@@ -47,9 +128,9 @@ export const hero = defineField({
       title: 'heading',
       media: 'backgroundImage',
     },
-    prepare({title, media}: {title: string; media: any}) {
+    prepare({title, media}: {title: any; media: any}) {
       return {
-        title: title || 'Hero Section',
+        title: title.map((item: any) => item.children[0].text).join(' ') || 'Hero Section',
         subtitle: 'Hero Section',
         media,
       }

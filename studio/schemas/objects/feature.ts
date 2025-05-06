@@ -7,6 +7,11 @@ export const feature = defineField({
   type: 'object',
   fieldsets: [
     {
+      name: 'spacing',
+      title: 'Spacing',
+      options: {collapsible: true, collapsed: false},
+    },
+    {
       name: 'sectionHeader',
       title: 'Section Header',
       options: {collapsible: true, collapsed: false},
@@ -18,6 +23,24 @@ export const feature = defineField({
     },
   ],
   fields: [
+    defineField({
+      name: 'topSpacing',
+      title: 'Top Spacing',
+      type: 'string',
+      options: {
+        list: ['none', 'small', 'medium', 'large'],
+      },
+      fieldset: 'spacing',
+    }),
+    defineField({
+      name: 'bottomSpacing',
+      title: 'Bottom Spacing',
+      type: 'string',
+      options: {
+        list: ['none', 'small', 'medium', 'large'],
+      },
+      fieldset: 'spacing',
+    }),
     {
       name: 'showSectionHeader',
       title: 'Show Section Header',
@@ -117,17 +140,22 @@ export const feature = defineField({
       validation: (Rule: any) => Rule.required(),
     },
     {
-      name: 'buttonText',
-      title: 'Button Text',
-      type: 'string',
+      name: 'link',
+      title: 'Link',
+      type: 'object',
       fieldset: 'content',
-      initialValue: 'READ MORE',
-    },
-    {
-      name: 'buttonLink',
-      title: 'Button Link',
-      type: 'string',
-      fieldset: 'content',
+      fields: [
+        {
+          name: 'href',
+          title: 'URL',
+          type: 'string',
+        },
+        {
+          name: 'text',
+          title: 'Link Text',
+          type: 'string',
+        },
+      ],
     },
     {
       name: 'reversed',

@@ -7,11 +7,19 @@
   }
 
   h1 {
-    font-size: var(--text-6xl);
+    font-size: var(--text-5xl);
     line-height: 1.1;
 
+    @media (min-width: 400px) {
+      @apply text-6xl;
+    }
+
     @media (min-width: 768px) {
-      font-size: var(--text-8xl);
+      @apply text-7xl;
+    }
+
+    @media (min-width: 1024px) {
+      @apply text-8xl;
     }
   }
 
@@ -33,6 +41,19 @@
     }
   }
 
+  h4 {
+    font-size: var(--text-xl);
+    line-height: 1;
+
+    @media (min-width: 768px) {
+      font-size: var(--text-2xl);
+    }
+  }
+
+  blockquote {
+    @apply border-l-4 border-teal-500 pl-4 italic;
+  }
+
   p {
     font-size: var(--text-base);
 
@@ -41,8 +62,13 @@
     }
   }
 
+  .prose ul,
+  .prose ol {
+    @apply ml-6;
+  }
+
   li {
-    @apply relative before:mr-2 before:text-teal-400 before:content-['•'];
+    @apply relative before:mr-2 before:-ml-4 before:text-teal-400 before:content-['•'];
   }
 }
 
@@ -61,7 +87,7 @@
 }
 
 @utility fancy-text {
-  @apply bg-gradient-to-r from-emerald-400 via-teal-400 to-teal-200 bg-clip-text font-serif leading-normal text-transparent italic;
+  @apply bg-gradient-to-r from-emerald-400 via-teal-400 to-teal-200 bg-clip-text font-serif leading-tight text-transparent italic;
 }
 
 .prose a:not(.btn) {

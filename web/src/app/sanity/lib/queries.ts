@@ -1,5 +1,30 @@
 import { groq } from "next-sanity";
 
+export const headerQuery = `
+  *[_type == "header"][0] {
+    siteTitle,
+    logo {
+      asset->{
+        url,
+        metadata { dimensions }
+      },
+      alt
+    },
+    links[] {
+      name,
+      url,
+      submenu[] {
+        name,
+        url
+      }
+    },
+    cta {
+      name,
+      url
+    }
+  }
+`;
+
 export const footerQuery = groq`*[_type == "footer"][0] {
   logoText,
   socialLinks[] {
@@ -19,9 +44,19 @@ export const pageQuery = groq`*[_type == "page" && slug.current == $slug][0] {
     selectedServices[]-> {
       _id,
       title,
+      description,
       image,
       imageAlt,
-      link
+      link {
+        href,
+        text
+      }
+    },
+    testimonials[]-> {
+      _id,
+      quote,
+      author,
+      role
     }
   }
 }`;

@@ -1,0 +1,21 @@
+.swiper,
+.swiper .swiper-wrapper {
+  @apply h-full;
+}
+
+.swiper .swiper-pagination {
+  @apply bottom-0;
+}
+
+.swiper .swiper-pagination-bullet {
+  @apply h-4 w-4 bg-teal-100;
+}
+
+.swiper .swiper-pagination-bullet-active {
+  @apply bg-teal-100;
+}
+
+.swiper .swiper-button-next,
+.swiper .swiper-button-prev {
+  @apply hidden text-teal-100 md:block;
+}
