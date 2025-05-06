@@ -16,7 +16,7 @@ type Story = StoryObj<typeof Feature>;
 export const Default: Story = {
   args: {
     data: {
-      title: "Hypnosis",
+      title: "Hypnosis Title",
       description: [
         {
           _type: "block",
