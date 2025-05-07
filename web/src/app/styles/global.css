@@ -25,6 +25,15 @@
   .animate-rotate-border {
     animation: border-rotate 5s linear infinite;
   }
+
+  .bg-animated-conic-border {
+    background-image: conic-gradient(
+      from var(--border-angle),
+      #5eead4,
+      #22c55e,
+      #5eead4
+    );
+  }
 }
 
 @media (prefers-color-scheme: dark) {
