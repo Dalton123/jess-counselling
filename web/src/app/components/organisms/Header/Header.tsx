@@ -6,6 +6,7 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { IoMenu, IoClose, IoChevronDown } from "react-icons/io5";
 import classNames from "classnames";
+import { urlForImage } from "@sanity/lib/client";
 
 // Types from Sanity schema
 export type NavLink = {
@@ -16,18 +17,27 @@ export type NavLink = {
 
 export type HeaderProps = {
   siteTitle?: string;
-  logo?: {
-    url: string;
-    alt?: string;
-    width?: number;
-    height?: number;
-  };
+  logo?: SanityImageObject;
   links?: NavLink[];
   cta?: {
     name: string;
     url: string;
   };
 };
+
+// A basic type for Sanity image objects for now
+// Consider using a more specific type from a Sanity library if available
+interface SanityImageObject {
+  _type: "image";
+  asset: {
+    _ref: string;
+    _type: "reference";
+  };
+  alt?: string;
+  // other image fields like hotspot, crop can be added here
+  width?: number; // these might be custom fields added in schema or from asset itself
+  height?: number;
+}
 
 export const Header = ({ data }: { data: HeaderProps }) => {
   const { siteTitle, logo, links, cta } = data;
@@ -72,12 +82,12 @@ export const Header = ({ data }: { data: HeaderProps }) => {
     >
       <div className="flex items-center justify-between">
         {/* Logo / Title */}
-        {logo ? (
+        {logo && logo.asset ? (
           <Link href="/">
             <Image
-              src={logo.url}
+              src={urlForImage(logo).url()}
               alt={logo.alt || siteTitle || "Logo"}
-              width={logo.width || 120}
+              width={logo.width || 140}
               height={logo.height || 60}
               priority
             />
@@ -96,7 +106,7 @@ export const Header = ({ data }: { data: HeaderProps }) => {
               <Link
                 key={link.name}
                 href={link.url}
-                className="hover:text-teal-600"
+                className="font-medium hover:text-teal-600"
               >
                 {link.name}
               </Link>

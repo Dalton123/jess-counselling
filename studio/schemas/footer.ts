@@ -13,6 +13,36 @@ export const footer = defineType({
       initialValue: 'JESSICA',
     }),
     defineField({
+      name: 'logo',
+      title: 'Logo Image',
+      type: 'image',
+      options: {hotspot: true},
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+          description: 'Important for SEO and accessibility.',
+        }),
+        defineField({
+          name: 'width',
+          title: 'Width',
+          type: 'number',
+          description: 'Optional: Specify width for the logo in pixels.',
+          initialValue: 120,
+        }),
+        defineField({
+          name: 'height',
+          title: 'Height',
+          type: 'number',
+          description: 'Optional: Specify height for the logo in pixels.',
+          initialValue: 60,
+        }),
+      ],
+      description:
+        'Optional: Upload a logo image. If provided, this will be used instead of the Logo Text.',
+    }),
+    defineField({
       name: 'socialLinks',
       title: 'Social Links',
       type: 'array',

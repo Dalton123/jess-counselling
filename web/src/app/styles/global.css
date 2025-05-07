@@ -4,6 +4,10 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Font Families */
+  --font-sans: "Montserrat", sans-serif;
+  --font-serif: "DM Serif Display", serif;
 }
 
 @property --border-angle {
@@ -68,8 +72,18 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-family-sans);
   @apply noise-pattern overscroll-none;
+}
+
+/* Apply DM Serif Display to headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-family-serif);
 }
 
 :focus {

@@ -27,6 +27,15 @@ export const headerQuery = `
 
 export const footerQuery = groq`*[_type == "footer"][0] {
   logoText,
+  logo {
+    asset->{
+      url,
+      metadata { dimensions }
+    },
+    alt,
+    width,
+    height
+  },
   socialLinks[] {
     platform,
     url,

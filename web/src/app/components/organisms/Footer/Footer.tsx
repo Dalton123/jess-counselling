@@ -1,8 +1,22 @@
 "use client";
 import { motion } from "framer-motion";
+import Image from "next/image";
+import { urlForImage } from "@sanity/lib/client";
+
+interface SanityImageObject {
+  _type: "image";
+  asset: {
+    _ref: string;
+    _type: "reference";
+  };
+  alt?: string;
+  width?: number;
+  height?: number;
+}
 
 type FooterData = {
   logoText: string;
+  logo?: SanityImageObject;
   socialLinks: {
     platform: string;
     url: string;
@@ -17,14 +31,24 @@ export const Footer = ({ data }: { data: FooterData }) => {
   };
 
   return (
-    <footer className="before:flower-pattern relative z-1 overflow-hidden bg-slate-950 py-12 before:absolute before:inset-0 before:z-[-1] before:opacity-10 before:content-['']">
+    <footer className="before:flower-pattern relative z-1 overflow-hidden bg-slate-950 pt-8 pb-40 before:absolute before:inset-0 before:z-[-1] before:opacity-10 before:content-[''] md:py-12">
       {/* Main Footer Content */}
-      <div className="container mx-auto px-16">
+      <div className="container mx-auto px-4 md:px-16">
         <div className="flex flex-col items-start gap-4">
           {/* Logo/Text */}
-          <div className="font-serif text-2xl text-white/80 italic">
-            {data?.logoText || "JESSICA"}
-          </div>
+          {data?.logo && data.logo.asset ? (
+            <Image
+              src={urlForImage(data.logo).url()}
+              alt={data.logo.alt || data.logoText || "Logo"}
+              width={data.logo.width || 200}
+              height={data.logo.height || 60}
+              className="object-contain"
+            />
+          ) : (
+            <div className="font-serif text-2xl text-white/80 italic">
+              {data?.logoText || "JESSICA"}
+            </div>
+          )}
 
           {/* Copyright */}
           <div className="text-sm text-white/60">
