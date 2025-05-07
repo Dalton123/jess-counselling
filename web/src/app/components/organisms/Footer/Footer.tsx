@@ -12,7 +12,6 @@ type FooterData = {
 };
 
 export const Footer = ({ data }: { data: FooterData }) => {
-  console.log(data);
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };

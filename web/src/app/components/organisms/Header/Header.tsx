@@ -58,11 +58,17 @@ export const Header = ({ data }: { data: HeaderProps }) => {
 
   return (
     <header
-      className={`noise-pattern-2 sticky top-0 z-20 px-6 py-4 transition-all duration-300 ${
-        isScrolled
-          ? "bg-teal-100/60 text-teal-900 shadow-sm backdrop-blur-md hover:bg-teal-100/80"
-          : "bg-teal-100/50 text-teal-800 shadow"
-      }`}
+      className={classNames(
+        "noise-pattern-2 sticky top-0 z-20 px-6 py-4 transition-colors duration-100",
+        {
+          // When mobile menu is open, apply a solid background to the entire header
+          "bg-teal-50 text-teal-900 shadow": mobileOpen,
+          // Otherwise, apply scroll-dependent styling
+          "bg-teal-100/60 text-teal-900 shadow-sm backdrop-blur-md hover:bg-teal-100/80":
+            !mobileOpen && isScrolled,
+          "bg-teal-100/50 text-teal-800 shadow": !mobileOpen && !isScrolled,
+        }
+      )}
     >
       <div className="flex items-center justify-between">
         {/* Logo / Title */}

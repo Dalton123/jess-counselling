@@ -26,10 +26,10 @@ export const SectionWrapper = ({
           "px-5": wrapper === "none",
           "mt-4": topSpacing === "small",
           "mt-8": topSpacing === "medium",
-          "mt-12": topSpacing === "large",
+          "mt-8 md:mt-12": topSpacing === "large",
           "mb-4": bottomSpacing === "small",
           "mb-8": bottomSpacing === "medium",
-          "mb-12": bottomSpacing === "large",
+          "mb-8 md:mb-12": bottomSpacing === "large",
         }
       )}
     >

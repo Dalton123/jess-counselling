@@ -23,9 +23,7 @@ type PageBuilderProps = {
 
 export async function getPageData(slug: string): Promise<PageData | null> {
   try {
-    // console.log('Fetching page data for slug:', slug);
     const data = await client.fetch(pageQuery, { slug });
-    // console.log('Fetched page data:', data);
 
     return data;
   } catch (error) {
@@ -37,7 +35,6 @@ export async function getPageData(slug: string): Promise<PageData | null> {
 export async function getAllPages() {
   try {
     const pages = await client.fetch(allPagesQuery);
-    // console.log('Fetched all pages:', pages);
 
     return pages;
   } catch (error) {
@@ -47,16 +44,12 @@ export async function getAllPages() {
 }
 
 export default async function PageBuilder({ slug }: PageBuilderProps) {
-  // console.log('PageBuilder received slug:', slug);
-
   const page = await getPageData(slug);
 
   if (!page) {
     console.log("No page found for slug:", slug);
     notFound();
   }
-
-  // console.log('Rendering page with content:', page.content);
 
   return (
     <main>

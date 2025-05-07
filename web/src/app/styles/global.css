@@ -56,11 +56,6 @@
   background-repeat: no-repeat;
 }
 
-/* Add utility for rotating border animation */
-@utility animate-rotate-border {
-  animation: border-rotate 5s linear infinite;
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
