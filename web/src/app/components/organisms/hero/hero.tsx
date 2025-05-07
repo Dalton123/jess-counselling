@@ -51,7 +51,7 @@ export const Hero = ({ data }: HeroProps) => {
   return (
     <section
       className={classNames(
-        "relative m-auto mt-5 flex w-[calc(100%-40px)] items-start overflow-hidden rounded-4xl bg-gradient-to-r from-teal-50 to-teal-50 p-4 md:p-8 lg:h-[calc(100dvh-140px)] lg:items-center",
+        "bg-animated-conic-border animate-rotate-border relative m-auto mt-5 flex w-[calc(100%-40px)] items-start overflow-hidden rounded-4xl bg-gradient-to-r from-teal-50 to-teal-50 p-4 md:p-8 lg:h-[calc(100dvh-140px)] lg:items-center",
         {
           "justify-center": !hasBackground,
         }
@@ -108,7 +108,7 @@ export const Hero = ({ data }: HeroProps) => {
         {data?.tagline && (
           <p
             className={classNames(
-              "mb-6 text-sm font-black tracking-wider uppercase md:text-lg",
+              "mb-6 text-xs font-black tracking-wider uppercase md:text-lg",
               {
                 "bg-gradient-to-r from-teal-600 via-teal-700 to-teal-500 bg-clip-text text-sm font-black tracking-widest text-transparent":
                   hasBackground,
