@@ -51,7 +51,7 @@ export const Hero = ({ data }: HeroProps) => {
   return (
     <section
       className={classNames(
-        "bg-animated-conic-border animate-rotate-border relative m-auto mt-5 flex w-[calc(100%-40px)] items-start overflow-hidden rounded-4xl bg-gradient-to-r from-teal-50 to-teal-50 p-4 md:p-8 lg:h-[calc(100dvh-140px)] lg:items-center",
+        "bg-animated-conic-border animate-rotate-border relative m-auto mt-5 flex h-[calc(100dvh-140px)] w-[calc(100%-40px)] items-start overflow-hidden rounded-4xl bg-gradient-to-r from-teal-50 to-teal-50 p-4 md:p-8 lg:h-[calc(100dvh-140px)] lg:items-center",
         {
           "justify-center": !hasBackground,
         }
@@ -96,7 +96,7 @@ export const Hero = ({ data }: HeroProps) => {
       {/* Content */}
       <div
         className={classNames(
-          "relative z-3 flex flex-col items-center justify-center gap-4 overflow-hidden rounded-4xl px-4 py-8 text-center lg:p-4",
+          "relative z-3 flex h-full flex-col items-center justify-center gap-4 overflow-hidden rounded-4xl px-4 py-8 text-center lg:h-auto lg:p-4",
           {
             "before:flower-pattern w-full bg-gradient-to-br from-teal-50 to-teal-200 backdrop-blur-md before:absolute before:inset-0 before:z-[-1] before:opacity-20 before:content-[''] md:from-teal-50/90 md:to-teal-200/70 md:py-8 lg:h-full lg:max-w-3xl":
               hasBackground,

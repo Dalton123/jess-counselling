@@ -1,15 +1,15 @@
 // components/InfoGrid.tsx
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import { SectionWrapper } from "@atoms/SectionWrapper/SectionWrapper";
-import { PortableText } from "@portabletext/react";
-import { PortableTextBlock } from "@portabletext/react";
+import { PortableText, PortableTextBlock } from "@portabletext/react";
 import { SectionHeader } from "@molecules/SectionHeader/SectionHeader";
 import { urlForImage } from "@sanity/lib/client";
 import classNames from "classnames";
+
 export type Step = {
   icon: {
     _type: string;
@@ -38,6 +38,60 @@ export type InfoGridProps = {
     topSpacing?: "none" | "small" | "medium" | "large";
     bottomSpacing?: "none" | "small" | "medium" | "large";
   };
+};
+
+// New internal component for animated grid items
+const AnimatedGridItem = ({
+  step,
+  idx,
+  wrapper,
+}: {
+  step: Step;
+  idx: number;
+  wrapper: "none" | "dark" | "light";
+}) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.2 }); // Trigger when 20% visible
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 }, // Slightly more y offset for individual items
+    visible: { opacity: 1, y: 0 },
+  };
+
+  return (
+    <motion.div
+      ref={ref}
+      key={idx} // Key is still useful for React list rendering
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      variants={itemVariants}
+      transition={{ duration: 0.5, delay: 0.1 }} // Small fixed delay, or use idx * 0.1 if preferred for a quick stagger once in view
+      className={classNames(
+        "flex flex-col items-center overflow-hidden rounded-4xl p-4 text-center",
+        {
+          "bg-teal-100": wrapper === "light" || wrapper === "none",
+          "bg-teal-900": wrapper === "dark",
+        }
+      )}
+    >
+      {step.icon && (
+        <div className="mb-4 h-16 w-16">
+          <Image
+            src={urlForImage(step.icon).url()}
+            alt="Info icon"
+            className="h-full w-full object-contain"
+            width={64}
+            height={64}
+          />
+        </div>
+      )}
+      {step.description && (
+        <div className="prose">
+          <PortableText value={step.description} />
+        </div>
+      )}
+    </motion.div>
+  );
 };
 
 export const InfoGrid = ({ data }: InfoGridProps) => {
@@ -75,36 +129,7 @@ export const InfoGrid = ({ data }: InfoGridProps) => {
         )}
       >
         {steps?.map((step, idx) => (
-          <motion.div
-            key={idx}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: idx * 0.1, duration: 0.4 }}
-            className={classNames(
-              "flex flex-col items-center overflow-hidden rounded-4xl p-4 text-center",
-              {
-                "bg-teal-100": wrapper === "light" || wrapper === "none",
-                "bg-teal-900": wrapper === "dark",
-              }
-            )}
-          >
-            {step.icon && (
-              <div className="mb-4 h-16 w-16">
-                <Image
-                  src={urlForImage(step.icon).url()}
-                  alt="Info icon"
-                  className="h-full w-full object-contain"
-                  width={64}
-                  height={64}
-                />
-              </div>
-            )}
-            {step.description && (
-              <div className="prose">
-                <PortableText value={step.description} />
-              </div>
-            )}
-          </motion.div>
+          <AnimatedGridItem key={idx} step={step} idx={idx} wrapper={wrapper} />
         ))}
       </div>
     </SectionWrapper>

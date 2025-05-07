@@ -1,9 +1,11 @@
-import React from "react";
+"use client";
+
+import React, { useRef } from "react";
 import Image from "next/image";
 import { urlForImage } from "@sanity/lib/client";
-import { PortableText } from "@portabletext/react";
-import { PortableTextBlock } from "@portabletext/react";
+import { PortableText, PortableTextBlock } from "@portabletext/react";
 import { Button } from "@atoms/Button/Button";
+import { motion, useInView } from "framer-motion";
 
 type ServiceCardProps = {
   title: string;
@@ -11,6 +13,9 @@ type ServiceCardProps = {
   imageAlt: string;
   link: { href: string; text: string };
   description: PortableTextBlock[];
+  className?: string;
+  animate?: boolean;
+  animationDelay?: number;
 };
 
 export const ServiceCard = ({
@@ -19,9 +24,27 @@ export const ServiceCard = ({
   imageAlt,
   link,
   description,
+  className = "",
+  animate = true,
+  animationDelay = 0,
 }: ServiceCardProps) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0 },
+  };
+
   return (
-    <div className="group relative z-1 max-h-120 w-full overflow-hidden rounded-4xl bg-teal-700 after:pointer-events-none after:absolute after:inset-0 after:-z-1 after:bg-gradient-to-t after:from-teal-900 after:to-teal-500 after:opacity-30 after:transition-all after:duration-500 after:ease-in-out after:hover:scale-105 hover:after:opacity-70">
+    <motion.div
+      ref={ref}
+      initial="hidden"
+      animate={animate && isInView ? "visible" : "hidden"}
+      variants={cardVariants}
+      transition={{ duration: 0.5, delay: animationDelay }}
+      className={`group relative z-1 max-h-120 w-full overflow-hidden rounded-4xl bg-teal-700 after:pointer-events-none after:absolute after:inset-0 after:-z-1 after:bg-gradient-to-t after:from-teal-900 after:to-teal-500 after:opacity-30 after:transition-all after:duration-500 after:ease-in-out after:hover:scale-105 hover:after:opacity-70 ${className}`}
+    >
       <div className="absolute inset-0 -z-1 aspect-square h-full w-full opacity-40 lg:relative lg:opacity-100">
         {image && typeof image === "object" && "_ref" in image ? (
           <Image
@@ -58,6 +81,6 @@ export const ServiceCard = ({
           </Button>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 };

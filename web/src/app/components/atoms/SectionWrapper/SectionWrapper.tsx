@@ -1,5 +1,8 @@
+"use client";
+
 import classNames from "classnames";
-import React from "react";
+import React, { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 
 type SectionWrapperProps = {
   children: React.ReactNode;
@@ -8,6 +11,8 @@ type SectionWrapperProps = {
   className?: string;
   topSpacing?: "none" | "small" | "medium" | "large";
   bottomSpacing?: "none" | "small" | "medium" | "large";
+  animate?: boolean;
+  animationDelay?: number;
 };
 
 export const SectionWrapper = ({
@@ -16,9 +21,24 @@ export const SectionWrapper = ({
   className = "",
   topSpacing = "medium",
   bottomSpacing = "medium",
+  animate = true,
+  animationDelay = 0,
 }: SectionWrapperProps) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
+
+  const sectionVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0 },
+  };
+
   return (
-    <section
+    <motion.section
+      ref={ref}
+      initial="hidden"
+      animate={animate && isInView ? "visible" : "hidden"}
+      variants={sectionVariants}
+      transition={{ duration: 0.6, delay: animationDelay }}
       className={classNames(
         "container mx-auto overflow-hidden px-5",
         className,
@@ -43,6 +63,6 @@ export const SectionWrapper = ({
       >
         {children}
       </div>
-    </section>
+    </motion.section>
   );
 };

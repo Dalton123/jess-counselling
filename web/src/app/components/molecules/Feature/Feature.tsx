@@ -33,6 +33,8 @@ type FeatureProps = {
     fullWidth?: boolean;
     topSpacing?: "none" | "small" | "medium" | "large";
     bottomSpacing?: "none" | "small" | "medium" | "large";
+    animate?: boolean;
+    animationDelay?: number;
   };
 };
 
@@ -50,6 +52,8 @@ export const Feature = ({ data }: FeatureProps) => {
     fullWidth = false,
     topSpacing = "medium",
     bottomSpacing = "medium",
+    animate,
+    animationDelay,
   } = data;
 
   return (
@@ -58,6 +62,8 @@ export const Feature = ({ data }: FeatureProps) => {
       fullWidth={fullWidth}
       topSpacing={topSpacing}
       bottomSpacing={bottomSpacing}
+      animate={animate}
+      animationDelay={animationDelay}
     >
       {showSectionHeader && sectionHeader && (
         <SectionHeader
