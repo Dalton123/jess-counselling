@@ -2,7 +2,7 @@
 @import "./typography.css";
 @import "./swiper.css";
 :root {
-  --background: #ffffff;
+  --background: var(--color-teal-50);
   --foreground: #171717;
 
   /* Font Families */
@@ -42,7 +42,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #fbfbfb;
+    --background: var(--color-teal-50);
     --foreground: #ededed;
   }
 }
@@ -73,7 +73,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-family-sans);
-  @apply noise-pattern overscroll-none;
+  @apply overscroll-none;
 }
 
 /* Apply DM Serif Display to headings */

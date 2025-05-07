@@ -69,14 +69,14 @@ export const Header = ({ data }: { data: HeaderProps }) => {
   return (
     <header
       className={classNames(
-        "noise-pattern-2 sticky top-0 z-20 px-6 py-4 transition-colors duration-100",
+        "noise-pattern-2 sticky top-0 z-20 px-6 transition-colors duration-100",
         {
           // When mobile menu is open, apply a solid background to the entire header
           "bg-teal-50 text-teal-900 shadow": mobileOpen,
           // Otherwise, apply scroll-dependent styling
-          "bg-teal-100/60 text-teal-900 shadow-sm backdrop-blur-md hover:bg-teal-100/80":
+          "bg-teal-100/60 py-2 text-teal-900 shadow-sm backdrop-blur-md hover:bg-teal-100/80":
             !mobileOpen && isScrolled,
-          "bg-teal-100/50 text-teal-800 shadow": !mobileOpen && !isScrolled,
+          "bg-teal-100 py-3 text-teal-800 shadow": !mobileOpen && !isScrolled,
         }
       )}
     >
@@ -87,8 +87,12 @@ export const Header = ({ data }: { data: HeaderProps }) => {
             <Image
               src={urlForImage(logo).url()}
               alt={logo.alt || siteTitle || "Logo"}
-              width={logo.width || 140}
+              width={logo.width || 200}
               height={logo.height || 60}
+              className={classNames("transition-all duration-200", {
+                "w-30 md:w-40": isScrolled,
+                "max-w-40 md:max-w-none": !isScrolled,
+              })}
               priority
             />
           </Link>
@@ -106,7 +110,7 @@ export const Header = ({ data }: { data: HeaderProps }) => {
               <Link
                 key={link.name}
                 href={link.url}
-                className="font-medium hover:text-teal-600"
+                className="relative py-2 font-medium after:absolute after:top-full after:left-1/2 after:h-1 after:w-0 after:origin-center after:-translate-x-1/2 after:bg-teal-600 after:transition-all after:duration-300 after:ease-in-out after:content-[''] hover:text-teal-600 hover:after:w-full focus:after:w-full"
               >
                 {link.name}
               </Link>
@@ -252,7 +256,7 @@ export default function DesktopDropdown({
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
-      <button className="flex items-center space-x-1 hover:text-teal-600">
+      <button className="flex items-center space-x-1 font-medium hover:text-teal-600">
         <span>{link.name}</span>
         <IoChevronDown
           className={`transition-transform duration-200 ${
