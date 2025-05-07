@@ -110,7 +110,7 @@ export const Header = ({ data }: { data: HeaderProps }) => {
               <Link
                 key={link.name}
                 href={link.url}
-                className="relative py-2 font-medium after:absolute after:top-full after:left-1/2 after:h-1 after:w-0 after:origin-center after:-translate-x-1/2 after:bg-teal-600 after:transition-all after:duration-300 after:ease-in-out after:content-[''] hover:text-teal-600 hover:after:w-full focus:after:w-full"
+                className="relative py-2 font-medium after:absolute after:top-full after:left-1/2 after:h-1 after:w-0 after:origin-center after:-translate-x-1/2 after:bg-teal-600 after:transition-all after:duration-300 after:ease-in-out after:content-[''] hover:text-teal-600 hover:after:w-full focus:after:w-full 2xl:text-lg"
               >
                 {link.name}
               </Link>
