@@ -51,7 +51,7 @@ export const Hero = ({ data }: HeroProps) => {
   return (
     <section
       className={classNames(
-        "relative m-auto mt-5 flex w-[calc(100%-40px)] items-start overflow-hidden rounded-4xl bg-gradient-to-r from-teal-50 to-teal-50 p-4 md:p-8 lg:h-[calc(100dvh-100px)] lg:items-center",
+        "relative m-auto mt-5 flex w-[calc(100%-40px)] items-start overflow-hidden rounded-4xl bg-gradient-to-r from-teal-50 to-teal-50 p-4 md:p-8 lg:h-[calc(100dvh-140px)] lg:items-center",
         {
           "justify-center": !hasBackground,
         }
