@@ -43,9 +43,9 @@ export const ServiceCard = ({
       animate={animate && isInView ? "visible" : "hidden"}
       variants={cardVariants}
       transition={{ duration: 0.5, delay: animationDelay }}
-      className={`group relative z-1 max-h-120 w-full overflow-hidden rounded-4xl bg-teal-700 after:pointer-events-none after:absolute after:inset-0 after:-z-1 after:bg-gradient-to-t after:from-teal-900 after:to-teal-500 after:opacity-30 after:transition-all after:duration-500 after:ease-in-out after:hover:scale-105 hover:after:opacity-70 ${className}`}
+      className={`group relative z-1 w-full overflow-hidden rounded-4xl bg-teal-700 after:pointer-events-none after:absolute after:inset-0 after:-z-1 after:bg-gradient-to-t after:from-teal-900 after:to-teal-500 after:opacity-30 after:transition-all after:duration-500 after:ease-in-out after:hover:scale-105 hover:after:opacity-70 lg:max-h-120 ${className}`}
     >
-      <div className="absolute inset-0 -z-1 aspect-square h-full w-full opacity-40 lg:relative lg:opacity-100">
+      <div className="absolute inset-0 -z-1 aspect-square h-full w-full opacity-40 lg:relative xl:opacity-100">
         {image && typeof image === "object" && "_ref" in image ? (
           <Image
             src={urlForImage(image).url()}
@@ -68,7 +68,7 @@ export const ServiceCard = ({
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
       </div>
 
-      <div className="right-0 bottom-0 left-0 z-2 flex h-full flex-col items-start gap-4 p-8 transition-all duration-500 group-hover:translate-y-0 md:h-auto lg:absolute xl:translate-y-[68%] 2xl:translate-y-[65%]">
+      <div className="right-0 bottom-0 left-0 z-2 flex h-full flex-col items-start gap-5 p-8 transition-all duration-500 group-hover:translate-y-0 md:h-auto lg:absolute xl:translate-y-[68%] 2xl:translate-y-[65%]">
         {title && <h2 className="font-black text-teal-50">{title}</h2>}
         {description && (
           <div className="prose">
