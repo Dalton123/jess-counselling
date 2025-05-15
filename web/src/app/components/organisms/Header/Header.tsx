@@ -76,7 +76,7 @@ export const Header = ({ data }: { data: HeaderProps }) => {
           // Otherwise, apply scroll-dependent styling
           "bg-teal-100/60 py-2 text-teal-900 shadow-sm backdrop-blur-md hover:bg-teal-100/80":
             !mobileOpen && isScrolled,
-          "bg-teal-900 py-3 text-teal-800 shadow": !mobileOpen && !isScrolled,
+          "bg-teal-100 py-3 text-teal-800 shadow": !mobileOpen && !isScrolled,
         }
       )}
     >
