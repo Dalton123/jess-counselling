@@ -24,9 +24,8 @@ export const dynamicParams = false;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async function Page(props: any) {
-  const slugArray = Array.isArray(props.params.slug)
-    ? props.params.slug
-    : [props.params.slug];
+  const params = await props.params;
+  const slugArray = Array.isArray(params.slug) ? params.slug : [params.slug];
   const slugString = slugArray.join("/");
   return <PageBuilder slug={slugString} />;
 }
