@@ -21,8 +21,9 @@ const montserrat = Montserrat({
 });
 
 export const metadata = {
-  title: "Jess Counselling",
-  description: "Professional counselling services",
+  title: "Jessica Wilkinson Counselling",
+  description:
+    "Professional counselling services for children, adolescents and adults",
 };
 
 export default async function RootLayout({
