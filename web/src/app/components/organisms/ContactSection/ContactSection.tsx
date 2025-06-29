@@ -84,7 +84,7 @@ export const ContactSection = ({ data }: ContactSectionProps) => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     // Honeypot check - if filled, silently "succeed" but don't actually submit
@@ -98,15 +98,33 @@ export const ContactSection = ({ data }: ContactSectionProps) => {
 
     setIsSubmitting(true);
 
-    // TODO: Implement actual form submission logic here
-    // e.g., send to API, email service, etc.
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-    // Simulate success after 1 second
-    setTimeout(() => {
+      const result = await response.json();
+
+      if (response.ok) {
+        setSubmitSuccess(true);
+        setFormData(initialState);
+      } else {
+        // Handle server errors
+        console.error("Form submission error:", result.error);
+        alert(result.error || "Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      alert(
+        "Something went wrong. Please check your connection and try again."
+      );
+    } finally {
       setIsSubmitting(false);
-      setSubmitSuccess(true);
-      setFormData(initialState);
-    }, 1000);
+    }
   };
 
   return (
