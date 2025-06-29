@@ -44,7 +44,7 @@ export const footerQuery = groq`*[_type == "footer"][0] {
   showBackToTop
 }`;
 
-export const pageQuery = groq`*[_type == "page" && slug.current == $slug][0] {
+export const pageQuery = groq`*[_type == "page" && slug.current == $slug && published == true][0] {
   title,
   description,
   content[] {
@@ -70,7 +70,7 @@ export const pageQuery = groq`*[_type == "page" && slug.current == $slug][0] {
   }
 }`;
 
-export const allPagesQuery = groq`*[_type == "page" && defined(slug.current)] {
+export const allPagesQuery = groq`*[_type == "page" && defined(slug.current) && published == true] {
   title,
   "slug": slug.current
 }`;

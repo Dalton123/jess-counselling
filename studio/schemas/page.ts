@@ -22,6 +22,13 @@ export const page = defineType({
       validation: (Rule: any) => Rule.required(),
     }),
     defineField({
+      name: 'published',
+      title: 'Published',
+      type: 'boolean',
+      description: 'Toggle to publish/unpublish this page on the live site',
+      initialValue: false,
+    }),
+    defineField({
       name: 'content',
       title: 'Page Content',
       type: 'array',
@@ -47,4 +54,16 @@ export const page = defineType({
       rows: 3,
     }),
   ],
+  preview: {
+    select: {
+      title: 'title',
+      published: 'published',
+    },
+    prepare({title, published}) {
+      return {
+        title: title,
+        subtitle: published ? '✅ Published' : '📝 Draft',
+      }
+    },
+  },
 })
