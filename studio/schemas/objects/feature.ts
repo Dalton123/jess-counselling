@@ -76,7 +76,6 @@ export const feature = defineField({
       title: 'Title',
       type: 'string',
       fieldset: 'content',
-      validation: (Rule: any) => Rule.required(),
       options: {
         spellCheck: false,
       },
@@ -130,14 +129,12 @@ export const feature = defineField({
       options: {
         hotspot: true,
       },
-      validation: (Rule: any) => Rule.required(),
     },
     {
       name: 'imageAlt',
       title: 'Image Alt Text',
       type: 'string',
       fieldset: 'content',
-      validation: (Rule: any) => Rule.required(),
     },
     {
       name: 'link',

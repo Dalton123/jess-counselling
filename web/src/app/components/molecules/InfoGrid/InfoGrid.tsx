@@ -51,23 +51,23 @@ const AnimatedGridItem = ({
   wrapper: "none" | "dark" | "light";
 }) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 }); // Trigger when 20% visible
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 }, // Slightly more y offset for individual items
+    hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0 },
   };
 
   return (
     <motion.div
       ref={ref}
-      key={idx} // Key is still useful for React list rendering
+      key={idx}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
       variants={itemVariants}
-      transition={{ duration: 0.5, delay: 0.1 }} // Small fixed delay, or use idx * 0.1 if preferred for a quick stagger once in view
+      transition={{ duration: 0.5, delay: idx * 0.15 }}
       className={classNames(
-        "flex flex-col items-center overflow-hidden rounded-4xl p-4 text-center",
+        "flex flex-col items-center overflow-hidden rounded-4xl p-4 text-center md:p-6 xl:p-8",
         {
           "bg-teal-100": wrapper === "light" || wrapper === "none",
           "bg-teal-900": wrapper === "dark",

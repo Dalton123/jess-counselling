@@ -5,7 +5,52 @@ export const sectionHeader = defineType({
   name: 'sectionHeader',
   title: 'Section Header',
   type: 'object',
+  fieldsets: [
+    {
+      name: 'spacing',
+      title: 'Spacing & Layout',
+      options: {collapsible: true, collapsed: false},
+    },
+    {
+      name: 'content',
+      title: 'Content',
+      options: {collapsible: true, collapsed: false},
+    },
+    {
+      name: 'styling',
+      title: 'Styling',
+      options: {collapsible: true, collapsed: false},
+    },
+  ],
   fields: [
+    defineField({
+      name: 'wrapper',
+      title: 'Background Wrapper',
+      type: 'string',
+      initialValue: 'none',
+      fieldset: 'styling',
+      options: {
+        list: ['light', 'dark', 'none'],
+      },
+      description: 'Choose a background style for the section header',
+    }),
+    defineField({
+      name: 'maxWidth',
+      title: 'Max Width',
+      type: 'string',
+      fieldset: 'styling',
+      options: {
+        list: [
+          {title: 'Small (32rem)', value: 'sm'},
+          {title: 'Medium (42rem)', value: 'md'},
+          {title: 'Large (56rem)', value: 'lg'},
+          {title: 'Extra Large (72rem)', value: 'xl'},
+          {title: 'Full Width', value: 'full'},
+        ],
+      },
+      initialValue: 'lg',
+      description: 'Set the maximum width of the content area',
+    }),
     defineField({
       name: 'topSpacing',
       title: 'Top Spacing',
@@ -13,6 +58,7 @@ export const sectionHeader = defineType({
       options: {
         list: ['none', 'small', 'medium', 'large'],
       },
+      fieldset: 'spacing',
     }),
     defineField({
       name: 'bottomSpacing',
@@ -21,6 +67,7 @@ export const sectionHeader = defineType({
       options: {
         list: ['none', 'small', 'medium', 'large'],
       },
+      fieldset: 'spacing',
     }),
     defineField({
       name: 'textAlignment',
@@ -30,17 +77,20 @@ export const sectionHeader = defineType({
         list: ['left', 'center', 'right'],
         layout: 'radio',
       },
+      fieldset: 'styling',
     }),
     defineField({
       name: 'label',
       title: 'Label',
       type: 'string',
       description: 'The small gradient label text that appears above the title',
+      fieldset: 'content',
     }),
     defineField({
       name: 'title',
       title: 'Title',
       type: 'array',
+      fieldset: 'content',
       of: [
         defineArrayMember({
           type: 'block',
@@ -69,6 +119,7 @@ export const sectionHeader = defineType({
       name: 'link',
       title: 'Link',
       type: 'object',
+      fieldset: 'content',
       fields: [
         {
           name: 'href',
@@ -90,6 +141,7 @@ export const sectionHeader = defineType({
         list: ['left', 'center', 'right'],
         layout: 'radio',
       },
+      fieldset: 'styling',
     }),
     defineField({
       name: 'buttonVerticalPosition',
@@ -99,6 +151,7 @@ export const sectionHeader = defineType({
         list: ['top', 'center', 'bottom'],
         layout: 'radio',
       },
+      fieldset: 'styling',
     }),
   ],
   preview: {

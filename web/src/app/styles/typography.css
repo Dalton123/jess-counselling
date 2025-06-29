@@ -67,6 +67,10 @@
     @apply ml-6;
   }
 
+  .prose :not(h1, h2, h3, h4) {
+    @apply text-pretty;
+  }
+
   li {
     @apply relative before:mr-2 before:-ml-4 before:text-teal-400 before:content-['•'];
   }

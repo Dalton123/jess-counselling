@@ -11,6 +11,7 @@ import {
 } from "swiper/modules";
 import { PortableText } from "@portabletext/react";
 import { PortableTextBlock } from "@portabletext/types";
+import { IoStar } from "react-icons/io5";
 
 // Import Swiper styles
 import "swiper/css";
@@ -52,7 +53,7 @@ export const TestimonialsCarousel = ({ data }: TestimonialsCarouselProps) => {
           modules={[Navigation, Keyboard, Autoplay, Scrollbar, A11y]}
           spaceBetween={50}
           slidesPerView={desktopSlidesPerView}
-          navigation
+          navigation={testimonials.length > 1}
           pagination={{ clickable: true }}
           autoplay={
             autoplay ? { delay: delay, disableOnInteraction: false } : false
@@ -66,6 +67,13 @@ export const TestimonialsCarousel = ({ data }: TestimonialsCarouselProps) => {
               className="flex h-auto justify-center pb-5"
             >
               <div className="mx-auto flex h-full w-full max-w-6xl flex-col rounded-lg text-center md:p-8">
+                {/* 5 Star Rating */}
+                <div className="mb-6 flex justify-center gap-1">
+                  {[...Array(5)].map((_, i) => (
+                    <IoStar key={i} className="h-5 w-5 text-yellow-400" />
+                  ))}
+                </div>
+
                 <div className="relative mb-6 w-full flex-1">
                   <div className="absolute -top-6 -left-2 hidden text-9xl leading-none text-teal-100 md:block">
                     &ldquo;
