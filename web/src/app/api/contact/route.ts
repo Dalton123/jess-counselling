@@ -64,13 +64,18 @@ export async function POST(request: NextRequest) {
 
     // Send auto-reply to the person who submitted
     const autoReplyEmail = await resend.emails.send({
-      from: "jessica@wilkinsoncounselling.co.uk", // Updated to match verified domain
+      from: "jessica@wilkinsoncounselling.co.uk",
       to: body.email,
       subject: "Thank you for your message - Wilkinson Counselling",
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <div style="background: #0f766e; color: white; padding: 20px; text-align: center;">
-            <h1 style="margin: 0;">Wilkinson Counselling</h1>
+          <div style="background: #0f766e; color: white; padding: 30px 20px; text-align: center;">
+            <img 
+              src="https://wilkinsoncounselling.co.uk/images/Wilkinson-counselling.png" 
+              alt="Wilkinson Counselling Logo" 
+              style="max-width: 200px; height: auto; margin-bottom: 15px; filter: brightness(0) invert(1);"
+            />
+            <h1 style="margin: 0; font-size: 24px;">Wilkinson Counselling</h1>
           </div>
           
           <div style="padding: 30px 20px;">
