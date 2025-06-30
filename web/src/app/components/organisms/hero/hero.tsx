@@ -144,7 +144,7 @@ export const Hero = ({ data }: HeroProps) => {
         {hasBackground && enableParallax && (
           <div
             ref={glowRef}
-            className="glow-ball absolute top-1/2 left-1/2 h-full w-full opacity-70"
+            className="glow-ball absolute top-1/2 left-1/2 z-2 h-full w-full opacity-70"
             style={{
               transform: "translate3d(-50%, -50%, 0)",
               willChange: "transform",
