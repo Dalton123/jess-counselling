@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
 
     // Send notification email to Jessica
     const notificationEmail = await resend.emails.send({
-      from: "website@wilkinsoncounselling.com", // You'll need to verify this domain
+      from: "website@wilkinsoncounselling.co.uk",
       to: "wilkinsoncounselling@outlook.com",
       subject: `New Contact Form Submission from ${body.name}`,
       html: `
@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
 
     // Send auto-reply to the person who submitted
     const autoReplyEmail = await resend.emails.send({
-      from: "jessica@wilkinsoncounselling.com", // You'll need to verify this domain
+      from: "jessica@wilkinsoncounselling.co.uk", // Updated to match verified domain
       to: body.email,
       subject: "Thank you for your message - Wilkinson Counselling",
       html: `
