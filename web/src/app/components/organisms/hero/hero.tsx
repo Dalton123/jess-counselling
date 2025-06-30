@@ -20,7 +20,31 @@ type HeroProps = {
         _type: string;
       };
     };
+    showCTA?: boolean;
+    link?: { href: string; text: string };
+    ctaStyle?: "light" | "dark" | "teal";
   };
+};
+
+const getCTAStyles = (style: "light" | "dark" | "teal" = "light") => {
+  switch (style) {
+    case "dark":
+      return {
+        backgroundColor: "bg-slate-700",
+        textColor: "text-white",
+      };
+    case "teal":
+      return {
+        backgroundColor: "bg-teal-600",
+        textColor: "text-white",
+      };
+    case "light":
+    default:
+      return {
+        backgroundColor: "bg-teal-50",
+        textColor: "text-teal-900",
+      };
+  }
 };
 
 export const Hero = ({ data }: HeroProps) => {
@@ -47,6 +71,8 @@ export const Hero = ({ data }: HeroProps) => {
       if (frame) cancelAnimationFrame(frame);
     };
   }, []);
+
+  const ctaStyles = getCTAStyles(data?.ctaStyle);
 
   return (
     <section
@@ -149,9 +175,18 @@ export const Hero = ({ data }: HeroProps) => {
             />
           </div>
         )}
-        <Button backgroundColor="bg-teal-50" className="[&>span]:text-xl!">
-          Get in touch
-        </Button>
+
+        {/* CTA Button - now editable from CMS */}
+        {data?.showCTA && data?.link && (
+          <Button
+            href={data.link.href}
+            backgroundColor={ctaStyles.backgroundColor}
+            textColor={ctaStyles.textColor}
+            className="[&>span]:text-xl!"
+          >
+            {data.link.text}
+          </Button>
+        )}
       </div>
     </section>
   );
