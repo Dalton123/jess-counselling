@@ -144,7 +144,7 @@ export const Hero = ({ data }: HeroProps) => {
         {hasBackground && enableParallax && (
           <div
             ref={glowRef}
-            className="glow-ball absolute top-1/2 left-1/2 z-2 h-full w-full opacity-70"
+            className="glow-ball absolute top-1/2 left-1/2 z-2 hidden h-full w-full opacity-70 lg:block"
             style={{
               transform: "translate3d(-50%, -50%, 0)",
               willChange: "transform",
@@ -187,7 +187,7 @@ export const Hero = ({ data }: HeroProps) => {
         )}
       >
         {/* Noise pattern - only add on desktop after load */}
-        {hasBackground && isLoaded && enableParallax && (
+        {hasBackground && (
           <div className="noise-pattern pointer-events-none absolute inset-0 -z-1 opacity-50" />
         )}
 
