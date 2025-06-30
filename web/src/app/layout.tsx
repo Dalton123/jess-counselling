@@ -11,6 +11,8 @@ const dmSerifDisplay = DM_Serif_Display({
   subsets: ["latin"],
   variable: "--font-family-serif",
   display: "swap",
+  preload: true,
+  fallback: ["serif"],
 });
 
 const montserrat = Montserrat({
@@ -18,6 +20,8 @@ const montserrat = Montserrat({
   subsets: ["latin"],
   variable: "--font-family-sans",
   display: "swap",
+  preload: true,
+  fallback: ["sans-serif"],
 });
 
 export const metadata = {
@@ -43,7 +47,7 @@ export const metadata = {
     title: "Jessica Wilkinson Counselling",
     description:
       "Professional counselling services for children, adolescents and adults",
-    url: "https://wilkinsoncounselling.com",
+    url: "https://wilkinsoncounselling.co.uk",
     siteName: "Wilkinson Counselling",
     locale: "en_GB",
     type: "website",
@@ -56,6 +60,15 @@ export const metadata = {
     //   },
     // ],
   },
+
+  // Twitter
+  // twitter: {
+  //   card: "summary_large_image",
+  //   title: "Jessica Wilkinson Counselling",
+  //   description:
+  //     "Professional counselling services for children, adolescents and adults",
+  //   images: ["/images/og-image.jpg"], // Same image as Open Graph
+  // },
 
   // Additional SEO
   robots: {
@@ -82,17 +95,35 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const footerData = await client.fetch(footerQuery);
-  const headerData = await client.fetch(headerQuery);
+  const [headerData, footerData] = await Promise.all([
+    client.fetch(headerQuery),
+    client.fetch(footerQuery),
+  ]);
 
   return (
     <html
       lang="en"
-      className={`h-full ${dmSerifDisplay.variable} ${montserrat.variable}`}
+      className={`${dmSerifDisplay.variable} ${montserrat.variable}`}
     >
-      <body className="flex min-h-screen flex-col">
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin=""
+        />
+
+        <link
+          rel="preload"
+          href="/images/wave-pattern.svg"
+          as="image"
+          type="image/svg+xml"
+        />
+      </head>
+      <body className="antialiased">
         <Header data={headerData} />
-        <div className="flex-1">{children}</div>
+        <main>{children}</main>
         <Footer data={footerData} />
       </body>
     </html>
