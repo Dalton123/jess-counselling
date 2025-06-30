@@ -186,14 +186,16 @@ export const ContactSection = ({ data }: ContactSectionProps) => {
               )}
 
               {submitSuccess ? (
-                <div className="rounded-lg bg-green-500/20 p-6 text-center">
-                  <h3 className="mb-2 text-xl font-semibold">
-                    {data.successTitle || "Thank you!"}
-                  </h3>
-                  <p>
-                    {data.successMessage ||
-                      "Your message has been sent successfully."}
-                  </p>
+                <div className="flex min-h-[400px] items-center justify-center rounded-lg bg-green-500/20 p-6 text-center">
+                  <div>
+                    <h3 className="mb-4 text-xl font-semibold">
+                      {data.successTitle || "Thank you!"}
+                    </h3>
+                    <p className="text-lg">
+                      {data.successMessage ||
+                        "Your message has been sent successfully."}
+                    </p>
+                  </div>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
