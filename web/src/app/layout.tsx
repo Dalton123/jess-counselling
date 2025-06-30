@@ -23,7 +23,7 @@ const montserrat = Montserrat({
 export const metadata = {
   title: "Jessica Wilkinson Counselling",
   description:
-    "Professional counselling services for children, adolescents and adults",
+    "Professional, compassionate counselling for adults and children. Person-centred support in a calm, supportive space.",
   keywords: [
     "counselling",
     "therapy",
