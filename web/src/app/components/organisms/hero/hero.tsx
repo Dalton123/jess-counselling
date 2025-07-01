@@ -7,6 +7,7 @@ import classNames from "classnames";
 import { PortableText } from "@portabletext/react";
 import { Button } from "@atoms/Button/Button";
 import { PortableTextBlock } from "@portabletext/types";
+import { motion } from "framer-motion";
 
 type HeroProps = {
   data: {
@@ -142,7 +143,7 @@ export const Hero = ({ data }: HeroProps) => {
       <div className="absolute inset-0 z-0 bg-gradient-to-br from-teal-100/80 to-teal-100/80">
         {/* Glow effect - only on desktop with parallax enabled */}
         {hasBackground && enableParallax && (
-          <div
+          <motion.div
             ref={glowRef}
             className="glow-ball absolute top-1/2 left-1/2 z-2 hidden h-full w-full opacity-70 lg:block"
             style={{
@@ -150,6 +151,9 @@ export const Hero = ({ data }: HeroProps) => {
               willChange: "transform",
               animation: "pulse 4s ease-in-out infinite",
             }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5, duration: 1.2, ease: "easeOut" }}
           />
         )}
 
