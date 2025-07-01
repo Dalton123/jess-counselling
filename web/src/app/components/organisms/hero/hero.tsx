@@ -51,79 +51,12 @@ const getCTAStyles = (style: "light" | "dark" | "teal" = "light") => {
 export const Hero = ({ data }: HeroProps) => {
   const hasBackground = Boolean(data?.backgroundImage);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [enableParallax, setEnableParallax] = useState(false);
   const glowRef = useRef<HTMLDivElement>(null);
 
-  // Delay expensive animations until after initial render
+  // Only progressive enhancement (no parallax)
   useEffect(() => {
-    // Mark as loaded for progressive enhancement
     setIsLoaded(true);
-
-    // Parallax is low priority - only enable after everything else is loaded
-    const enableParallaxTimer = setTimeout(() => {
-      // Wait for page to be fully loaded and settled
-      if (document.readyState === "complete") {
-        const isMobile =
-          /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-            navigator.userAgent
-          );
-        const hasTouch =
-          "ontouchstart" in window || navigator.maxTouchPoints > 0;
-        const isLargeScreen = window.innerWidth >= 1024;
-
-        // Only enable on large screens without touch capability
-        if (isLargeScreen && !isMobile && !hasTouch) {
-          setEnableParallax(true);
-        }
-      } else {
-        // If page isn't fully loaded yet, check again later
-        window.addEventListener(
-          "load",
-          () => {
-            setTimeout(() => {
-              const isMobile =
-                /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-                  navigator.userAgent
-                );
-              const hasTouch =
-                "ontouchstart" in window || navigator.maxTouchPoints > 0;
-              const isLargeScreen = window.innerWidth >= 1024;
-
-              if (isLargeScreen && !isMobile && !hasTouch) {
-                setEnableParallax(true);
-              }
-            }, 2000); // Extra delay after page load
-          },
-          { once: true }
-        );
-      }
-    }, 3000); // Increased delay - 3 seconds
-
-    return () => clearTimeout(enableParallaxTimer);
   }, []);
-
-  // Parallax effect - only runs on desktop
-  useEffect(() => {
-    if (!enableParallax || !hasBackground) return;
-
-    let ticking = false;
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!ticking && glowRef.current) {
-        requestAnimationFrame(() => {
-          if (glowRef.current) {
-            const x = (e.clientX / window.innerWidth - 0.5) * 3;
-            const y = (e.clientY / window.innerHeight - 0.5) * 3;
-            glowRef.current.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-          }
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener("mousemove", handleMouseMove, { passive: true });
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [enableParallax, hasBackground]);
 
   const ctaStyles = getCTAStyles(data?.ctaStyle);
 
@@ -133,28 +66,24 @@ export const Hero = ({ data }: HeroProps) => {
         "relative m-auto mt-5 flex min-h-[calc(100dvh-140px)] w-[calc(100%-40px)] flex-col items-start justify-center overflow-hidden rounded-4xl bg-teal-50 p-4 md:p-8",
         {
           "justify-center": !hasBackground,
-          // Only add border animation after load and on non-mobile
-          "bg-animated-conic-border animate-rotate-border":
-            isLoaded && enableParallax,
+          "bg-animated-conic-border animate-rotate-border": isLoaded,
         }
       )}
     >
       {/* Simplified background */}
       <div className="absolute inset-0 z-0 bg-gradient-to-br from-teal-100/80 to-teal-100/80">
-        {/* Glow effect - only on desktop with parallax enabled */}
-        {hasBackground && enableParallax && (
+        {/* Glow effect - always fade in if hasBackground */}
+        {hasBackground && (
           <motion.div
-            ref={glowRef}
-            className="glow-ball absolute top-1/2 left-1/2 z-2 hidden h-full w-full opacity-70 lg:block"
-            style={{
-              transform: "translate3d(-50%, -50%, 0)",
-              willChange: "transform",
-              animation: "pulse 4s ease-in-out infinite",
-            }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 1.2, ease: "easeOut" }}
-          />
+            transition={{ duration: 3, delay: 0.5 }}
+          >
+            <div
+              ref={glowRef}
+              className="glow-ball pulse absolute top-1/2 left-1/2 z-2 hidden h-full w-full opacity-70 lg:block"
+            />
+          </motion.div>
         )}
 
         {/* Background content */}
@@ -184,7 +113,7 @@ export const Hero = ({ data }: HeroProps) => {
         className={classNames(
           "relative z-10 flex flex-1 flex-col items-center justify-center gap-4 px-4 py-8 text-center lg:p-4",
           {
-            "w-full max-w-3xl rounded-4xl bg-gradient-to-br from-teal-50/90 to-teal-200/70 backdrop-blur-sm md:py-8":
+            "w-full rounded-4xl bg-gradient-to-br from-teal-50/90 to-teal-200/70 backdrop-blur-sm md:py-8 lg:max-w-3xl":
               hasBackground,
             "max-w-4xl md:px-8": !hasBackground,
           }

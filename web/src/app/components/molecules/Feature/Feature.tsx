@@ -89,7 +89,7 @@ export const Feature = ({ data }: FeatureProps) => {
           {/* Content Section */}
           <div
             className={classNames(
-              "noise-pattern-2 flex flex-col items-start justify-center py-8 pr-4 pl-6 md:w-1/2 md:p-12",
+              "noise-pattern-2 flex flex-col items-start justify-center py-8 pr-4 pl-6 lg:w-1/2 lg:p-12",
               {
                 "bg-slate-700": wrapper === "light" || wrapper === "none",
                 "bg-teal-50": wrapper === "dark",
@@ -127,10 +127,13 @@ export const Feature = ({ data }: FeatureProps) => {
           {/* Image Section */}
           {image && (
             <div
-              className={classNames("relative min-h-[300px] overflow-hidden", {
-                "md:w-1/2": !fullWidth,
-                "md:w-4/6 lg:w-5/6": fullWidth,
-              })}
+              className={classNames(
+                "relative min-h-[300px] overflow-hidden sm:min-h-[400px]",
+                {
+                  "md:w-1/2": !fullWidth,
+                  "md:w-4/6 lg:w-5/6": fullWidth,
+                }
+              )}
             >
               <Image
                 src={urlForImage(image).url()}

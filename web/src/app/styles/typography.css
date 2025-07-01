@@ -91,7 +91,7 @@
 }
 
 @utility fancy-text {
-  @apply bg-gradient-to-r from-emerald-400 via-teal-400 to-teal-200 bg-clip-text font-serif leading-tight text-transparent italic;
+  @apply bg-gradient-to-r from-emerald-400 via-teal-400 to-teal-200 bg-clip-text font-serif leading-none text-transparent italic;
 }
 
 .prose a:not(.btn) {
