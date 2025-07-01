@@ -42,6 +42,36 @@ export const metadata = {
   creator: "Jessica Wilkinson",
   publisher: "Wilkinson Counselling",
 
+  // Favicon and icons
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.ico", sizes: "16x16", type: "image/x-icon" },
+      { url: "/favicon.ico", sizes: "32x32", type: "image/x-icon" },
+    ],
+    apple: [
+      {
+        url: "/web-app-manifest-192x192.png",
+        sizes: "192x192",
+        type: "image/png",
+      },
+    ],
+    other: [
+      {
+        rel: "mask-icon",
+        url: "/favicon.ico",
+        color: "#0d9488",
+      },
+    ],
+  },
+
+  // Web App Manifest
+  manifest: "/site.webmanifest",
+
+  // Theme colors
+  themeColor: "#0d9488",
+  colorScheme: "light",
+
   // Open Graph / Facebook
   openGraph: {
     title: "Jessica Wilkinson Counselling",
@@ -107,6 +137,21 @@ export default async function RootLayout({
     >
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        {/* Additional favicon links for better compatibility */}
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link
+          rel="apple-touch-icon"
+          sizes="192x192"
+          href="/web-app-manifest-192x192.png"
+        />
+        <meta name="msapplication-TileColor" content="#0d9488" />
+        <meta
+          name="msapplication-TileImage"
+          content="/web-app-manifest-192x192.png"
+        />
+
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
