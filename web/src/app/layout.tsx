@@ -81,14 +81,14 @@ export const metadata = {
     siteName: "Wilkinson Counselling",
     locale: "en_GB",
     type: "website",
-    // images: [
-    //   {
-    //     url: "/images/og-image.jpg", // You'll need to add this image
-    //     width: 1200,
-    //     height: 630,
-    //     alt: "Jessica Wilkinson Counselling - Professional Mental Health Services",
-    //   },
-    // ],
+    images: [
+      {
+        url: "/Wilkinson-counselling-OG.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Jessica Wilkinson Counselling - Professional Mental Health Services",
+      },
+    ],
   },
 
   // Twitter
