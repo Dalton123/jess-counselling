@@ -83,7 +83,7 @@ export const metadata = {
     type: "website",
     images: [
       {
-        url: "/Wilkinson-counselling-OG.jpg",
+        url: "/images/Wilkinson-counselling-OG.jpg",
         width: 1200,
         height: 630,
         alt: "Jessica Wilkinson Counselling - Professional Mental Health Services",
