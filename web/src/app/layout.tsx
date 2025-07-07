@@ -24,7 +24,15 @@ const montserrat = Montserrat({
   fallback: ["sans-serif"],
 });
 
+export const viewport = {
+  themeColor: "#0d9488",
+  colorScheme: "light",
+  width: "device-width",
+  initialScale: 1,
+};
+
 export const metadata = {
+  metadataBase: new URL("https://wilkinsoncounselling.co.uk"),
   title: "Jessica Wilkinson Counselling",
   description:
     "Professional, compassionate counselling for adults and children. Person-centred support in a calm, supportive space.",
@@ -67,10 +75,6 @@ export const metadata = {
 
   // Web App Manifest
   manifest: "/site.webmanifest",
-
-  // Theme colors
-  themeColor: "#0d9488",
-  colorScheme: "light",
 
   // Open Graph / Facebook
   openGraph: {
@@ -136,8 +140,6 @@ export default async function RootLayout({
       className={`${dmSerifDisplay.variable} ${montserrat.variable}`}
     >
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-
         {/* Additional favicon links for better compatibility */}
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="shortcut icon" href="/favicon.ico" />
