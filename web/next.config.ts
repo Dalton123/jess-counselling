@@ -45,28 +45,6 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  async redirects() {
-    return [
-      // Redirect /home to root
-      {
-        source: "/home",
-        destination: "/",
-        permanent: true,
-      },
-      // Redirect www to non-www (Vercel handles HTTPS automatically)
-      {
-        source: "/(.*)",
-        has: [
-          {
-            type: "host",
-            value: "www.wilkinsoncounselling.co.uk",
-          },
-        ],
-        destination: "https://wilkinsoncounselling.co.uk/$1",
-        permanent: true,
-      },
-    ];
-  },
 };
 
 export default nextConfig;
