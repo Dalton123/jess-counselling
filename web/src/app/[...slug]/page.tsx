@@ -1,4 +1,8 @@
-import PageBuilder, { getAllPages } from "@organisms/PageBuilder/PageBuilder";
+import PageBuilder, {
+  getAllPages,
+  getPageData,
+} from "@organisms/PageBuilder/PageBuilder";
+import { Metadata } from "next";
 
 // Revalidate every hour
 export const revalidate = 3600;
@@ -22,8 +26,62 @@ export async function generateStaticParams(): Promise<{ slug: string[] }[]> {
 // In Next.js 15, dynamic routes receive a `params` object
 export const dynamicParams = false;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default async function Page(props: any) {
+export async function generateMetadata(props: {
+  params: Promise<{ slug: string[] }>;
+}): Promise<Metadata> {
+  const params = await props.params;
+  const slugArray = Array.isArray(params.slug) ? params.slug : [params.slug];
+  const slugString = slugArray.join("/");
+
+  const page = await getPageData(slugString);
+
+  if (!page) {
+    return {
+      title: "Page Not Found",
+      description: "The requested page could not be found.",
+    };
+  }
+
+  const title = page.title
+    ? `${page.title} | Jessica Wilkinson Counselling`
+    : "Jessica Wilkinson Counselling";
+  const description =
+    page.description ||
+    "Professional, compassionate counselling for adults and children. Person-centred support in a calm, supportive space.";
+  const url = `https://wilkinsoncounselling.co.uk/${slugString}`;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: "Wilkinson Counselling",
+      locale: "en_GB",
+      type: "website",
+      images: [
+        {
+          url: "/images/Wilkinson-counselling-OG.jpg",
+          width: 1200,
+          height: 630,
+          alt: `${page.title} - Jessica Wilkinson Counselling`,
+        },
+      ],
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
+}
+
+export default async function Page(props: {
+  params: Promise<{ slug: string[] }>;
+}) {
   const params = await props.params;
   const slugArray = Array.isArray(params.slug) ? params.slug : [params.slug];
   const slugString = slugArray.join("/");

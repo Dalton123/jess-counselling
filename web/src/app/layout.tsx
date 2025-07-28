@@ -33,7 +33,10 @@ export const viewport = {
 
 export const metadata = {
   metadataBase: new URL("https://wilkinsoncounselling.co.uk"),
-  title: "Jessica Wilkinson Counselling",
+  title: {
+    default: "Jessica Wilkinson Counselling",
+    template: "%s | Jessica Wilkinson Counselling",
+  },
   description:
     "Professional, compassionate counselling for adults and children. Person-centred support in a calm, supportive space.",
   keywords: [

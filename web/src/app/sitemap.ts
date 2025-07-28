@@ -20,13 +20,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Fetch published pages from Sanity
     const pages: PageData[] = await client.fetch(pagesQuery);
 
-    // Create sitemap entries for dynamic pages
-    const pageUrls = pages.map((page: PageData) => ({
-      url: `${baseUrl}/${page.slug}`,
-      lastModified: new Date(page._updatedAt),
-      changeFrequency: "weekly" as const,
-      priority: 0.8,
-    }));
+    // Create sitemap entries for dynamic pages (excluding home and hardcoded pages)
+    const pageUrls = pages
+      .filter(
+        (page: PageData) =>
+          page.slug !== "home" &&
+          page.slug !== "adults" &&
+          page.slug !== "children-young-people-therapy" &&
+          page.slug !== "contact"
+      )
+      .map((page: PageData) => ({
+        url: `${baseUrl}/${page.slug}`,
+        lastModified: new Date(page._updatedAt),
+        changeFrequency: "weekly" as const,
+        priority: 0.8,
+      }));
 
     // Static pages and homepage
     const staticUrls = [
@@ -57,13 +65,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ];
 
     // Filter out duplicate pages (e.g., if "home" exists in Sanity, exclude it)
-    const filteredPageUrls = pageUrls.filter(
-      (page) =>
-        !page.url.endsWith("/home") &&
-        !page.url.endsWith("/adults") &&
-        !page.url.endsWith("/children-young-people-therapy") &&
-        !page.url.endsWith("/contact")
-    );
+    const filteredPageUrls = pageUrls;
 
     return [...staticUrls, ...filteredPageUrls];
   } catch (error) {
