@@ -86,7 +86,8 @@
   @apply mb-6;
 } */
 
-.prose p {
+.prose p,
+p {
   @apply text-pretty;
 }
 

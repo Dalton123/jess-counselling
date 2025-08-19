@@ -34,46 +34,59 @@ export const Footer = ({ data }: { data: FooterData }) => {
     <footer className="before:flower-pattern relative z-1 overflow-hidden bg-slate-950 pt-8 pb-40 before:absolute before:inset-0 before:z-[-1] before:opacity-10 before:content-[''] md:py-12">
       {/* Main Footer Content */}
       <div className="container mx-auto px-4 md:px-16">
-        <div className="flex flex-col items-start gap-4">
-          {/* Logo/Text */}
-          {data?.logo && data.logo.asset ? (
-            <Image
-              src={urlForImage(data.logo).url()}
-              alt={data.logo.alt || data.logoText || "Logo"}
-              width={data.logo.width || 200}
-              height={data.logo.height || 60}
-              className="object-contain"
-            />
-          ) : (
-            <div className="font-serif text-2xl text-white/80 italic">
-              {data?.logoText || "JESSICA"}
-            </div>
-          )}
+        <div className="flex flex-col items-start justify-between gap-12 md:flex-row md:gap-8">
+          {/* Left side - Logo/Text and other content */}
+          <div className="flex flex-col items-start gap-4">
+            {/* Logo/Text */}
+            {data?.logo && data.logo.asset ? (
+              <Image
+                src={urlForImage(data.logo).url()}
+                alt={data.logo.alt || data.logoText || "Logo"}
+                width={data.logo.width || 200}
+                height={data.logo.height || 60}
+                className="object-contain"
+              />
+            ) : (
+              <div className="font-serif text-2xl text-white/80 italic">
+                {data?.logoText || "JESSICA"}
+              </div>
+            )}
 
-          {/* Copyright */}
-          <div className="text-sm text-white/60">
-            Copyright © {new Date().getFullYear()} | All Rights Reserved
+            {/* Copyright */}
+            <div className="text-sm text-white/60">
+              Copyright © {new Date().getFullYear()} | All Rights Reserved
+            </div>
+
+            {/* Social Links */}
+            {/* <div className="mt-4 flex gap-4">
+              {data?.socialLinks
+                ?.filter((link) => link.isActive)
+                .map((social) => (
+                  <Link
+                    key={social.platform}
+                    href={social.url}
+                    className="rounded bg-white/10 p-2 transition-colors hover:bg-white/20"
+                    aria-label={social.platform}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span
+                      className={`i-${social.platform} h-5 w-5 text-white/80`}
+                    />
+                  </Link>
+                ))}
+            </div> */}
           </div>
 
-          {/* Social Links */}
-          {/* <div className="mt-4 flex gap-4">
-            {data?.socialLinks
-              ?.filter((link) => link.isActive)
-              .map((social) => (
-                <Link
-                  key={social.platform}
-                  href={social.url}
-                  className="rounded bg-white/10 p-2 transition-colors hover:bg-white/20"
-                  aria-label={social.platform}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span
-                    className={`i-${social.platform} h-5 w-5 text-white/80`}
-                  />
-                </Link>
-              ))}
-          </div> */}
+          <div className="flex flex-col items-end gap-4">
+            <Image
+              src="/images/BACP_Jessica-Walsh-counselling-01.png"
+              alt="BACP - British Association for Counselling and Psychotherapy"
+              width={200}
+              height={89}
+              className="object-contain"
+            />
+          </div>
         </div>
       </div>
 
