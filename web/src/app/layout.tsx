@@ -34,8 +34,8 @@ export const viewport = {
 export const metadata = {
   metadataBase: new URL("https://wilkinsoncounselling.co.uk"),
   title: {
-    default: "Jessica Wilkinson Counselling",
-    template: "%s | Jessica Wilkinson Counselling",
+    default: "Wilkinson Counselling",
+    template: "%s | Wilkinson Counselling",
   },
   description:
     "Professional, compassionate counselling for adults and children. Person-centred support in a calm, supportive space.",
@@ -47,10 +47,11 @@ export const metadata = {
     "adolescent therapy",
     "adult counselling",
     "Jessica Wilkinson",
+    "Jessica Walsh",
     "professional counsellor",
   ],
-  authors: [{ name: "Jessica Wilkinson" }],
-  creator: "Jessica Wilkinson",
+  authors: [{ name: "Jessica Walsh" }],
+  creator: "Jessica Walsh",
   publisher: "Wilkinson Counselling",
 
   // Favicon and icons
@@ -81,7 +82,7 @@ export const metadata = {
 
   // Open Graph / Facebook
   openGraph: {
-    title: "Jessica Wilkinson Counselling",
+    title: "Jessica Walsh Counselling",
     description:
       "Professional counselling services for children, adolescents and adults",
     url: "https://wilkinsoncounselling.co.uk",
@@ -93,7 +94,7 @@ export const metadata = {
         url: "/images/Wilkinson-counselling-OG.jpg",
         width: 1200,
         height: 630,
-        alt: "Jessica Wilkinson Counselling - Professional Mental Health Services",
+        alt: "Wilkinson Counselling - Professional Mental Health Services",
       },
     ],
   },

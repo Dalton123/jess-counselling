@@ -43,8 +43,8 @@ export async function generateMetadata(props: {
   }
 
   const title = page.title
-    ? `${page.title} | Jessica Wilkinson Counselling`
-    : "Jessica Wilkinson Counselling";
+    ? `${page.title} | Wilkinson Counselling`
+    : "Wilkinson Counselling";
   const description =
     page.description ||
     "Professional, compassionate counselling for adults and children. Person-centred support in a calm, supportive space.";
@@ -68,7 +68,7 @@ export async function generateMetadata(props: {
           url: "/images/Wilkinson-counselling-OG.jpg",
           width: 1200,
           height: 630,
-          alt: `${page.title} - Jessica Wilkinson Counselling`,
+          alt: `${page.title} - Wilkinson Counselling`,
         },
       ],
     },

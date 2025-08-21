@@ -7,8 +7,7 @@ export const revalidate = 3600;
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPageData("home");
 
-  const title =
-    "Jessica Wilkinson Counselling - Professional Mental Health Services";
+  const title = "Wilkinson Counselling - Professional Mental Health Services";
   const description =
     page?.description ||
     "Professional, compassionate counselling for adults and children. Person-centred support in a calm, supportive space.";
