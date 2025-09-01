@@ -5,5 +5,6 @@
       "destination": "/",
       "permanent": true
     }
-  ]
+  ],
+  "trailingSlash": true
 }

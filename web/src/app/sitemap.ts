@@ -30,7 +30,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           page.slug !== "contact"
       )
       .map((page: PageData) => ({
-        url: `${baseUrl}/${page.slug}`,
+        url: `${baseUrl}/${page.slug}/`,
         lastModified: new Date(page._updatedAt),
         changeFrequency: "weekly" as const,
         priority: 0.8,
@@ -39,25 +39,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Static pages and homepage
     const staticUrls = [
       {
-        url: baseUrl,
+        url: `${baseUrl}/`,
         lastModified: new Date(),
         changeFrequency: "weekly" as const,
         priority: 1,
       },
       {
-        url: `${baseUrl}/adults`,
+        url: `${baseUrl}/adults/`,
         lastModified: new Date(),
         changeFrequency: "weekly" as const,
         priority: 0.9,
       },
       {
-        url: `${baseUrl}/children-young-people-therapy`,
+        url: `${baseUrl}/children-young-people-therapy/`,
         lastModified: new Date(),
         changeFrequency: "weekly" as const,
         priority: 0.9,
       },
       {
-        url: `${baseUrl}/contact`,
+        url: `${baseUrl}/contact/`,
         lastModified: new Date(),
         changeFrequency: "weekly" as const,
         priority: 0.8,
@@ -73,25 +73,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Fallback to static pages if there's an error
     return [
       {
-        url: baseUrl,
+        url: `${baseUrl}/`,
         lastModified: new Date(),
         changeFrequency: "weekly" as const,
         priority: 1,
       },
       {
-        url: `${baseUrl}/adults`,
+        url: `${baseUrl}/adults/`,
         lastModified: new Date(),
         changeFrequency: "weekly" as const,
         priority: 0.9,
       },
       {
-        url: `${baseUrl}/children-young-people-therapy`,
+        url: `${baseUrl}/children-young-people-therapy/`,
         lastModified: new Date(),
         changeFrequency: "weekly" as const,
         priority: 0.9,
       },
       {
-        url: `${baseUrl}/contact`,
+        url: `${baseUrl}/contact/`,
         lastModified: new Date(),
         changeFrequency: "weekly" as const,
         priority: 0.8,

@@ -48,7 +48,7 @@ export async function generateMetadata(props: {
   const description =
     page.description ||
     "Professional, compassionate counselling for adults and children. Person-centred support in a calm, supportive space.";
-  const url = `https://wilkinsoncounselling.co.uk/${slugString}`;
+  const url = `https://wilkinsoncounselling.co.uk/${slugString}/`;
 
   return {
     title,

@@ -32,7 +32,7 @@ export const viewport = {
 };
 
 export const metadata = {
-  metadataBase: new URL("https://wilkinsoncounselling.co.uk"),
+  metadataBase: new URL("https://wilkinsoncounselling.co.uk/"),
   title: {
     default: "Wilkinson Counselling",
     template: "%s | Wilkinson Counselling",
@@ -85,7 +85,7 @@ export const metadata = {
     title: "Jessica Walsh Counselling",
     description:
       "Professional counselling services for children, adolescents and adults",
-    url: "https://wilkinsoncounselling.co.uk",
+    url: "https://wilkinsoncounselling.co.uk/",
     siteName: "Wilkinson Counselling",
     locale: "en_GB",
     type: "website",
