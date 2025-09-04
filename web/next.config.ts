@@ -16,6 +16,15 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: 60 * 60 * 24 * 365, // 1 year
   },
   compress: true,
+  async redirects() {
+    return [
+      {
+        source: '/home/:path*',
+        destination: '/',
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {
