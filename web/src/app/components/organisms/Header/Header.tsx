@@ -39,6 +39,17 @@ interface SanityImageObject {
   height?: number;
 }
 
+// Normalize URLs to ensure they start with / for internal links
+const normalizeUrl = (url: string): string => {
+  if (!url) return '/';
+  // External URLs (http, mailto, tel) are fine as-is
+  if (url.startsWith('http') || url.startsWith('mailto:') || url.startsWith('tel:')) {
+    return url;
+  }
+  // Internal URLs must start with /
+  return url.startsWith('/') ? url : `/${url}`;
+};
+
 export const Header = ({ data }: { data: HeaderProps }) => {
   const { siteTitle, logo, links, cta } = data;
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -109,7 +120,7 @@ export const Header = ({ data }: { data: HeaderProps }) => {
             return !link.submenu ? (
               <Link
                 key={link.name}
-                href={link.url}
+                href={normalizeUrl(link.url)}
                 className="relative py-2 font-medium after:absolute after:top-full after:left-1/2 after:h-1 after:w-0 after:origin-center after:-translate-x-1/2 after:bg-teal-600 after:transition-all after:duration-300 after:ease-in-out after:content-[''] hover:text-teal-600 hover:after:w-full focus:after:w-full 2xl:text-lg"
               >
                 {link.name}
@@ -125,7 +136,7 @@ export const Header = ({ data }: { data: HeaderProps }) => {
 
           {cta && (
             <Link
-              href={cta.url}
+              href={normalizeUrl(cta.url)}
               className="ml-4 inline-block rounded bg-teal-600 px-4 py-2 text-white hover:bg-teal-700"
             >
               {cta.name}
@@ -186,7 +197,7 @@ export const Header = ({ data }: { data: HeaderProps }) => {
                         }}
                       >
                         <Link
-                          href={link.url}
+                          href={normalizeUrl(link.url)}
                           className="text-teal-700 hover:text-teal-600 focus:text-teal-600"
                           onClick={toggleMobile}
                         >
@@ -222,7 +233,7 @@ export const Header = ({ data }: { data: HeaderProps }) => {
                       }}
                     >
                       <Link
-                        href={cta.url}
+                        href={normalizeUrl(cta.url)}
                         className="mt-4 inline-block rounded bg-teal-600 px-4 py-2 text-white hover:bg-teal-700"
                         onClick={toggleMobile}
                       >
@@ -283,7 +294,7 @@ export default function DesktopDropdown({
             {link.submenu!.map((s) => (
               <Link
                 key={s.name}
-                href={s.url}
+                href={normalizeUrl(s.url)}
                 className="block px-4 py-2 text-center hover:bg-gray-100"
               >
                 {s.name}
@@ -325,7 +336,7 @@ const MobileAccordion = ({ link }: { link: NavLink }) => {
             {link.submenu!.map((s) => (
               <Link
                 key={s.name}
-                href={s.url}
+                href={normalizeUrl(s.url)}
                 className="block py-1 text-3xl text-teal-700 hover:text-teal-600"
               >
                 {s.name}
