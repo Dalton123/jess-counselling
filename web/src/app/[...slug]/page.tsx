@@ -3,6 +3,7 @@ import PageBuilder, {
   getPageData,
 } from "@organisms/PageBuilder/PageBuilder";
 import { Metadata } from "next";
+import { generateStructuredData } from "@utils/structuredData";
 
 // Revalidate every hour
 export const revalidate = 3600;
@@ -85,5 +86,21 @@ export default async function Page(props: {
   const params = await props.params;
   const slugArray = Array.isArray(params.slug) ? params.slug : [params.slug];
   const slugString = slugArray.join("/");
-  return <PageBuilder slug={slugString} />;
+
+  const page = await getPageData(slugString);
+  const structuredData = page ? generateStructuredData(page, slugString) : null;
+
+  return (
+    <>
+      {structuredData && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+          }}
+        />
+      )}
+      <PageBuilder slug={slugString} />
+    </>
+  );
 }

@@ -50,6 +50,12 @@ export const pageQuery = groq`*[_type == "page" && slug.current == $slug && publ
   content[] {
     _type,
     ...,
+    _type == "accordion" => {
+      items[] {
+        title,
+        content
+      }
+    },
     selectedServices[]-> {
       _id,
       title,

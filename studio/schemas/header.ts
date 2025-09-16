@@ -43,17 +43,6 @@ export const header = defineType({
               name: 'url',
               title: 'Link URL',
               type: 'string',
-              description: 'Internal links must start with / (e.g., /contact). External links should include https://',
-              validation: (Rule) => Rule.required().custom((value) => {
-                if (!value) return 'URL is required'
-                if (value.startsWith('http') || value.startsWith('mailto:') || value.startsWith('tel:')) {
-                  return true // External links are fine as-is
-                }
-                if (!value.startsWith('/')) {
-                  return 'Internal URLs must start with / (e.g., /contact not contact)'
-                }
-                return true
-              }),
             }),
             defineField({
               name: 'submenu',
@@ -75,17 +64,6 @@ export const header = defineType({
                       name: 'url',
                       title: 'Subpage URL',
                       type: 'string',
-                      description: 'Internal links must start with / (e.g., /contact). External links should include https://',
-                      validation: (Rule) => Rule.required().custom((value) => {
-                        if (!value) return 'URL is required'
-                        if (value.startsWith('http') || value.startsWith('mailto:') || value.startsWith('tel:')) {
-                          return true // External links are fine as-is
-                        }
-                        if (!value.startsWith('/')) {
-                          return 'Internal URLs must start with / (e.g., /contact not contact)'
-                        }
-                        return true
-                      }),
                     }),
                   ],
                 },
@@ -110,17 +88,6 @@ export const header = defineType({
           name: 'url',
           title: 'Button URL',
           type: 'string',
-          description: 'Internal links must start with / (e.g., /contact). External links should include https://',
-          validation: (Rule) => Rule.required().custom((value) => {
-            if (!value) return 'URL is required'
-            if (value.startsWith('http') || value.startsWith('mailto:') || value.startsWith('tel:')) {
-              return true // External links are fine as-is
-            }
-            if (!value.startsWith('/')) {
-              return 'Internal URLs must start with / (e.g., /contact not contact)'
-            }
-            return true
-          }),
         }),
       ],
     }),

@@ -69,7 +69,7 @@ export const Accordion = ({ data }: { data: AccordionData }) => {
       <div className="container mx-auto rounded-lg">
         {items.map((item, index) => (
           <AccordionItem
-            key={item._key}
+            key={item._key || index}
             title={item.title}
             content={item.content}
             isOpen={openIndexes.includes(index)}
