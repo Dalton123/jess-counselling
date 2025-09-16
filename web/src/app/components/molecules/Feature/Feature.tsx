@@ -35,6 +35,7 @@ type FeatureProps = {
     bottomSpacing?: "none" | "small" | "medium" | "large";
     animate?: boolean;
     animationDelay?: number;
+    removeMinHeight?: boolean;
   };
 };
 
@@ -54,6 +55,7 @@ export const Feature = ({ data }: FeatureProps) => {
     bottomSpacing = "medium",
     animate,
     animationDelay,
+    removeMinHeight = false,
   } = data;
 
   return (
@@ -82,8 +84,8 @@ export const Feature = ({ data }: FeatureProps) => {
           className={classNames("flex flex-col overflow-hidden rounded-4xl", {
             "md:flex-row-reverse": reversed,
             "md:flex-row": !reversed,
-            "min-h-[500px] md:min-h-[700px] lg:min-h-[900px]": fullWidth,
-            "min-h-[475px] md:min-h-[600px] lg:min-h-[750px]": !fullWidth,
+            "min-h-[500px] md:min-h-[700px] lg:min-h-[900px]": fullWidth && !removeMinHeight,
+            "min-h-[475px] md:min-h-[600px] lg:min-h-[750px]": !fullWidth && !removeMinHeight,
           })}
         >
           {/* Content Section */}

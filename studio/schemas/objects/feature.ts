@@ -162,6 +162,14 @@ export const feature = defineField({
       initialValue: false,
       fieldset: 'content',
     },
+    {
+      name: 'removeMinHeight',
+      title: 'Remove Minimum Height',
+      type: 'boolean',
+      description: 'If enabled, removes the minimum height constraints for more flexible sizing',
+      initialValue: false,
+      fieldset: 'content',
+    },
   ],
   preview: {
     select: {

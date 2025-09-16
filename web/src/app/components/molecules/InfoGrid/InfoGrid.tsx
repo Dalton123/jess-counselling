@@ -78,7 +78,7 @@ const AnimatedGridItem = ({
         <div className="mb-4 h-16 w-16">
           <Image
             src={urlForImage(step.icon).url()}
-            alt="Info icon"
+            alt="Lock icon representing confidentiality"
             className="h-full w-full object-contain"
             width={64}
             height={64}

@@ -50,6 +50,16 @@
     }
   }
 
+  h1.fancy-text {
+    @apply pb-2;
+  }
+  h2.fancy-text {
+    @apply pb-1.5;
+  }
+  h3.fancy-text {
+    @apply pb-1;
+  }
+
   blockquote {
     @apply border-l-4 border-teal-500 pl-4 italic;
   }
