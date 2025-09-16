@@ -84,8 +84,10 @@ export const Feature = ({ data }: FeatureProps) => {
           className={classNames("flex flex-col overflow-hidden rounded-4xl", {
             "md:flex-row-reverse": reversed,
             "md:flex-row": !reversed,
-            "min-h-[500px] md:min-h-[700px] lg:min-h-[900px]": fullWidth && !removeMinHeight,
-            "min-h-[475px] md:min-h-[600px] lg:min-h-[750px]": !fullWidth && !removeMinHeight,
+            "min-h-[500px] md:min-h-[700px] lg:min-h-[900px]":
+              fullWidth && !removeMinHeight,
+            "min-h-[475px] md:min-h-[600px] lg:min-h-[750px]":
+              !fullWidth && !removeMinHeight,
           })}
         >
           {/* Content Section */}
@@ -139,7 +141,7 @@ export const Feature = ({ data }: FeatureProps) => {
             >
               <Image
                 src={urlForImage(image).url()}
-                alt={imageAlt}
+                alt={imageAlt || "Feature image"}
                 fill
                 className="object-cover"
               />

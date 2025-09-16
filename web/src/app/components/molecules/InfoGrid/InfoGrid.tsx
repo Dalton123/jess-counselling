@@ -18,6 +18,7 @@ export type Step = {
       _type: string;
     };
   };
+  iconAlt: string;
   description: PortableTextBlock[];
 };
 
@@ -78,7 +79,7 @@ const AnimatedGridItem = ({
         <div className="mb-4 h-16 w-16">
           <Image
             src={urlForImage(step.icon).url()}
-            alt="Lock icon representing confidentiality"
+            alt={step.iconAlt || "Info grid icon"}
             className="h-full w-full object-contain"
             width={64}
             height={64}

@@ -77,7 +77,7 @@ export const ServiceCard = ({
             <PortableText value={description} />
           </div>
         )}
-        {link && (
+        {link.text && (
           <Button href={link.href} textColor="text-slate-700">
             {link.text}
           </Button>

@@ -54,12 +54,15 @@ export const SectionWrapper = ({
       )}
     >
       <div
-        className={classNames("relative z-1 overflow-hidden rounded-4xl", {
-          "before:flower-pattern bg-teal-100 bg-gradient-to-bl from-emerald-100 before:absolute before:inset-0 before:z-[-1] before:opacity-50 before:content-['']":
-            wrapper === "light",
-          "noise-pattern-2 bg-slate-700": wrapper === "dark",
-          "py-8 md:py-10": wrapper !== "none",
-        })}
+        className={classNames(
+          "relative z-1 overflow-hidden rounded-4xl pb-1.5",
+          {
+            "before:flower-pattern bg-teal-100 bg-gradient-to-bl from-emerald-100 before:absolute before:inset-0 before:z-[-1] before:opacity-50 before:content-['']":
+              wrapper === "light",
+            "noise-pattern-2 bg-slate-700": wrapper === "dark",
+            "py-8 md:py-10": wrapper !== "none",
+          }
+        )}
       >
         {children}
       </div>

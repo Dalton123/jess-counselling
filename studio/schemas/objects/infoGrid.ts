@@ -25,6 +25,12 @@ export const infoGrid = defineType({
               },
             }),
             defineField({
+              name: 'iconAlt',
+              title: 'Icon Alt Text',
+              type: 'string',
+              description: 'Alternative text for the icon (important for accessibility and SEO)',
+            }),
+            defineField({
               name: 'description',
               title: 'Description',
               type: 'array',
