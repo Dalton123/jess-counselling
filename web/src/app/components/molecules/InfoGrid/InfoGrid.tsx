@@ -68,29 +68,36 @@ const AnimatedGridItem = ({
       variants={itemVariants}
       transition={{ duration: 0.5, delay: idx * 0.15 }}
       className={classNames(
-        "flex flex-col items-center overflow-hidden rounded-4xl p-4 text-center md:p-6 xl:p-8",
-        {
-          "bg-teal-100": wrapper === "light" || wrapper === "none",
-          "bg-teal-900": wrapper === "dark",
-        }
+        "animate-rotate-border bg-animated-conic-border relative flex flex-col items-center overflow-hidden rounded-4xl p-4 text-center md:p-6 xl:p-8"
       )}
     >
-      {step.icon && (
-        <div className="mb-4 h-16 w-16">
-          <Image
-            src={urlForImage(step.icon).url()}
-            alt={step.iconAlt || "Info grid icon"}
-            className="h-full w-full object-contain"
-            width={64}
-            height={64}
-          />
-        </div>
-      )}
-      {step.description && (
-        <div className="prose">
-          <PortableText value={step.description} />
-        </div>
-      )}
+      <div
+        className={classNames(
+          "absolute top-1/2 left-1/2 z-1 h-[95%] w-[95%] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-4xl",
+          {
+            "bg-teal-100": wrapper === "light" || wrapper === "none",
+            "bg-teal-900": wrapper === "dark",
+          }
+        )}
+      ></div>
+      <div className="relative z-1 flex flex-col items-center">
+        {step.icon && (
+          <div className="mb-4 h-16 w-16">
+            <Image
+              src={urlForImage(step.icon).url()}
+              alt={step.iconAlt || "Info grid icon"}
+              className="h-full w-full object-contain"
+              width={64}
+              height={64}
+            />
+          </div>
+        )}
+        {step.description && (
+          <div className="prose">
+            <PortableText value={step.description} />
+          </div>
+        )}
+      </div>
     </motion.div>
   );
 };
