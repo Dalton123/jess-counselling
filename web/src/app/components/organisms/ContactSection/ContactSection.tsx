@@ -210,7 +210,7 @@ export const ContactSection = ({ data }: ContactSectionProps) => {
                       type="text"
                       value={formData.name}
                       onChange={handleChange}
-                      className={`w-full rounded-md border border-slate-900/20 bg-slate-600/40 p-3 text-white placeholder-slate-400 transition-colors outline-none group-focus-within:bg-slate-500/60 group-hover:bg-slate-500/60 focus:ring-2 focus:ring-teal-300/50 ${
+                      className={`w-full rounded-md border border-slate-900/20 bg-slate-600/40 p-3 text-white placeholder-slate-400 transition-colors outline-none group-focus-within:bg-slate-500/50 group-hover:bg-slate-500/50 focus:ring-2 focus:ring-teal-300/50 ${
                         errors.name ? "border border-red-500" : ""
                       }`}
                     />
@@ -230,7 +230,7 @@ export const ContactSection = ({ data }: ContactSectionProps) => {
                       type="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className={`w-full rounded-md border border-slate-900/20 bg-slate-600/40 p-3 text-white placeholder-slate-400 transition-colors outline-none group-focus-within:bg-slate-500/60 group-hover:bg-slate-500/60 focus:ring-2 focus:ring-teal-300/50 ${
+                      className={`w-full rounded-md border border-slate-900/20 bg-slate-600/40 p-3 text-white placeholder-slate-400 transition-colors outline-none group-focus-within:bg-slate-500/50 group-hover:bg-slate-500/50 focus:ring-2 focus:ring-teal-300/50 ${
                         errors.email ? "border border-red-500" : ""
                       }`}
                     />
@@ -252,7 +252,7 @@ export const ContactSection = ({ data }: ContactSectionProps) => {
                       type="tel"
                       value={formData.phone}
                       onChange={handleChange}
-                      className="w-full rounded-md border border-slate-900/20 bg-slate-600/40 p-3 text-white placeholder-slate-400 transition-colors outline-none group-focus-within:bg-slate-500/60 group-hover:bg-slate-500/60 focus:ring-2 focus:ring-teal-300/50"
+                      className="w-full rounded-md border border-slate-900/20 bg-slate-600/40 p-3 text-white placeholder-slate-400 transition-colors outline-none group-focus-within:bg-slate-500/50 group-hover:bg-slate-500/50 focus:ring-2 focus:ring-teal-300/50"
                     />
                   </div>
 
@@ -267,7 +267,7 @@ export const ContactSection = ({ data }: ContactSectionProps) => {
                       rows={4}
                       value={formData.message}
                       onChange={handleChange}
-                      className={`field-sizing-content w-full rounded-md border border-slate-900/20 bg-slate-600/40 p-3 text-white placeholder-slate-400 transition-colors outline-none group-focus-within:bg-slate-500/60 group-hover:bg-slate-500/60 focus:ring-2 focus:ring-teal-300/50 ${
+                      className={`field-sizing-content w-full rounded-md border border-slate-900/20 bg-slate-600/40 p-3 text-white placeholder-slate-400 transition-colors outline-none group-focus-within:bg-slate-500/50 group-hover:bg-slate-500/50 focus:ring-2 focus:ring-teal-300/50 ${
                         errors.message ? "border border-red-500" : ""
                       }`}
                     />
