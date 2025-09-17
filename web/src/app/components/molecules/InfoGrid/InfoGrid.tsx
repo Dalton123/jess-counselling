@@ -73,7 +73,7 @@ const AnimatedGridItem = ({
     >
       <div
         className={classNames(
-          "absolute top-1/2 left-1/2 z-1 h-[95%] w-[95%] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-4xl",
+          "absolute top-1/2 left-1/2 z-1 h-[97%] w-[97%] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-4xl",
           {
             "bg-teal-100": wrapper === "light" || wrapper === "none",
             "bg-teal-900": wrapper === "dark",
