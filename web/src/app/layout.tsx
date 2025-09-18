@@ -82,7 +82,7 @@ export const metadata = {
 
   // Open Graph / Facebook
   openGraph: {
-    title: "Jessica Walsh Counselling",
+    title: "Wilkinson Counselling",
     description:
       "Professional counselling services for children, adolescents and adults",
     url: "https://wilkinsoncounselling.co.uk/",
