@@ -53,9 +53,10 @@ export const Footer = ({ data }: { data: FooterData }) => {
             )}
 
             {/* Copyright */}
-            <div className="text-sm text-white/60">
+            <p className="pr-10 text-sm text-white/60">
+              Counselling and therapy in Higher Blackley, Manchester, UK. <br />
               Copyright © {new Date().getFullYear()} | All Rights Reserved
-            </div>
+            </p>
 
             {/* Social Links */}
             {/* <div className="mt-4 flex gap-4">
