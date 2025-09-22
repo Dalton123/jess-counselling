@@ -11,7 +11,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const description =
     page?.description ||
     "Professional, compassionate counselling for adults and children. Person-centred support in a calm, supportive space.";
-  const url = "https://wilkinsoncounselling.co.uk/";
+  const url = "https://www.wilkinsoncounselling.co.uk/";
 
   return {
     title,

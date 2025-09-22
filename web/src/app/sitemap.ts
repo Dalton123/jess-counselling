@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { client } from "@sanity/lib/client";
 import { groq } from "next-sanity";
 
-const baseUrl = "https://wilkinsoncounselling.co.uk";
+const baseUrl = "https://www.wilkinsoncounselling.co.uk";
 
 // Query to get all published pages
 const pagesQuery = groq`*[_type == "page" && published == true && defined(slug.current)] {
