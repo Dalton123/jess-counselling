@@ -71,7 +71,7 @@ export async function POST(request: NextRequest) {
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <div style="padding: 30px 20px; text-align: center;">
             <img 
-              src="https://wilkinsoncounselling.co.uk/images/Wilkinson-counselling.png" 
+              src="https://www.wilkinsoncounselling.co.uk/images/Wilkinson-counselling.png" 
               alt="Wilkinson Counselling Logo" 
               style="max-width: 200px; height: auto; margin-bottom: 15px; filter: brightness(0) invert(1);"
             />

@@ -59,7 +59,7 @@ export function generateStructuredData(page: PageData, slug: string) {
     "@type": "WebPage",
     name: page.title,
     description: page.description,
-    url: `https://wilkinsoncounselling.co.uk/${slug}/`,
+    url: `https://www.wilkinsoncounselling.co.uk/${slug}/`,
     mainEntity: {
       "@type": "FAQPage",
       mainEntity: questions,
