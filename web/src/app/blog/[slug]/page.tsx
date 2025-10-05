@@ -103,9 +103,7 @@ export async function generateMetadata(props: {
   };
 }
 
-export default async function BlogPostPage(props: {
-  params: Promise<Params>;
-}) {
+export default async function BlogPostPage(props: { params: Promise<Params> }) {
   const params = await props.params;
   const post: BlogPost | null = await client.fetch(blogPostQuery, {
     slug: params.slug,
@@ -113,7 +111,7 @@ export default async function BlogPostPage(props: {
 
   if (!post) {
     return (
-      <main className="container mx-auto px-4 py-16">
+      <main className="container mx-auto !max-w-6xl px-4 py-16">
         <div className="rounded-lg border border-red-200 bg-red-50 p-8 text-center">
           <h1 className="mb-4 font-serif text-3xl font-bold text-red-900">
             Post Not Found
@@ -139,7 +137,7 @@ export default async function BlogPostPage(props: {
         />
       )}
       <main>
-        <article className="py-8 md:py-16">
+        <article className="mx-auto !max-w-6xl py-8 md:py-16">
           <BlogPostHeader
             title={post.title}
             publishedDate={post.publishedDate}

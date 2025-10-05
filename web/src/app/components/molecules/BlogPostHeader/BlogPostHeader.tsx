@@ -36,7 +36,7 @@ export const BlogPostHeader = ({
 
   return (
     <header className="mb-8">
-      <div className="container mx-auto max-w-4xl px-4">
+      <div className="prose container mx-auto !max-w-6xl px-4">
         <div className="mb-6 flex flex-wrap items-center gap-2 text-sm text-teal-700">
           <time dateTime={publishedDate}>{formattedDate}</time>
           {author && (
@@ -47,9 +47,7 @@ export const BlogPostHeader = ({
           )}
         </div>
 
-        <h1 className="mb-6 font-serif text-4xl font-bold text-teal-900 md:text-5xl">
-          {title}
-        </h1>
+        <h1 className="mb-10 text-teal-900">{title}</h1>
 
         {tags && tags.length > 0 && (
           <div className="mb-8 flex flex-wrap gap-2">
@@ -67,11 +65,12 @@ export const BlogPostHeader = ({
         {featuredImage?.asset && (
           <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg">
             <Image
-              src={urlForImage(featuredImage).url()}
+              src={urlForImage(featuredImage).width(1920).quality(90).url()}
               alt={featuredImage.alt || title}
               fill
               className="object-cover"
               priority
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 1200px, 1920px"
             />
           </div>
         )}

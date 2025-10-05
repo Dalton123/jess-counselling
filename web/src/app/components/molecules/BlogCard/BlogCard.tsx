@@ -45,10 +45,11 @@ export const BlogCard = ({
         <Link href={`/blog/${slug}`} className="block">
           <div className="relative aspect-[16/9] w-full overflow-hidden">
             <Image
-              src={urlForImage(featuredImage).url()}
+              src={urlForImage(featuredImage).width(800).quality(85).url()}
               alt={featuredImage.alt || title}
               fill
               className="object-cover transition-transform duration-300 group-hover:scale-105"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             />
           </div>
         </Link>
