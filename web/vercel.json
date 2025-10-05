@@ -2,8 +2,14 @@
   "trailingSlash": true,
   "redirects": [
     {
-      "source": "https://wilkinsoncounselling.co.uk/(.*)",
-      "destination": "https://www.wilkinsoncounselling.co.uk/$1",
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "wilkinsoncounselling.co.uk"
+        }
+      ],
+      "destination": "https://www.wilkinsoncounselling.co.uk/:path*",
       "permanent": true
     }
   ]
