@@ -17,6 +17,22 @@ type PageData = {
   content?: PageComponent[];
 };
 
+type BlogPostData = {
+  title: string;
+  slug: string;
+  publishedDate: string;
+  _updatedAt: string;
+  author?: string;
+  excerpt?: string;
+  metaDescription?: string;
+  featuredImage?: {
+    asset: {
+      url: string;
+    };
+    alt?: string;
+  };
+};
+
 function extractTextFromPortableText(blocks: PortableTextBlock[]): string {
   return blocks
     .filter((block) => block._type === "block")
@@ -63,6 +79,37 @@ export function generateStructuredData(page: PageData, slug: string) {
     mainEntity: {
       "@type": "FAQPage",
       mainEntity: questions,
+    },
+  };
+}
+
+export function generateBlogPostStructuredData(post: BlogPostData) {
+  const description = post.metaDescription || post.excerpt || post.title;
+  const imageUrl = post.featuredImage?.asset?.url || "/images/Wilkinson-counselling-OG.jpg";
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: description,
+    image: imageUrl,
+    datePublished: post.publishedDate,
+    dateModified: post._updatedAt,
+    author: {
+      "@type": "Person",
+      name: post.author || "Jessica Wilkinson",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Wilkinson Counselling",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://www.wilkinsoncounselling.co.uk/images/Wilkinson-counselling-OG.jpg",
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://www.wilkinsoncounselling.co.uk/blog/${post.slug}/`,
     },
   };
 }

@@ -80,3 +80,45 @@ export const allPagesQuery = groq`*[_type == "page" && defined(slug.current) && 
   title,
   "slug": slug.current
 }`;
+
+// Blog queries
+export const allBlogPostsQuery = groq`*[_type == "blogPost" && published == true] | order(publishedDate desc) {
+  _id,
+  title,
+  "slug": slug.current,
+  publishedDate,
+  author,
+  excerpt,
+  featuredImage {
+    asset->{
+      url,
+      metadata { dimensions }
+    },
+    alt
+  },
+  tags
+}`;
+
+export const blogPostQuery = groq`*[_type == "blogPost" && slug.current == $slug && published == true][0] {
+  title,
+  "slug": slug.current,
+  publishedDate,
+  _updatedAt,
+  author,
+  excerpt,
+  metaDescription,
+  featuredImage {
+    asset->{
+      url,
+      metadata { dimensions }
+    },
+    alt
+  },
+  content,
+  tags
+}`;
+
+export const allBlogSlugsQuery = groq`*[_type == "blogPost" && defined(slug.current) && published == true] {
+  "slug": slug.current,
+  _updatedAt
+}`;

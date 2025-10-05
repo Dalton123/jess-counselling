@@ -70,7 +70,7 @@ export default defineType({
                 name: 'reference',
                 type: 'reference',
                 title: 'Reference',
-                to: [{type: 'page'}, {type: 'service'}],
+                to: [{type: 'page'}, {type: 'service'}, {type: 'blogPost'}],
               },
             ],
           },

@@ -122,7 +122,10 @@ export const RichText = ({ data }: RichTextProps) => {
         value,
       }: PortableTextMarkComponentProps<SanityInternalLinkMark>) => {
         if (!value?.reference?._ref) return <>{children}</>;
-        const href = `/${value.reference._type}/${value.reference._ref}`;
+        // Handle blog posts with /blog/ prefix
+        const href = value.reference._type === "blogPost"
+          ? `/blog/${value.reference._ref}`
+          : `/${value.reference._type}/${value.reference._ref}`;
         return (
           <Link
             href={href}

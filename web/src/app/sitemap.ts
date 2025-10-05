@@ -10,15 +10,27 @@ const pagesQuery = groq`*[_type == "page" && published == true && defined(slug.c
   _updatedAt
 }`;
 
+// Query to get all published blog posts
+const blogPostsQuery = groq`*[_type == "blogPost" && published == true && defined(slug.current)] {
+  "slug": slug.current,
+  publishedDate
+}`;
+
 type PageData = {
   slug: string;
   _updatedAt: string;
+};
+
+type BlogPostData = {
+  slug: string;
+  publishedDate: string;
 };
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {
     // Fetch published pages from Sanity
     const pages: PageData[] = await client.fetch(pagesQuery);
+    const blogPosts: BlogPostData[] = await client.fetch(blogPostsQuery);
 
     // Create sitemap entries for dynamic pages (excluding home and hardcoded pages)
     const pageUrls = pages
@@ -35,6 +47,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         changeFrequency: "weekly" as const,
         priority: 0.8,
       }));
+
+    // Create sitemap entries for blog posts
+    const blogUrls = blogPosts.map((post: BlogPostData) => ({
+      url: `${baseUrl}/blog/${post.slug}/`,
+      lastModified: new Date(post.publishedDate),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    }));
 
     // Static pages and homepage
     const staticUrls = [
@@ -62,12 +82,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         changeFrequency: "weekly" as const,
         priority: 0.8,
       },
+      {
+        url: `${baseUrl}/blog/`,
+        lastModified: new Date(),
+        changeFrequency: "weekly" as const,
+        priority: 0.8,
+      },
     ];
 
     // Filter out duplicate pages (e.g., if "home" exists in Sanity, exclude it)
     const filteredPageUrls = pageUrls;
 
-    return [...staticUrls, ...filteredPageUrls];
+    return [...staticUrls, ...filteredPageUrls, ...blogUrls];
   } catch (error) {
     console.error("Error generating sitemap:", error);
     // Fallback to static pages if there's an error
@@ -92,6 +118,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       },
       {
         url: `${baseUrl}/contact/`,
+        lastModified: new Date(),
+        changeFrequency: "weekly" as const,
+        priority: 0.8,
+      },
+      {
+        url: `${baseUrl}/blog/`,
         lastModified: new Date(),
         changeFrequency: "weekly" as const,
         priority: 0.8,

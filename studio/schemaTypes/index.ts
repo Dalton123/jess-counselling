@@ -15,6 +15,7 @@ import richTextModule from '../schemas/modules/richTextModule'
 import {infoGrid} from '../schemas/objects/infoGrid'
 import testimonial from '../schemas/testimonial'
 import testimonialsCarousel from '../schemas/modules/testimonialsCarousel'
+import {blogPost} from '../schemas/blogPost'
 
 export const schemaTypes = [
   services,
@@ -34,4 +35,5 @@ export const schemaTypes = [
   infoGrid,
   testimonial,
   testimonialsCarousel,
+  blogPost,
 ]
