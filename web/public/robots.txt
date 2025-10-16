@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://www.wilkinsoncounselling.co.uk/sitemap.xml

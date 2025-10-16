@@ -18,6 +18,19 @@ const nextConfig: NextConfig = {
   compress: true,
   async redirects() {
     return [
+      // Redirect non-www to www
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'wilkinsoncounselling.co.uk',
+          },
+        ],
+        destination: 'https://www.wilkinsoncounselling.co.uk/:path*',
+        permanent: true,
+      },
+      // Redirect /home to root
       {
         source: '/home/:path*',
         destination: '/',
