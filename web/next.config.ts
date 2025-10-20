@@ -18,22 +18,35 @@ const nextConfig: NextConfig = {
   compress: true,
   async redirects() {
     return [
-      // Redirect non-www to www
+      // Redirect HTTP to HTTPS (for www subdomain)
       {
-        source: '/:path*',
+        source: "/:path*",
         has: [
           {
-            type: 'host',
-            value: 'wilkinsoncounselling.co.uk',
+            type: "header",
+            key: "x-forwarded-proto",
+            value: "http",
           },
         ],
-        destination: 'https://www.wilkinsoncounselling.co.uk/:path*',
+        destination: "https://www.wilkinsoncounselling.co.uk/:path*",
+        permanent: true,
+      },
+      // Redirect non-www to www
+      {
+        source: "/:path*",
+        has: [
+          {
+            type: "host",
+            value: "wilkinsoncounselling.co.uk",
+          },
+        ],
+        destination: "https://www.wilkinsoncounselling.co.uk/:path*",
         permanent: true,
       },
       // Redirect /home to root
       {
-        source: '/home/:path*',
-        destination: '/',
+        source: "/home/:path*",
+        destination: "/",
         permanent: true,
       },
     ];

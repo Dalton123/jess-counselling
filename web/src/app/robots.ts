@@ -11,6 +11,7 @@ export default function robots(): MetadataRoute.Robots {
         "/studio/", // Disallow Sanity Studio
         "/api/", // Disallow API routes
         "/_next/", // Disallow Next.js internal files
+        "/favicon.ico", // Disallow favicon from being indexed
       ],
     },
     sitemap: `${baseUrl}/sitemap.xml`,
