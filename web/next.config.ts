@@ -18,20 +18,7 @@ const nextConfig: NextConfig = {
   compress: true,
   async redirects() {
     return [
-      // Redirect HTTP to HTTPS (for www subdomain)
-      {
-        source: "/:path*",
-        has: [
-          {
-            type: "header",
-            key: "x-forwarded-proto",
-            value: "http",
-          },
-        ],
-        destination: "https://www.wilkinsoncounselling.co.uk/:path*",
-        permanent: true,
-      },
-      // Redirect non-www to www
+      // Redirect non-www to www (Vercel handles HTTP→HTTPS at platform level)
       {
         source: "/:path*",
         has: [
@@ -41,13 +28,13 @@ const nextConfig: NextConfig = {
           },
         ],
         destination: "https://www.wilkinsoncounselling.co.uk/:path*",
-        permanent: true,
+        statusCode: 301, // Use 301 for better Google compatibility instead of 308
       },
       // Redirect /home to root
       {
         source: "/home/:path*",
         destination: "/",
-        permanent: true,
+        statusCode: 301,
       },
     ];
   },
