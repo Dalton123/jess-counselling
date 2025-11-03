@@ -18,18 +18,7 @@ const nextConfig: NextConfig = {
   compress: true,
   async redirects() {
     return [
-      // Redirect non-www to www (Vercel handles HTTP→HTTPS at platform level)
-      {
-        source: "/:path*",
-        has: [
-          {
-            type: "host",
-            value: "wilkinsoncounselling.co.uk",
-          },
-        ],
-        destination: "https://www.wilkinsoncounselling.co.uk/:path*",
-        statusCode: 301, // Use 301 for better Google compatibility instead of 308
-      },
+      // Domain redirects (non-www → www) handled by middleware for proper 301 status
       // Redirect /home to root
       {
         source: "/home/:path*",
