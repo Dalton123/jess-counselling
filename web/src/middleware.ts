@@ -9,7 +9,7 @@ export function middleware(req: NextRequest) {
   if (host === "wilkinsoncounselling.co.uk") {
     const newUrl = `https://www.wilkinsoncounselling.co.uk${req.nextUrl.pathname}${req.nextUrl.search}`;
     return NextResponse.redirect(newUrl, {
-      status: 301, // Permanent redirect
+      status: 308, // 308 = Permanent redirect (Next.js middleware only supports 307/308, not 301/302)
       headers: {
         "Cache-Control": "public, max-age=31536000, immutable",
       },
@@ -20,7 +20,7 @@ export function middleware(req: NextRequest) {
   if (protocol === "http") {
     const newUrl = `https://${host}${req.nextUrl.pathname}${req.nextUrl.search}`;
     return NextResponse.redirect(newUrl, {
-      status: 301,
+      status: 308, // 308 = Permanent redirect (Google treats same as 301 for SEO)
     });
   }
 
