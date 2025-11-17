@@ -10,12 +10,14 @@ A modern, high-performance counselling practice website built with Next.js 15, S
 ## 🌟 Features
 
 ### Content Management
+
 - **Visual Page Builder** - Build pages with reusable content modules through Sanity Studio
 - **Real-time Preview** - See changes instantly with Next.js draft mode integration
 - **Flexible Content Blocks** - Hero sections, service showcases, testimonials, rich text, and more
 - **Image Optimization** - Automatic AVIF/WebP conversion with Sanity's CDN
 
 ### Performance & SEO
+
 - **Core Web Vitals Optimized** - Lighthouse scores 95+
 - **Dynamic Sitemap Generation** - Automatically updates with new content
 - **Structured Data** - JSON-LD schema for local business SEO
@@ -23,12 +25,14 @@ A modern, high-performance counselling practice website built with Next.js 15, S
 - **Edge-Ready** - Deployed on Vercel Edge Network
 
 ### User Experience
+
 - **Mobile-First Design** - Fully responsive across all devices
 - **Smooth Animations** - Framer Motion for delightful micro-interactions
 - **Accessible Components** - WCAG compliant with semantic HTML
 - **Progressive Enhancement** - Works without JavaScript, enhanced with it
 
 ### Developer Experience
+
 - **TypeScript** - Full type safety across the stack
 - **Monorepo Setup** - Yarn workspaces for web and studio
 - **Component Library** - Atomic design with Storybook documentation
@@ -71,12 +75,14 @@ jess-counselling/
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/Dalton123/jess-counselling.git
    cd jess-counselling
    ```
 
 2. **Install dependencies**
+
    ```bash
    yarn install
    ```
@@ -84,25 +90,28 @@ jess-counselling/
 3. **Set up environment variables**
 
    Create `.env.local` in the `web` directory:
+
    ```env
    # Sanity
    NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
    NEXT_PUBLIC_SANITY_DATASET=production
    SANITY_API_TOKEN=your_api_token
-   
+
    # Email (Resend)
    RESEND_API_KEY=your_resend_key
-   
+
    # Site URL
    NEXT_PUBLIC_SITE_URL=http://localhost:3000
    ```
 
 4. **Run the development servers**
+
    ```bash
    yarn dev
    ```
-   
+
    This starts both:
+
    - Next.js frontend at `http://localhost:3000`
    - Sanity Studio at `http://localhost:3333`
 
@@ -120,6 +129,7 @@ yarn build:studio
 ## 🎨 Key Technologies
 
 ### Frontend Stack
+
 - **[Next.js 15](https://nextjs.org/)** - React framework with App Router, Server Components, and advanced caching
 - **[TypeScript](https://www.typescriptlang.org/)** - Type-safe development
 - **[Tailwind CSS 4](https://tailwindcss.com/)** - Utility-first styling with the latest beta
@@ -127,17 +137,20 @@ yarn build:studio
 - **[React 19](https://react.dev/)** - Latest React features
 
 ### Content & Data
+
 - **[Sanity](https://www.sanity.io/)** - Headless CMS with real-time collaboration
 - **[GROQ](https://www.sanity.io/docs/groq)** - Powerful query language for content
 - **[@portabletext/react](https://github.com/portabletext/react-portabletext)** - Render rich text content
 
 ### Developer Tools
+
 - **[Storybook](https://storybook.js.org/)** - Component development environment
 - **[Vitest](https://vitest.dev/)** - Fast unit testing framework
 - **[Playwright](https://playwright.dev/)** - E2E testing
 - **[ESLint](https://eslint.org/)** - Code linting with Next.js config
 
 ### Deployment & Services
+
 - **[Vercel](https://vercel.com/)** - Hosting platform with Edge Network
 - **[Resend](https://resend.com/)** - Modern email API for contact forms
 
@@ -150,26 +163,26 @@ The Sanity schemas define the content structure:
 ```typescript
 // studio/schemas/page.ts
 export default defineType({
-  name: 'page',
-  title: 'Page',
-  type: 'document',
+  name: "page",
+  title: "Page",
+  type: "document",
   fields: [
-    { name: 'title', type: 'string' },
-    { name: 'slug', type: 'slug' },
-    { name: 'published', type: 'boolean' },
+    { name: "title", type: "string" },
+    { name: "slug", type: "slug" },
+    { name: "published", type: "boolean" },
     {
-      name: 'content',
-      type: 'array',
+      name: "content",
+      type: "array",
       of: [
-        { type: 'hero' },
-        { type: 'services' },
-        { type: 'richTextModule' },
-        { type: 'testimonialsCarousel' },
+        { type: "hero" },
+        { type: "services" },
+        { type: "richTextModule" },
+        { type: "testimonialsCarousel" },
         // ... more modules
-      ]
-    }
-  ]
-})
+      ],
+    },
+  ],
+});
 ```
 
 ### Component Architecture
@@ -188,24 +201,27 @@ Pages are generated from Sanity content:
 // app/[...slug]/page.tsx
 export async function generateStaticParams() {
   const pages = await getAllPages();
-  return pages.map(page => ({ slug: [page.slug] }));
+  return pages.map((page) => ({ slug: [page.slug] }));
 }
 ```
 
 ## 🎯 Performance Optimizations
 
 ### Image Optimization
+
 - AVIF/WebP formats with automatic fallbacks
 - Responsive srcsets for different screen sizes
 - Lazy loading below the fold
 - Sanity CDN for fast delivery
 
 ### Code Splitting
+
 - Automatic route-based code splitting
 - Dynamic imports for heavy components
 - Tree shaking unused code
 
 ### Caching Strategy
+
 ```typescript
 // next.config.ts
 images: {
@@ -215,17 +231,19 @@ images: {
 ```
 
 ### Font Loading
+
 ```typescript
 const dmSerifDisplay = DM_Serif_Display({
-  display: 'swap',
+  display: "swap",
   preload: true,
-  fallback: ['serif'],
+  fallback: ["serif"],
 });
 ```
 
 ## 🔧 Available Scripts
 
 ### Root Level
+
 ```bash
 yarn dev              # Run both web and studio in development
 yarn dev:web          # Run only Next.js
@@ -236,6 +254,7 @@ yarn build:studio     # Build Sanity Studio
 ```
 
 ### Web Workspace
+
 ```bash
 yarn lint             # Run ESLint
 yarn storybook        # Start Storybook on port 6006
@@ -243,6 +262,7 @@ yarn build-storybook  # Build static Storybook
 ```
 
 ### Studio Workspace
+
 ```bash
 yarn deploy           # Deploy Studio to Sanity's hosted platform
 yarn deploy-graphql   # Deploy GraphQL API
@@ -310,8 +330,8 @@ theme: {
 Font configuration in `app/layout.tsx`:
 
 ```typescript
-import { Montserrat } from 'next/font/google';
-import { DM_Serif_Display } from 'next/font/google';
+import { Montserrat } from "next/font/google";
+import { DM_Serif_Display } from "next/font/google";
 ```
 
 ### Adding New Content Modules
@@ -333,6 +353,7 @@ The project is configured for zero-config deployment on Vercel:
 4. Deploy!
 
 Vercel automatically:
+
 - Builds on every push
 - Creates preview deployments for PRs
 - Enables edge caching
@@ -354,16 +375,19 @@ Access at: `https://your-project.sanity.studio`
 ### Common Issues
 
 **Issue**: Sanity content not appearing
+
 - Check environment variables are set correctly
 - Ensure content is marked as "published"
 - Verify API token has correct permissions
 
 **Issue**: Images not loading
+
 - Check Sanity project ID and dataset
 - Verify image URLs in Sanity CDN
 - Check Next.js image configuration
 
 **Issue**: Build fails
+
 - Clear `.next` cache: `rm -rf .next`
 - Update dependencies: `yarn install`
 - Check for TypeScript errors
@@ -371,6 +395,7 @@ Access at: `https://your-project.sanity.studio`
 ## 📚 Learning Resources
 
 This project demonstrates:
+
 - Next.js 15 App Router patterns
 - Headless CMS integration
 - TypeScript best practices
@@ -383,6 +408,7 @@ This project demonstrates:
 ## 🤝 Contributing
 
 This is a portfolio project, but suggestions are welcome! Feel free to:
+
 - Open issues for bugs
 - Suggest improvements
 - Ask questions about implementation
@@ -394,6 +420,7 @@ This project is private and proprietary. All rights reserved.
 ## 👤 About the Developer
 
 Built by **Dalton Walsh** as a professional project demonstrating modern web development practices. This site showcases expertise in:
+
 - React/Next.js ecosystem
 - Headless CMS architecture
 - Performance optimization
@@ -401,6 +428,7 @@ Built by **Dalton Walsh** as a professional project demonstrating modern web dev
 - Full-stack JavaScript
 
 ### Connect
+
 - GitHub: [@Dalton123](https://github.com/Dalton123)
 - Portfolio: [Your Portfolio URL]
 
