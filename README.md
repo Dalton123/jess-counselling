@@ -430,7 +430,7 @@ Built by **Dalton Walsh** as a professional project demonstrating modern web dev
 ### Connect
 
 - GitHub: [@Dalton123](https://github.com/Dalton123)
-- Portfolio: [Your Portfolio URL]
+- Portfolio: [\[Dalton Walsh\]](https://daltonwalsh.com/)
 
 ---
 
