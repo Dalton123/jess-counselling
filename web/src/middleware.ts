@@ -4,6 +4,13 @@ export function middleware(req: NextRequest) {
   const host = req.headers.get("host");
   const protocol = req.headers.get("x-forwarded-proto");
 
+  // Skip redirects in development (localhost)
+  const isLocalhost = host?.includes("localhost") || host?.includes("127.0.0.1");
+
+  if (isLocalhost) {
+    return NextResponse.next();
+  }
+
   // Check if we need to redirect to www with HTTPS
   // Only redirect if on non-www domain
   if (host === "wilkinsoncounselling.co.uk") {

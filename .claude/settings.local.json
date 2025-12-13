@@ -3,7 +3,11 @@
     "allow": [
       "Bash(curl:*)",
       "Bash(npm run dev:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "WebSearch",
+      "Bash(npm view:*)",
+      "Bash(yarn install:*)",
+      "Bash(yarn list:*)"
     ],
     "deny": [],
     "ask": []
