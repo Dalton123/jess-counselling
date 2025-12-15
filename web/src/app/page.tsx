@@ -7,10 +7,10 @@ export const revalidate = 3600;
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPageData("home");
 
-  const title = "Wilkinson Counselling - Professional Mental Health Services";
+  const title = "Counselling in Manchester | Wilkinson Counselling - BACP Registered";
   const description =
     page?.description ||
-    "Professional, compassionate counselling for adults and children. Person-centred support in a calm, supportive space.";
+    "Professional counselling in Higher Blackley, Manchester and online throughout the UK. Person-centred therapy for adults, children and young people. BACP registered therapist.";
   const url = "https://www.wilkinsoncounselling.co.uk/";
 
   return {
@@ -31,7 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
           url: "/images/Wilkinson-counselling-OG.jpg",
           width: 1200,
           height: 630,
-          alt: "Jessica Wilkinson Counselling - Professional Mental Health Services",
+          alt: "Wilkinson Counselling - Professional Counselling in Manchester",
         },
       ],
     },

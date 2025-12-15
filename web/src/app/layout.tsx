@@ -5,6 +5,10 @@ import { footerQuery, headerQuery } from "@sanity/lib/queries";
 import { Header } from "@organisms/Header/Header";
 import { DM_Serif_Display, Montserrat } from "next/font/google";
 import Script from "next/script";
+import {
+  generateLocalBusinessSchema,
+  generateWebSiteSchema,
+} from "./utils/structuredData";
 
 const dmSerifDisplay = DM_Serif_Display({
   weight: ["400"],
@@ -35,12 +39,25 @@ export const viewport = {
 export const metadata = {
   metadataBase: new URL("https://www.wilkinsoncounselling.co.uk/"),
   title: {
-    default: "Wilkinson Counselling",
+    default: "Counselling in Manchester | Wilkinson Counselling",
     template: "%s | Wilkinson Counselling",
   },
   description:
-    "Professional, compassionate counselling for adults and children. Person-centred support in a calm, supportive space.",
+    "Professional counselling in Manchester & online throughout the UK. BACP registered therapist offering person-centred support for adults, children and young people.",
   keywords: [
+    "counselling Manchester",
+    "therapist Manchester",
+    "counsellor Greater Manchester",
+    "child therapist Manchester",
+    "adult counselling Manchester",
+    "online therapy UK",
+    "remote counselling",
+    "BACP registered therapist Manchester",
+    "anxiety counselling Manchester",
+    "depression therapy Manchester",
+    "children counselling Manchester",
+    "adolescent therapy Manchester",
+    "mental health support Manchester",
     "counselling",
     "therapy",
     "mental health",
@@ -83,9 +100,9 @@ export const metadata = {
 
   // Open Graph / Facebook
   openGraph: {
-    title: "Wilkinson Counselling",
+    title: "Counselling in Manchester | Wilkinson Counselling",
     description:
-      "Professional counselling services for children, adolescents and adults",
+      "Professional counselling in Manchester & online throughout the UK. BACP registered therapist for adults, children and young people.",
     url: "https://www.wilkinsoncounselling.co.uk/",
     siteName: "Wilkinson Counselling",
     locale: "en_GB",
@@ -121,12 +138,6 @@ export const metadata = {
       "max-snippet": -1,
     },
   },
-
-  // Verification (add these when you set up Google Search Console, etc.)
-  // verification: {
-  //   google: "your-google-verification-code",
-  //   bing: "your-bing-verification-code",
-  // },
 };
 
 export default async function RootLayout({
@@ -171,6 +182,20 @@ export default async function RootLayout({
           href="/images/wave-pattern.svg"
           as="image"
           type="image/svg+xml"
+        />
+
+        {/* Structured Data - LocalBusiness & WebSite schemas for SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(generateLocalBusinessSchema()),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(generateWebSiteSchema()),
+          }}
         />
 
         {/* Google Analytics */}

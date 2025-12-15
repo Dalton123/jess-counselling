@@ -4,6 +4,7 @@ import { client } from "@sanity/lib/client";
 import { allBlogPostsQuery } from "@sanity/lib/queries";
 import { BlogCard } from "@molecules/BlogCard/BlogCard";
 import { SectionWrapper } from "@atoms/SectionWrapper/SectionWrapper";
+import { generateBreadcrumbSchema } from "@utils/structuredData";
 
 // Revalidate every hour
 export const revalidate = 3600;
@@ -31,9 +32,9 @@ type BlogPost = {
 };
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = "Blog | Wilkinson Counselling";
+  const title = "Mental Health Blog | Wilkinson Counselling Manchester";
   const description =
-    "Read our latest articles on mental health, counselling, and wellbeing. Expert insights and guidance from Jessica Wilkinson.";
+    "Expert mental health insights from a BACP registered counsellor in Manchester. Articles on anxiety, depression, child therapy, and wellbeing.";
   const url = "https://www.wilkinsoncounselling.co.uk/blog/";
 
   return {
@@ -68,8 +69,20 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function BlogPage() {
   const posts: BlogPost[] = await client.fetch(allBlogPostsQuery);
 
+  const breadcrumbData = generateBreadcrumbSchema([
+    { name: "Home", url: "https://www.wilkinsoncounselling.co.uk/" },
+    { name: "Blog", url: "https://www.wilkinsoncounselling.co.uk/blog/" },
+  ]);
+
   return (
-    <main>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbData).replace(/</g, "\\u003c"),
+        }}
+      />
+      <main>
       <SectionWrapper wrapper="light">
         <div className="container mx-auto px-4 py-16 md:py-24">
           <div className="mb-12 text-center">
@@ -105,6 +118,7 @@ export default async function BlogPage() {
           )}
         </div>
       </SectionWrapper>
-    </main>
+      </main>
+    </>
   );
 }

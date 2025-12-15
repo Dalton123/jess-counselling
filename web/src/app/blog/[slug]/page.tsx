@@ -5,7 +5,10 @@ import { blogPostQuery, allBlogSlugsQuery } from "@sanity/lib/queries";
 import { BlogPostHeader } from "@molecules/BlogPostHeader/BlogPostHeader";
 import { RichText } from "@organisms/RichText/RichText";
 import { PortableTextBlock } from "@portabletext/react";
-import { generateBlogPostStructuredData } from "@utils/structuredData";
+import {
+  generateBlogPostStructuredData,
+  generateBreadcrumbSchema,
+} from "@utils/structuredData";
 
 // Revalidate every hour
 export const revalidate = 3600;
@@ -125,6 +128,14 @@ export default async function BlogPostPage(props: { params: Promise<Params> }) {
   }
 
   const structuredData = generateBlogPostStructuredData(post);
+  const breadcrumbData = generateBreadcrumbSchema([
+    { name: "Home", url: "https://www.wilkinsoncounselling.co.uk/" },
+    { name: "Blog", url: "https://www.wilkinsoncounselling.co.uk/blog/" },
+    {
+      name: post.title,
+      url: `https://www.wilkinsoncounselling.co.uk/blog/${post.slug}/`,
+    },
+  ]);
 
   return (
     <>
@@ -136,6 +147,12 @@ export default async function BlogPostPage(props: { params: Promise<Params> }) {
           }}
         />
       )}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbData).replace(/</g, "\\u003c"),
+        }}
+      />
       <main>
         <article className="mx-auto !max-w-6xl py-8 md:py-16">
           <BlogPostHeader

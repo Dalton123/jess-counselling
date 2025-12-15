@@ -3,7 +3,10 @@ import PageBuilder, {
   getPageData,
 } from "@organisms/PageBuilder/PageBuilder";
 import { Metadata } from "next";
-import { generateStructuredData } from "@utils/structuredData";
+import {
+  generateStructuredData,
+  generateBreadcrumbSchema,
+} from "@utils/structuredData";
 
 // Revalidate every hour
 export const revalidate = 3600;
@@ -89,6 +92,15 @@ export default async function Page(props: {
 
   const page = await getPageData(slugString);
   const structuredData = page ? generateStructuredData(page, slugString) : null;
+  const breadcrumbData = page
+    ? generateBreadcrumbSchema([
+        { name: "Home", url: "https://www.wilkinsoncounselling.co.uk/" },
+        {
+          name: page.title,
+          url: `https://www.wilkinsoncounselling.co.uk/${slugString}/`,
+        },
+      ])
+    : null;
 
   return (
     <>
@@ -97,6 +109,14 @@ export default async function Page(props: {
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+          }}
+        />
+      )}
+      {breadcrumbData && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(breadcrumbData).replace(/</g, "\\u003c"),
           }}
         />
       )}

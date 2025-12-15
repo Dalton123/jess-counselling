@@ -7,7 +7,11 @@
       "WebSearch",
       "Bash(npm view:*)",
       "Bash(yarn install:*)",
-      "Bash(yarn list:*)"
+      "Bash(yarn list:*)",
+      "Skill(frontend-design:frontend-design)",
+      "WebFetch(domain:www.wilkinsoncounselling.co.uk)",
+      "Bash(ls:*)",
+      "Bash(npm run build:web:*)"
     ],
     "deny": [],
     "ask": []
