@@ -91,11 +91,12 @@ export const Hero = ({ data }: HeroProps) => {
           {data?.backgroundImage ? (
             <div className="relative hidden h-full w-full overflow-hidden lg:block">
               <Image
-                src={urlForImage(data.backgroundImage).url()}
+                src={urlForImage(data.backgroundImage).width(1920).quality(85).url()}
                 alt="Background"
                 fill
                 className="object-cover"
                 priority
+                fetchPriority="high"
                 sizes="100vw"
               />
               <div className="absolute inset-0 bg-gradient-to-br from-teal-500/30 to-teal-200/30 opacity-50 mix-blend-multiply" />

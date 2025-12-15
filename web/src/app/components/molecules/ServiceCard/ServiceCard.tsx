@@ -48,10 +48,11 @@ export const ServiceCard = ({
       <div className="absolute inset-0 -z-1 h-full w-full">
         {image && typeof image === "object" && "_ref" in image ? (
           <Image
-            src={urlForImage(image).url()}
+            src={urlForImage(image).width(800).quality(80).url()}
             alt={imageAlt || "Service image"}
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-105"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
         ) : image && typeof image === "string" ? (
           <Image
@@ -59,6 +60,7 @@ export const ServiceCard = ({
             alt={imageAlt || "Service image"}
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-105"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-teal-100">

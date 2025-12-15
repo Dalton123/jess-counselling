@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic";
 import { Hero } from "@organisms/hero/hero";
 import { Services } from "@organisms/Services/Services";
 import { Feature } from "@molecules/Feature/Feature";
@@ -7,7 +8,18 @@ import { LogoShowcase } from "@organisms/LogoShowcase/LogoShowcase";
 import { Accordion } from "@organisms/Accordion/Accordion";
 import { RichText } from "@organisms/RichText/RichText";
 import { InfoGrid } from "@molecules/InfoGrid/InfoGrid";
-import { TestimonialsCarousel } from "@organisms/TestimonialsCarousel/TestimonialsCarousel";
+
+// Lazy load TestimonialsCarousel to reduce initial bundle size (~30-40 KiB savings)
+const TestimonialsCarousel = dynamic(
+  () => import("@organisms/TestimonialsCarousel/TestimonialsCarousel").then(mod => mod.TestimonialsCarousel),
+  {
+    loading: () => (
+      <section className="flex min-h-[calc(100dvh-100px)] items-center justify-center bg-teal-500">
+        <div className="animate-pulse text-teal-100">Loading testimonials...</div>
+      </section>
+    ),
+  }
+);
 
 // This component renders the right component based on the _type
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

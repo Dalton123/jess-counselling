@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .swiper,
 .swiper .swiper-wrapper {
   @apply h-full;

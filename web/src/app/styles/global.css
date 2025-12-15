@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @import "./typography.css";
-@import "./swiper.css";
 :root {
   --background: var(--color-teal-50);
   --foreground: #171717;
@@ -52,15 +51,29 @@
   background-position: center;
   background-repeat: repeat;
 }
+/* Noise patterns use deferred loading so hero heading becomes LCP */
+@keyframes loadNoisePattern {
+  to {
+    background-image: url("/images/noise-pattern.png");
+  }
+}
+@keyframes loadNoisePattern2 {
+  to {
+    background-image: url("/images/noise-pattern-02.png");
+  }
+}
+
 @utility noise-pattern {
-  background-image: url("/images/noise-pattern.png");
+  background-image: none;
   background-position: center;
   background-repeat: repeat;
+  animation: loadNoisePattern 0s 0.1s forwards;
 }
 @utility noise-pattern-2 {
-  background-image: url("/images/noise-pattern-02.png");
+  background-image: none;
   background-position: center;
   background-repeat: repeat;
+  animation: loadNoisePattern2 0s 0.1s forwards;
 }
 
 @utility glow-ball {

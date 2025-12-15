@@ -19,6 +19,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/keyboard";
 import "swiper/css/scrollbar";
+import "@styles/swiper.css";
 
 type TestimonialType = {
   _id: string;

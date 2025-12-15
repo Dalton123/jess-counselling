@@ -139,10 +139,11 @@ export const ContactSection = ({ data }: ContactSectionProps) => {
         {data.backgroundImage && (
           <div className="absolute inset-0 z-0">
             <Image
-              src={urlForImage(data.backgroundImage).url()}
+              src={urlForImage(data.backgroundImage).width(1920).quality(85).url()}
               alt="Counseling session"
               className="h-full w-full object-cover"
               fill
+              sizes="100vw"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-green-900/60 to-emerald-900/50"></div>
           </div>

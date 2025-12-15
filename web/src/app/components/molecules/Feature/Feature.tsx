@@ -140,10 +140,11 @@ export const Feature = ({ data }: FeatureProps) => {
               )}
             >
               <Image
-                src={urlForImage(image).url()}
+                src={urlForImage(image).width(1200).quality(85).url()}
                 alt={imageAlt || "Feature image"}
                 fill
                 className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
               <div className="absolute inset-0 w-[200%] bg-gradient-to-br from-transparent to-teal-400/80"></div>
             </div>
