@@ -1,3 +1,11 @@
 {
-  "trailingSlash": true
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "wilkinsoncounselling.co.uk" }],
+      "destination": "https://www.wilkinsoncounselling.co.uk/$1",
+      "permanent": true
+    }
+  ]
 }

@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { notFound } from "next/navigation";
 import { ComponentSelector } from "@organisms/ComponentSelector/ComponentSelector";
 import { client } from "@sanity/lib/client";
@@ -21,16 +22,18 @@ type PageBuilderProps = {
   slug: string;
 };
 
-export async function getPageData(slug: string): Promise<PageData | null> {
-  try {
-    const data = await client.fetch(pageQuery, { slug });
+export const getPageData = cache(
+  async (slug: string): Promise<PageData | null> => {
+    try {
+      const data = await client.fetch(pageQuery, { slug });
 
-    return data;
-  } catch (error) {
-    console.error("Error fetching page data:", error);
-    return null;
+      return data;
+    } catch (error) {
+      console.error("Error fetching page data:", error);
+      return null;
+    }
   }
-}
+);
 
 export async function getAllPages() {
   try {

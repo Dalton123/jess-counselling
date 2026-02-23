@@ -1,4 +1,4 @@
-import React from "react";
+import React, { cache } from "react";
 import { Metadata } from "next";
 import { client } from "@sanity/lib/client";
 import { blogPostQuery, allBlogSlugsQuery } from "@sanity/lib/queries";
@@ -10,8 +10,8 @@ import {
   generateBreadcrumbSchema,
 } from "@utils/structuredData";
 
-// Revalidate every hour
-export const revalidate = 3600;
+// Revalidate every week (on-demand revalidation handles content updates)
+export const revalidate = 604800;
 
 type BlogPost = {
   title: string;
@@ -41,6 +41,10 @@ type Params = {
   slug: string;
 };
 
+const getBlogPost = cache(async (slug: string): Promise<BlogPost | null> => {
+  return client.fetch(blogPostQuery, { slug });
+});
+
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const posts = await client.fetch<{ slug: string }[]>(allBlogSlugsQuery);
   return posts.map((post) => ({
@@ -54,9 +58,7 @@ export async function generateMetadata(props: {
   params: Promise<Params>;
 }): Promise<Metadata> {
   const params = await props.params;
-  const post: BlogPost | null = await client.fetch(blogPostQuery, {
-    slug: params.slug,
-  });
+  const post = await getBlogPost(params.slug);
 
   if (!post) {
     return {
@@ -108,9 +110,7 @@ export async function generateMetadata(props: {
 
 export default async function BlogPostPage(props: { params: Promise<Params> }) {
   const params = await props.params;
-  const post: BlogPost | null = await client.fetch(blogPostQuery, {
-    slug: params.slug,
-  });
+  const post = await getBlogPost(params.slug);
 
   if (!post) {
     return (

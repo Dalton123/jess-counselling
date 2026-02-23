@@ -8,8 +8,8 @@ import {
   generateBreadcrumbSchema,
 } from "@utils/structuredData";
 
-// Revalidate every hour
-export const revalidate = 3600;
+// Revalidate every week (on-demand revalidation handles content updates)
+export const revalidate = 604800;
 
 type SanityPage = {
   slug: string;

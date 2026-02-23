@@ -1,3 +1,4 @@
+import { cache } from "react";
 import "@styles/global.css";
 import { Footer } from "@organisms/Footer/Footer";
 import { client } from "@sanity/lib/client";
@@ -140,15 +141,20 @@ export const metadata = {
   },
 };
 
+const getLayoutData = cache(async () => {
+  const [headerData, footerData] = await Promise.all([
+    client.fetch(headerQuery),
+    client.fetch(footerQuery),
+  ]);
+  return { headerData, footerData };
+});
+
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [headerData, footerData] = await Promise.all([
-    client.fetch(headerQuery),
-    client.fetch(footerQuery),
-  ]);
+  const { headerData, footerData } = await getLayoutData();
 
   return (
     <html
