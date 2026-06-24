@@ -10,8 +10,8 @@ import {
   generateBreadcrumbSchema,
 } from "@utils/structuredData";
 
-// Revalidate every week (on-demand revalidation handles content updates)
-export const revalidate = 604800;
+// Revalidate blog posts frequently enough for newly published Sanity posts to appear without a rebuild.
+export const revalidate = 300;
 
 type BlogPost = {
   title: string;
@@ -52,7 +52,8 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
   }));
 }
 
-export const dynamicParams = false;
+// Allow new Sanity blog posts to render on demand instead of requiring a redeploy for generateStaticParams.
+export const dynamicParams = true;
 
 export async function generateMetadata(props: {
   params: Promise<Params>;

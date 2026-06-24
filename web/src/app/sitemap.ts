@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { client } from "@sanity/lib/client";
 import { groq } from "next-sanity";
 
-export const revalidate = 604800; // 1 week
+export const revalidate = 300; // Keep new Sanity blog posts discoverable without waiting a week
 
 const baseUrl = "https://www.wilkinsoncounselling.co.uk";
 

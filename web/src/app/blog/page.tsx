@@ -6,8 +6,8 @@ import { BlogCard } from "@molecules/BlogCard/BlogCard";
 import { SectionWrapper } from "@atoms/SectionWrapper/SectionWrapper";
 import { generateBreadcrumbSchema } from "@utils/structuredData";
 
-// Revalidate every week (on-demand revalidation handles content updates)
-export const revalidate = 604800;
+// Revalidate frequently enough for newly published Sanity posts to appear without a rebuild.
+export const revalidate = 300;
 
 type BlogPost = {
   _id: string;
