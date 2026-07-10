@@ -1,6 +1,5 @@
-"use client";
-import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import { urlForImage } from "@sanity/lib/client";
 
 interface SanityImageObject {
@@ -25,103 +24,78 @@ type FooterData = {
   showBackToTop: boolean;
 };
 
-export const Footer = ({ data }: { data: FooterData }) => {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  return (
-    <footer className="before:flower-pattern relative z-1 overflow-hidden bg-slate-950 pt-8 pb-40 before:absolute before:inset-0 before:z-[-1] before:opacity-10 before:content-[''] md:py-12">
-      {/* Main Footer Content */}
-      <div className="container mx-auto px-4 md:px-16">
-        <div className="flex flex-col items-start justify-between gap-12 md:flex-row md:gap-8">
-          {/* Left side - Logo/Text and other content */}
-          <div className="flex flex-col items-start gap-4">
-            {/* Logo/Text */}
-            {data?.logo && data.logo.asset ? (
-              <Image
-                src={urlForImage(data.logo).url()}
-                alt={data.logo.alt || data.logoText || "Logo"}
-                width={data.logo.width || 200}
-                height={data.logo.height || 60}
-                className="object-contain"
-              />
-            ) : (
-              <div className="font-serif text-2xl text-white/80 italic">
-                {data?.logoText || "JESSICA"}
-              </div>
-            )}
-
-            {/* Copyright */}
-            <p className="pr-10 text-sm text-white/60">
-              Counselling and therapy in Higher Blackley, Manchester, UK. <br />
-              Copyright © {new Date().getFullYear()} | All Rights Reserved
-            </p>
-
-            {/* Social Links */}
-            {/* <div className="mt-4 flex gap-4">
-              {data?.socialLinks
-                ?.filter((link) => link.isActive)
-                .map((social) => (
-                  <Link
-                    key={social.platform}
-                    href={social.url}
-                    className="rounded bg-white/10 p-2 transition-colors hover:bg-white/20"
-                    aria-label={social.platform}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <span
-                      className={`i-${social.platform} h-5 w-5 text-white/80`}
-                    />
-                  </Link>
-                ))}
-            </div> */}
-          </div>
-
-          <div className="flex flex-col items-end gap-4">
+export const Footer = ({ data }: { data: FooterData }) => (
+  <footer className="before:flower-pattern relative z-1 overflow-hidden bg-slate-950 pt-8 pb-40 before:absolute before:inset-0 before:z-[-1] before:opacity-10 before:content-[''] md:py-12">
+    <div className="container mx-auto px-4 md:px-16">
+      <div className="flex flex-col items-start justify-between gap-12 md:flex-row md:gap-8">
+        <div className="flex flex-col items-start gap-4">
+          {data?.logo && data.logo.asset ? (
             <Image
-              src="/images/BACP_Jessica-Walsh-counselling-01.png"
-              alt="BACP - British Association for Counselling and Psychotherapy"
-              width={200}
-              height={89}
+              src={urlForImage(data.logo).url()}
+              alt={data.logo.alt || data.logoText || "Logo"}
+              width={data.logo.width || 200}
+              height={data.logo.height || 60}
               className="object-contain"
             />
-          </div>
+          ) : (
+            <div className="font-serif text-2xl text-white/80 italic">
+              {data?.logoText || "JESSICA"}
+            </div>
+          )}
+
+          <p className="pr-10 text-sm text-white/60">
+            Counselling and therapy in Higher Blackley, Manchester, UK. <br />
+            Copyright © {new Date().getFullYear()} | All Rights Reserved
+          </p>
+
+          <nav aria-label="Privacy and cookie links" className="flex flex-col gap-2">
+            <Link
+              href="/privacy-policy/"
+              className="text-sm text-white/70 underline underline-offset-4 transition-colors hover:text-white"
+            >
+              Privacy policy
+            </Link>
+            <Link
+              href="/?cookie-settings=true"
+              className="text-sm text-white/70 underline underline-offset-4 transition-colors hover:text-white"
+            >
+              Cookie settings
+            </Link>
+          </nav>
+        </div>
+
+        <div className="flex flex-col items-end gap-4">
+          <Image
+            src="/images/BACP_Jessica-Walsh-counselling-01.png"
+            alt="BACP - British Association for Counselling and Psychotherapy"
+            width={200}
+            height={89}
+            className="object-contain"
+          />
         </div>
       </div>
+    </div>
 
-      {/* Back to Top Button with Radiating Animation */}
-      {data?.showBackToTop && (
-        <div className="absolute -bottom-16 left-1/2 m-auto mt-10 -translate-x-1/2 text-center">
-          <button
-            onClick={scrollToTop}
-            className="group relative z-1 cursor-pointer rounded-full"
-            aria-label="Back to top"
-          >
-            {/* More circles for a sun-like effect */}
-            {[1, 2, 3, 4, 5].map((i) => (
-              <motion.div
-                key={i}
-                className="absolute inset-0 z-0 rounded-full bg-emerald-300/30"
-                animate={{
-                  scale: [0.8, 1.5], // Different max scale for each ring
-                  opacity: [0, 1, 0],
-                }}
-                transition={{
-                  duration: 5,
-                  repeat: Infinity,
-                  delay: i * 1, // Smaller delay for more continuous effect
-                  ease: "linear",
-                }}
-              />
-            ))}
-            <span className="relative block rounded-full bg-emerald-300/10 px-7 py-16 text-sm text-white/80 uppercase transition-all duration-500 group-hover:bg-emerald-300/30">
-              <span className="block -translate-y-4">Back To Top</span>
-            </span>
-          </button>
-        </div>
-      )}
-    </footer>
-  );
-};
+    {data?.showBackToTop && (
+      <div className="absolute -bottom-16 left-1/2 m-auto mt-10 -translate-x-1/2 text-center">
+        <a
+          href="#top"
+          className="group relative z-1 block cursor-pointer rounded-full"
+          aria-label="Back to top"
+        >
+          {[1, 2, 3, 4, 5].map((i) => (
+            <span
+              key={i}
+              aria-hidden="true"
+              className="absolute inset-0 z-0 animate-ping rounded-full bg-emerald-300/30"
+              style={{ animationDuration: "5s", animationDelay: `${i}s` }}
+            />
+          ))}
+          <span className="relative block rounded-full bg-emerald-300/10 px-7 py-16 text-sm text-white/80 uppercase transition-all duration-500 group-hover:bg-emerald-300/30">
+            <span className="block -translate-y-4">Back To Top</span>
+          </span>
+        </a>
+      </div>
+    )}
+  </footer>
+);

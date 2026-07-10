@@ -46,6 +46,8 @@ export const TestimonialsCarousel = ({ data }: TestimonialsCarouselProps) => {
     autoplay = true,
     delay = 5000,
   } = data;
+  const hasMultipleTestimonials = testimonials.length > 1;
+  const canLoop = testimonials.length > Math.max(1, desktopSlidesPerView);
 
   return (
     <section className="before:flower-pattern relative flex min-h-[calc(100dvh-100px)] items-center justify-center bg-teal-500 before:absolute before:inset-0 before:z-0 before:opacity-15">
@@ -54,12 +56,14 @@ export const TestimonialsCarousel = ({ data }: TestimonialsCarouselProps) => {
           modules={[Navigation, Keyboard, Autoplay, Scrollbar, A11y]}
           spaceBetween={50}
           slidesPerView={desktopSlidesPerView}
-          navigation={testimonials.length > 1}
-          pagination={{ clickable: true }}
+          navigation={hasMultipleTestimonials}
+          pagination={hasMultipleTestimonials ? { clickable: true } : false}
           autoplay={
-            autoplay ? { delay: delay, disableOnInteraction: false } : false
+            autoplay && hasMultipleTestimonials
+              ? { delay: delay, disableOnInteraction: false }
+              : false
           }
-          loop={true}
+          loop={canLoop}
           autoHeight={true}
         >
           {testimonials.map((testimonial) => (

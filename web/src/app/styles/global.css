@@ -24,6 +24,15 @@
   }
 }
 
+@keyframes soft-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @layer utilities {
   .animate-rotate-border {
     animation: border-rotate 5s linear infinite;
@@ -36,6 +45,10 @@
       #22c55e,
       #5eead4
     );
+  }
+
+  .animate-soft-fade-in {
+    animation: soft-fade-in 3s ease 0.5s both;
   }
 }
 

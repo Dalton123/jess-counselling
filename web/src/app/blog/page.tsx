@@ -82,7 +82,7 @@ export default async function BlogPage() {
           __html: JSON.stringify(breadcrumbData).replace(/</g, "\\u003c"),
         }}
       />
-      <main>
+      <main id="main-content">
       <SectionWrapper wrapper="light">
         <div className="container mx-auto px-4 py-16 md:py-24">
           <div className="mb-12 text-center">

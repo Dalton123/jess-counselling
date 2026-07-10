@@ -42,7 +42,11 @@ export const BlogCard = ({
   return (
     <article className="group overflow-hidden rounded-lg border border-teal-200 bg-white shadow-sm transition-shadow hover:shadow-md">
       {featuredImage?.asset && (
-        <Link href={`/blog/${slug}`} className="block">
+        <Link
+          href={`/blog/${slug}/`}
+          className="block"
+          aria-label={`Read ${title}`}
+        >
           <div className="relative aspect-[16/9] w-full overflow-hidden">
             <Image
               src={urlForImage(featuredImage).width(800).quality(85).url()}
@@ -66,10 +70,10 @@ export const BlogCard = ({
           )}
         </div>
 
-        <Link href={`/blog/${slug}`}>
-          <h3 className="mb-3 font-serif text-2xl font-bold text-teal-900 transition-colors group-hover:text-teal-700">
+        <Link href={`/blog/${slug}/`}>
+          <h2 className="mb-3 font-serif text-2xl font-bold text-teal-900 transition-colors group-hover:text-teal-700">
             {title}
-          </h3>
+          </h2>
         </Link>
 
         {excerpt && <p className="mb-4 text-teal-800">{excerpt}</p>}
@@ -88,7 +92,8 @@ export const BlogCard = ({
         )}
 
         <Link
-          href={`/blog/${slug}`}
+          href={`/blog/${slug}/`}
+          aria-label={`Read more about ${title}`}
           className="inline-flex items-center text-sm font-semibold text-teal-600 transition-colors hover:text-teal-800"
         >
           Read more

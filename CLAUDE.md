@@ -2,6 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+For project ethos, tone, and sensitive counselling-content guardrails, also read `AGENTS.md` before making copy or content changes. Its guidance is authoritative for voice, human review, and safe SEO/content work on this site.
+
 ## Project Structure
 
 This is a monorepo for Wilkinson Counselling containing:
