@@ -2,6 +2,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { FiPhone } from "react-icons/fi";
 import Image from "next/image";
+import Link from "next/link";
 import { urlForImage } from "@sanity/lib/client";
 import { Button } from "@atoms/Button/Button";
 import { PortableText, PortableTextBlock } from "@portabletext/react";
@@ -99,7 +100,7 @@ export const ContactSection = ({ data }: ContactSectionProps) => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch("/api/contact/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -185,6 +186,17 @@ export const ContactSection = ({ data }: ContactSectionProps) => {
                   {data.formDisclaimer}
                 </p>
               )}
+              <p className="mb-6 text-sm leading-6 text-slate-300">
+                Please keep your first message brief and avoid detailed sensitive
+                information. See the{" "}
+                <Link
+                  href="/privacy-policy/"
+                  className="underline underline-offset-4 hover:text-white"
+                >
+                  privacy policy
+                </Link>
+                .
+              </p>
 
               {submitSuccess ? (
                 <div className="flex min-h-[400px] items-center justify-center rounded-lg bg-green-500/20 p-6 text-center">
@@ -203,12 +215,15 @@ export const ContactSection = ({ data }: ContactSectionProps) => {
                   {/* Name Field */}
                   <div>
                     <label htmlFor="name" className="mb-1 block text-sm">
-                      Your Name
+                      Your Name *
                     </label>
                     <input
                       id="name"
                       name="name"
                       type="text"
+                      required
+                      maxLength={100}
+                      autoComplete="name"
                       value={formData.name}
                       onChange={handleChange}
                       className={`w-full rounded-md border border-slate-900/20 bg-slate-600/40 p-3 text-white placeholder-slate-400 transition-colors outline-none group-focus-within:bg-slate-500/50 group-hover:bg-slate-500/50 focus:ring-2 focus:ring-teal-300/50 ${
@@ -229,6 +244,9 @@ export const ContactSection = ({ data }: ContactSectionProps) => {
                       id="email"
                       name="email"
                       type="email"
+                      required
+                      maxLength={254}
+                      autoComplete="email"
                       value={formData.email}
                       onChange={handleChange}
                       className={`w-full rounded-md border border-slate-900/20 bg-slate-600/40 p-3 text-white placeholder-slate-400 transition-colors outline-none group-focus-within:bg-slate-500/50 group-hover:bg-slate-500/50 focus:ring-2 focus:ring-teal-300/50 ${
@@ -251,6 +269,8 @@ export const ContactSection = ({ data }: ContactSectionProps) => {
                       id="phone"
                       name="phone"
                       type="tel"
+                      maxLength={40}
+                      autoComplete="tel"
                       value={formData.phone}
                       onChange={handleChange}
                       className="w-full rounded-md border border-slate-900/20 bg-slate-600/40 p-3 text-white placeholder-slate-400 transition-colors outline-none group-focus-within:bg-slate-500/50 group-hover:bg-slate-500/50 focus:ring-2 focus:ring-teal-300/50"
@@ -266,6 +286,8 @@ export const ContactSection = ({ data }: ContactSectionProps) => {
                       id="message"
                       name="message"
                       rows={4}
+                      required
+                      maxLength={4000}
                       value={formData.message}
                       onChange={handleChange}
                       className={`field-sizing-content w-full rounded-md border border-slate-900/20 bg-slate-600/40 p-3 text-white placeholder-slate-400 transition-colors outline-none group-focus-within:bg-slate-500/50 group-hover:bg-slate-500/50 focus:ring-2 focus:ring-teal-300/50 ${

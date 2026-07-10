@@ -1,5 +1,4 @@
-"use client";
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import { urlForImage } from "@sanity/lib/client";
 import { AnimatedWaves } from "@atoms/AnimatedWaves/AnimatedWaves";
@@ -7,7 +6,6 @@ import classNames from "classnames";
 import { PortableText } from "@portabletext/react";
 import { Button } from "@atoms/Button/Button";
 import { PortableTextBlock } from "@portabletext/types";
-import { motion } from "framer-motion";
 
 type HeroProps = {
   data: {
@@ -50,23 +48,15 @@ const getCTAStyles = (style: "light" | "dark" | "teal" = "light") => {
 
 export const Hero = ({ data }: HeroProps) => {
   const hasBackground = Boolean(data?.backgroundImage);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const glowRef = useRef<HTMLDivElement>(null);
-
-  // Only progressive enhancement (no parallax)
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
 
   const ctaStyles = getCTAStyles(data?.ctaStyle);
 
   return (
     <section
       className={classNames(
-        "relative m-auto mt-5 flex min-h-[calc(100dvh-140px)] w-[calc(100%-40px)] flex-col items-start justify-center overflow-hidden rounded-4xl bg-teal-50 p-4 md:p-8",
+        "bg-animated-conic-border animate-rotate-border relative m-auto mt-5 flex min-h-[calc(100dvh-140px)] w-[calc(100%-40px)] flex-col items-start justify-center overflow-hidden rounded-4xl bg-teal-50 p-4 md:p-8",
         {
           "justify-center": !hasBackground,
-          "bg-animated-conic-border animate-rotate-border": isLoaded,
         }
       )}
     >
@@ -74,16 +64,9 @@ export const Hero = ({ data }: HeroProps) => {
       <div className="absolute inset-0 z-0 bg-gradient-to-br from-teal-100/80 to-teal-100/80">
         {/* Glow effect - always fade in if hasBackground */}
         {hasBackground && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 3, delay: 0.5 }}
-          >
-            <div
-              ref={glowRef}
-              className="glow-ball pulse absolute top-1/2 left-1/2 z-2 hidden h-full w-full opacity-70 lg:block"
-            />
-          </motion.div>
+          <div className="animate-soft-fade-in">
+            <div className="glow-ball pulse absolute top-1/2 left-1/2 z-2 hidden h-full w-full opacity-70 lg:block" />
+          </div>
         )}
 
         {/* Background content */}

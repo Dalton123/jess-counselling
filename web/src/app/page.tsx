@@ -1,8 +1,8 @@
 import PageBuilder, { getPageData } from "@organisms/PageBuilder/PageBuilder";
 import { Metadata } from "next";
 
-// Revalidate every week (on-demand revalidation handles content updates)
-export const revalidate = 604800;
+// Keep published Sanity updates from remaining stale for a full deployment cycle.
+export const revalidate = 300;
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPageData("home");

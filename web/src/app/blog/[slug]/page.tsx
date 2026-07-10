@@ -115,7 +115,10 @@ export default async function BlogPostPage(props: { params: Promise<Params> }) {
 
   if (!post) {
     return (
-      <main className="container mx-auto !max-w-6xl px-4 py-16">
+      <main
+        id="main-content"
+        className="container mx-auto !max-w-6xl px-4 py-16"
+      >
         <div className="rounded-lg border border-red-200 bg-red-50 p-8 text-center">
           <h1 className="mb-4 font-serif text-3xl font-bold text-red-900">
             Post Not Found
@@ -154,7 +157,7 @@ export default async function BlogPostPage(props: { params: Promise<Params> }) {
           __html: JSON.stringify(breadcrumbData).replace(/</g, "\\u003c"),
         }}
       />
-      <main>
+      <main id="main-content">
         <article className="mx-auto !max-w-6xl py-8 md:py-16">
           <BlogPostHeader
             title={post.title}

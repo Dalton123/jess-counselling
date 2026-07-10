@@ -4,8 +4,8 @@ import { Footer } from "@organisms/Footer/Footer";
 import { client } from "@sanity/lib/client";
 import { footerQuery, headerQuery } from "@sanity/lib/queries";
 import { Header } from "@organisms/Header/Header";
+import { AnalyticsConsent } from "@organisms/AnalyticsConsent/AnalyticsConsent";
 import { DM_Serif_Display, Montserrat } from "next/font/google";
-import Script from "next/script";
 import {
   generateLocalBusinessSchema,
   generateWebSiteSchema,
@@ -204,24 +204,18 @@ export default async function RootLayout({
           }}
         />
 
-        {/* Google Analytics */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-S35TH57BF2"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-S35TH57BF2');
-          `}
-        </Script>
       </head>
-      <body className="antialiased">
+      <body id="top" className="antialiased">
+        <a
+          href="#main-content"
+          className="fixed top-4 left-4 z-[100] -translate-y-24 rounded-md bg-white px-4 py-2 font-semibold text-teal-950 shadow-lg transition-transform focus:translate-y-0"
+        >
+          Skip to main content
+        </a>
         <Header data={headerData} />
-        <main>{children}</main>
+        {children}
         <Footer data={footerData} />
+        <AnalyticsConsent />
       </body>
     </html>
   );

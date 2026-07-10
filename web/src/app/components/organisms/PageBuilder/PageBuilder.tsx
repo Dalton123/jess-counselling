@@ -55,7 +55,7 @@ export default async function PageBuilder({ slug }: PageBuilderProps) {
   }
 
   return (
-    <main>
+    <main id="main-content">
       {page.content?.map((component, index) => (
         <ComponentSelector key={index} component={component} />
       ))}
