@@ -7,6 +7,7 @@ import {
   generateStructuredData,
   generateBreadcrumbSchema,
 } from "@utils/structuredData";
+import { getPageSeoMetadata } from "@utils/seo";
 
 // Keep published Sanity updates from remaining stale for a full deployment cycle.
 export const revalidate = 300;
@@ -46,16 +47,20 @@ export async function generateMetadata(props: {
     };
   }
 
-  const title = page.title
-    ? `${page.title} | Wilkinson Counselling`
-    : "Wilkinson Counselling";
+  const seoMetadata = getPageSeoMetadata(slugString);
+  const title =
+    seoMetadata?.title ||
+    (page.title
+      ? `${page.title} | Wilkinson Counselling`
+      : "Wilkinson Counselling");
   const description =
     page.description ||
+    seoMetadata?.description ||
     "Professional, compassionate counselling for adults and children. Person-centred support in a calm, supportive space.";
   const url = `https://www.wilkinsoncounselling.co.uk/${slugString}/`;
 
   return {
-    title,
+    title: { absolute: title },
     description,
     alternates: {
       canonical: url,

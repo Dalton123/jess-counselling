@@ -7,14 +7,14 @@ export const revalidate = 300;
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPageData("home");
 
-  const title = "Counselling in Manchester | Wilkinson Counselling - BACP Registered";
+  const title = "Counselling in Manchester | Wilkinson Counselling";
   const description =
     page?.description ||
-    "Professional counselling in Higher Blackley, Manchester and online throughout the UK. Person-centred therapy for adults, children and young people. BACP registered therapist.";
+    "Warm, professional counselling in Manchester and online across the UK for adults, children and young people, with a BACP registered counsellor.";
   const url = "https://www.wilkinsoncounselling.co.uk/";
 
   return {
-    title,
+    title: { absolute: title },
     description,
     alternates: {
       canonical: url,
