@@ -9,6 +9,7 @@ import {
   generateBlogPostStructuredData,
   generateBreadcrumbSchema,
 } from "@utils/structuredData";
+import { getBlogSeoTitle, limitMetaDescription } from "@utils/seo";
 
 // Revalidate blog posts frequently enough for newly published Sanity posts to appear without a rebuild.
 export const revalidate = 300;
@@ -41,6 +42,14 @@ type Params = {
   slug: string;
 };
 
+const normalizeBlogHeadings = (content: PortableTextBlock[]) =>
+  content.map((block) => {
+    const headingBlock = block as PortableTextBlock & { style?: string };
+    return headingBlock.style === "h1"
+      ? { ...headingBlock, style: "h2" }
+      : block;
+  });
+
 const getBlogPost = cache(async (slug: string): Promise<BlogPost | null> => {
   return client.fetch(blogPostQuery, { slug });
 });
@@ -68,8 +77,10 @@ export async function generateMetadata(props: {
     };
   }
 
-  const title = `${post.title} | Wilkinson Counselling`;
-  const description = post.metaDescription || post.excerpt || post.title;
+  const title = getBlogSeoTitle(post.slug, post.title);
+  const description = limitMetaDescription(
+    post.metaDescription || post.excerpt || post.title
+  );
   const url = `https://www.wilkinsoncounselling.co.uk/blog/${post.slug}/`;
 
   // Use featured image if available, otherwise fallback to default OG image
@@ -78,7 +89,7 @@ export async function generateMetadata(props: {
     : "/images/Wilkinson-counselling-OG.jpg";
 
   return {
-    title,
+    title: { absolute: title },
     description,
     alternates: {
       canonical: url,
@@ -169,7 +180,7 @@ export default async function BlogPostPage(props: { params: Promise<Params> }) {
 
           <RichText
             data={{
-              content: post.content,
+              content: normalizeBlogHeadings(post.content),
               maxWidth: "medium",
               textAlignment: "left",
               padding: "small",

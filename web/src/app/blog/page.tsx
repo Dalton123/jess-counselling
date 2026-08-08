@@ -32,13 +32,13 @@ type BlogPost = {
 };
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = "Mental Health Blog | Wilkinson Counselling Manchester";
+  const title = "Counselling Blog | Wilkinson Counselling";
   const description =
-    "Expert mental health insights from a BACP registered counsellor in Manchester. Articles on anxiety, depression, child therapy, and wellbeing.";
+    "Gentle, practical articles about counselling, anxiety and emotional wellbeing from a BACP registered counsellor working with adults, children and families.";
   const url = "https://www.wilkinsoncounselling.co.uk/blog/";
 
   return {
-    title,
+    title: { absolute: title },
     description,
     alternates: {
       canonical: url,
